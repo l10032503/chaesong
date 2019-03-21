@@ -36,5 +36,11 @@ module.exports = {
             filename: "[name].css",
             chunkFilename : "[id].css"
         })
-    ]
+    ],
+    devServer: {
+        host: "localhost",
+        port : 8080,
+        disableHostCheck : true,
+        https: false
+    }
 };

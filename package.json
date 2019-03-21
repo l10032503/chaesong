@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development --host 0.0.0.0 --disableHostCheck true",
+    "dev": "webpack --mode development",
     "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development --open"
   },
@@ -20,7 +20,6 @@
     "morgan": "~1.9.0",
     "mysql": "^2.16.0"
   },
-  "proxy": "http://0.0.0.0:8080",
   "devDependencies": {
     "@babel/core": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
