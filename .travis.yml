@@ -1,6 +1,10 @@
 language: node_js
 node_js:
   - "9"
+
+before_install:
+  - npm install -g yarn
+
 env:
   - CXX=g++-4.8
 addons:
@@ -33,8 +37,8 @@ cache:
 
 deploy:
   - provider: s3
-    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
-    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
     bucket: "chaesongbucket"
     region: ap-northeast-2
     skip_cleanup: true
