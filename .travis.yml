@@ -24,7 +24,6 @@ install:
 
 script:
   - npm run build
-  - chmod 775
 
 after_success:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
