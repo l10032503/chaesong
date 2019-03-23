@@ -9,7 +9,7 @@
     "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development --open",
     "heroku-prebuild": "npm install --dev",
-    "heroku-postbuild": "webpack --config webpack.prod.js"
+    "heroku-postbuild": "npm i webpack webpack-dev-server loader-utils html-webpack-plugin extract-text-webpack-plugin style-loader css-loader sass-loader node-sass -D"
   },
   "author": "",
   "license": "ISC",
