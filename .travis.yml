@@ -3,7 +3,7 @@ node_js:
   - "9"
 
 before_install:
-  - sudo npm install -g yarn
+  - npm install -g yarn
 
 env:
   - CXX=g++-4.8
@@ -20,10 +20,11 @@ services:
   - docker
 
 install:
-  - sudo npm install
+  - npm install
 
 script:
-  - sudo npm run build
+  - npm run build
+  - chmod 775
 
 after_success:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
