@@ -1,46 +1,40 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+const outputDirectory = "dist";
 
 module.exports = {
-    module:{
+    entry: "./src/client/index.js",
+    output: {
+        path: path.join(__dirname, outputDirectory),
+        filename: "bundle.js",
+        publicPath: "/"
+    },
+    module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
-                exclude : /node_modules/,
-                use:{
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
                     loader: "babel-loader"
                 }
             },
             {
-                test: /\.html$/,
-                use:[
-                    {
-                        loader: "html-loader",
-                        options: {minimize: true}
-                    }
-                ]
-            },
-            {
                 test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, "css-loader"]
+                use: ["style-loader", "css-loader"]
             }
         ]
-
+    },
+    devServer: {
+        port: 3000,
+        open: true,
+        proxy: {
+            "/api": "http://localhost:8080"
+        }
     },
     plugins: [
-        new HtmlWebPackPlugin({
-            template: "./src/index.html",
-            filename: "./index.html"
-        }),
-        new MiniCssExtractPlugin({
-            filename: "[name].css",
-            chunkFilename : "[id].css"
+        new HtmlWebpackPlugin({
+            template: "./public/index.html"
         })
-    ],
-    devServer: {
-        host: "localhost",
-        port : 8080,
-        disableHostCheck : true,
-        https: false
-    }
+    ]
 };
