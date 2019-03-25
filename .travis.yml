@@ -25,25 +25,7 @@ install:
 script:
   - npm run build
 
-after_success:
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-  - docker build -t l10032503/chaesong .
-  - docker push l10032503/chaesong
-
 cache:
   directories:
     - '$HOME/.m2/repository'
     - '$HOME/.gradle  '
-
-deploy:
-  - provider: s3
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
-    bucket: "chaesongbucket"
-    region: ap-northeast-2
-    skip_cleanup: true
-    acl: public_read
-    wait-until-deployed: true
-    on:
-      repo: l10032503/chaesong
-      branch: master
