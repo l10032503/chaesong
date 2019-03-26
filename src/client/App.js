@@ -11,7 +11,7 @@ class MyComponent extends Component {
             <div>
                 <h1>{this.state.hi}</h1>
                 <h1>chaesong react express test</h1>
-                <h1>update test</h1>
+                <h1>build 후 확인</h1>
             </div>
         );
     }
