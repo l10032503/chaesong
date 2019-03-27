@@ -57,7 +57,7 @@ memberJoins.use(cors());
 
 process.env.SECRET_KEY = 'secret';
 
-memberJoins.post('/register',(req,res)=>{
+memberJoins.post('/signup',(req,res)=>{
     const today = new Date();
     const memberJoinData = {
         pw: req.body.pw,
@@ -68,6 +68,7 @@ memberJoins.post('/register',(req,res)=>{
         register_date: today,
         vegantype: req.body.vegantype
     };
+
     MemberJoin.findOne({
        where:{
            user_id : req.body.user_id
