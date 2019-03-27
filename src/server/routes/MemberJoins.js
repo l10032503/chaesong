@@ -75,7 +75,18 @@ memberJoins.post('/register',(req,res)=>{
     })
         .then(memberJoin=>{
             if(!memberJoin){
-                res.json({error: "User already exists"})
+                bcrypt.hash(req.body.pw, 10, (err,hash)=>{
+                    memberJoinData.pw = hash;
+                    MemberJoin.create(memberJoinData)
+                        .then(memberJoin=>{
+                            res.json({status: memberjoin.user_id + 'registered'});
+                        })
+                        .catch(err => {
+                            res.send('error: '+ err);
+                        });
+                });
+            }else{
+                res.json({error: "ID already exists"});
             }
         })
         .catch(err=>{
@@ -86,9 +97,23 @@ memberJoins.post('/register',(req,res)=>{
 memberJoins.post('/login',(req,res)=>{
    MemberJoin.findOne({
      where:{
-
+         user_id: req.body.user_id
      }
-   });
+   }).then(memberJoin=>{
+       if(memberJoin){
+           if(bcrypt.compareSync(req.body.pw)){
+               let token = jwt.sign(memberJoin.dataValue, process.env.SECRET_KEY,{
+                   expiresIn: 1440
+               });
+               res.send(token);
+           }else{
+               res.status(400).json({error: "User does not exist"});
+           }
+       }
+   })
+       .catch(err=>{
+           res.status(400).json({error:err});
+       })
 });
 
 module.exports = memberJoins;
