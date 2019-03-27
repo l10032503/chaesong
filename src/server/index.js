@@ -12,13 +12,14 @@ const connection  = mysql.createConnection({
 });
 connection.connect();
 
-import api from './routes';
-app.use('/api', api);
-
-
 app.use(express.static("dist"));
 app.use(cors());
 app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+
+import api from './routes';
+app.use('/api', api);
+
 
 app.get('*', function (request, response){
     response.sendFile(path.resolve('dist', 'index.html'))

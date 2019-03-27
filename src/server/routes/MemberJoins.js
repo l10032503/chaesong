@@ -4,11 +4,11 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Sequelize = require("sequelize");
+
 const sequelize = new Sequelize('chaesongdb', 'comhong', 'sook2019', {
         host: "chaesong.cccteklwfdo9.ap-northeast-2.rds.amazonaws.com",
         dialect: 'mysql',
         operatorsAliases: false,
-
         pool:{
             max:5,
             min: 0,
@@ -59,6 +59,7 @@ process.env.SECRET_KEY = 'secret';
 
 memberJoins.post('/signup',(req,res)=>{
     const today = new Date();
+    console.log(req.body.pw);
     const memberJoinData = {
         pw: req.body.pw,
         bitrhyear: req.body.birthyear,
@@ -73,9 +74,12 @@ memberJoins.post('/signup',(req,res)=>{
        where:{
            user_id : req.body.user_id
        }
-    })
-        .then(memberJoin=>{
-            if(!memberJoin){
+    }).then(err=>{
+        console.log("not same id");
+        res.send('error same id')
+        })
+        .catch(memberJoin=>{
+            if(memberJoin){
                 bcrypt.hash(req.body.pw, 10, (err,hash)=>{
                     memberJoinData.pw = hash;
                     MemberJoin.create(memberJoinData)
@@ -83,15 +87,14 @@ memberJoins.post('/signup',(req,res)=>{
                             res.json({status: memberjoin.user_id + 'registered'});
                         })
                         .catch(err => {
+                            console.log("error register");
                             res.send('error: '+ err);
                         });
                 });
             }else{
+                console.log("error id exists");
                 res.json({error: "ID already exists"});
             }
-        })
-        .catch(err=>{
-            res.send('error:' + err)
         });
 });
 

@@ -28,8 +28,9 @@ class Authentication extends React.Component{
         let active = this.state.active;
         let vegantype = this.state.vegantype;
 
-        this.props.onRegister(user_id,pw).then(
+        this.props.onRegister(user_id, pw, birthyear, height, weight, active, vegantype).then(
             (result) => {
+                console.log("components" + pw);
                 if(!result){
                     this.setState({
                         user_id:"",

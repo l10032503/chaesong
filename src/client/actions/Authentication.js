@@ -8,6 +8,7 @@ import{
 export function registerRequest(user_id, pw, birthyear, height, weight, active, vegantype) {
     return (dispatch) =>{
         dispatch(register());
+        console.log("actions" + pw);
 
         return axios.post('/api/MemberJoins/signup',{user_id, pw, birthyear, height, weight, active, vegantype})
             .then((response)=>{

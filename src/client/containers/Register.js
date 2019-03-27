@@ -5,8 +5,8 @@ import {registerRequest} from '../actions/Authentication';
 
 class Register extends Component{
 
-    handleRegister = (id,pw) => {
-        return this.props.registerRequest(id,pw).then(
+    handleRegister = (user_id, pw, birthyear, height, weight, active, vegantype) => {
+        return this.props.registerRequest(user_id, pw, birthyear, height, weight, active, vegantype).then(
             ()=> {
                 if(this.props.status === "SUCCESS"){
                     console.log('success');
