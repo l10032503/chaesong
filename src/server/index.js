@@ -33,6 +33,6 @@ app.get("/show", (req, res) =>
 );
 
 
-app.listen(4000,function(){
+app.listen(process.env.PORT || 4000,function(){
     console.log("Started listening on port", 4000);
 });
