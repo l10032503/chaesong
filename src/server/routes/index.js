@@ -1,7 +1,7 @@
 import express from 'express';
-import MemberJoins from './MemberJoins';
+import MemberJoin from './memberJoin';
 
 const router = express.Router();
-router.use('/MemberJoins', MemberJoins);
+router.use('/MemberJoin', MemberJoin);
 
 export default router;

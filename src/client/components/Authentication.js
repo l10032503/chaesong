@@ -30,7 +30,6 @@ class Authentication extends React.Component{
 
         this.props.onRegister(user_id, pw, birthyear, height, weight, active, vegantype).then(
             (result) => {
-                console.log("components" + pw);
                 if(!result){
                     this.setState({
                         user_id:"",
@@ -58,7 +57,7 @@ class Authentication extends React.Component{
                         onChange={this.handleChange}
                         value={this.state.user_id}/>
                 </div>
-                <div className="input-field col s12">
+                <div className="input-field col s12 pw">
                     <label>Password</label>
                     <input
                         name="pw"
@@ -67,16 +66,16 @@ class Authentication extends React.Component{
                         onChange={this.handleChange}
                         value={this.state.pw}/>
                 </div>
-                <div className="input-field col s12">
+                <div className="input-field col s12 birthyear">
                     <label>birthyear</label>
                     <input
                         name="birthyear"
-                        type="text"
+                        type="int"
                         className="validate"
                         onChange={this.handleChange}
                         value={this.state.birthyear}/>
                 </div>
-                <div className="input-field col s12">
+                <div className="input-field col s12 height">
                     <label>height</label>
                     <input
                         name="height"
@@ -85,7 +84,7 @@ class Authentication extends React.Component{
                         onChange={this.handleChange}
                         value={this.state.height}/>
                 </div>
-                <div className="input-field col s12">
+                <div className="input-field col s12 weight">
                     <label>weight</label>
                     <input
                         name="weight"
@@ -94,7 +93,7 @@ class Authentication extends React.Component{
                         onChange={this.handleChange}
                         value={this.state.weight}/>
                 </div>
-                <div className="input-field col s12">
+                <div className="input-field col s12 active">
                     <label>active</label>
                     <input
                         name="active"
@@ -103,7 +102,7 @@ class Authentication extends React.Component{
                         onChange={this.handleChange}
                         value={this.state.active}/>
                 </div>
-                <div className="input-field col s12">
+                <div className="input-field col s12 vegantype">
                     <label>vegantype</label>
                     <input
                         name="vegantype"
@@ -166,7 +165,7 @@ Authentication.propTypes = {
 
 Authentication.defaultProps = {
     mode: true,
-    onRegister: (user_id, pw) => { console.error("register function is not defined"); }
+    onRegister: (user_id, pw, birthyear, height, weight, active, vegantype) => { console.error("register function is not defined"); }
 };
 
 export default Authentication;

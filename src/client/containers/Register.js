@@ -42,8 +42,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return{
-      registerRequest:(id, pw) => {
-          return dispatch(registerRequest(id,pw));
+      registerRequest:(user_id, pw, birthyear, height, weight, active, vegantype) => {
+          return dispatch(registerRequest(user_id, pw, birthyear, height, weight, active, vegantype));
       }
   }
 };
