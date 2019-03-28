@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
-import path from 'path';
+const path =require( 'path');
 const connection  = mysql.createConnection({
     "host"         : "chaesong.cccteklwfdo9.ap-northeast-2.rds.amazonaws.com",
     "user"         : "comhong",

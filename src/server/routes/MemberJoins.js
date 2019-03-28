@@ -60,6 +60,25 @@ process.env.SECRET_KEY = 'secret';
 memberJoins.post('/signup',(req,res)=>{
     const today = new Date();
     console.log(req.body.pw);
+
+    let useridRegex = /^[a-z0-9]+$/;
+
+    if(!useridRegex.test(req.body.user_id)) {
+        return res.status(400).json({ // HTTP 요청에 대한 리스폰스 (json 형식으로)
+            error: "BAD USERNAME",
+            code: 1
+        });
+    }
+
+    // CHECK PASS LENGTH
+    // 비밀번호 유형 검사 (4보다 작거나, 들어온 비밀번호의 값이 문자열이 아닐 경우)
+    if(req.body.pw.length < 4 || typeof req.body.pw !== "string") {
+        return res.status(400).json({
+            error: "BAD PASSWORD",
+            code: 2
+        });
+    }
+
     const memberJoinData = {
         pw: req.body.pw,
         bitrhyear: req.body.birthyear,
@@ -75,14 +94,14 @@ memberJoins.post('/signup',(req,res)=>{
            user_id : req.body.user_id
        }
     }).then(err=>{
-        console.log("not same id");
+        console.log("same id");
         res.send('error same id')
         })
         .catch(memberJoin=>{
             if(memberJoin){
                 bcrypt.hash(req.body.pw, 10, (err,hash)=>{
                     memberJoinData.pw = hash;
-                    MemberJoin.create(memberJoinData)
+                    MemberJoin.create({memberJoinData})
                         .then(memberJoin=>{
                             res.json({status: memberjoin.user_id + 'registered'});
                         })
