@@ -10,7 +10,7 @@ class Authentication extends React.Component{
         height:"",
         weight:"",
         active:"",
-        vegantype:""
+        vegantype:"",
     }
 
     handleChange = (e) => {
@@ -48,7 +48,7 @@ class Authentication extends React.Component{
     render(){
         const inputBoxes = (
             <div>
-                <div className="input-field col s12 user_id">
+                <div className="input-field col s12">
                     <label>ID</label>
                     <input
                         name="user_id"
@@ -57,8 +57,8 @@ class Authentication extends React.Component{
                         onChange={this.handleChange}
                         value={this.state.user_id}/>
                 </div>
-                <div className="input-field col s12 pw">
-                    <label>Password</label>
+                <div className="input-field col s12">
+                    <label>PW</label>
                     <input
                         name="pw"
                         type="text"
@@ -66,8 +66,8 @@ class Authentication extends React.Component{
                         onChange={this.handleChange}
                         value={this.state.pw}/>
                 </div>
-                <div className="input-field col s12 birthyear">
-                    <label>birthyear</label>
+                <div className="input-field col s12">
+                    <label>출생년도</label>
                     <input
                         name="birthyear"
                         type="int"
@@ -75,41 +75,93 @@ class Authentication extends React.Component{
                         onChange={this.handleChange}
                         value={this.state.birthyear}/>
                 </div>
-                <div className="input-field col s12 height">
-                    <label>height</label>
+                <div className="input-field col s12">
+                    <label>키</label>
                     <input
                         name="height"
                         type="int"
                         className="validate"
                         onChange={this.handleChange}
                         value={this.state.height}/>
+                    <label>cm</label>
                 </div>
-                <div className="input-field col s12 weight">
-                    <label>weight</label>
+                <div className="input-field col s12">
+                    <label>몸무게</label>
                     <input
                         name="weight"
                         type="int"
                         className="validate"
                         onChange={this.handleChange}
                         value={this.state.weight}/>
+                    <label>kg</label>
                 </div>
-                <div className="input-field col s12 active">
-                    <label>active</label>
-                    <input
-                        name="active"
-                        type="int"
-                        className="validate"
-                        onChange={this.handleChange}
-                        value={this.state.active}/>
+                <div className="radio">
+                    <label>활동량</label>
+                    <label>
+                        <input
+                            name="active"
+                            type="radio"
+                            className="validate"
+                            onChange={this.handleChange}
+                            value="1"/>
+                            적다
+                    </label>
+                    <label>
+                        <input
+                            name="active"
+                            type="radio"
+                            className="validate"
+                            onChange={this.handleChange}
+                            value="2"/>
+                        보통
+                    </label>
+                    <label>
+                        <input
+                            name="active"
+                            type="radio"
+                            className="validate"
+                            onChange={this.handleChange}
+                            value="3"/>
+                        많음
+                    </label>
                 </div>
-                <div className="input-field col s12 vegantype">
-                    <label>vegantype</label>
+                <div className="radio">
+                    <label>채식타입</label>
                     <input
                         name="vegantype"
-                        type="int"
+                        type="radio"
                         className="validate"
                         onChange={this.handleChange}
-                        value={this.state.vegantype}/>
+                        value="1"/>
+                        페스코
+                    <input
+                        name="vegantype"
+                        type="radio"
+                        className="validate"
+                        onChange={this.handleChange}
+                        value="2"/>
+                        락토 오보
+                    <input
+                        name="vegantype"
+                        type="radio"
+                        className="validate"
+                        onChange={this.handleChange}
+                        value="3"/>
+                        오보
+                    <input
+                        name="vegantype"
+                        type="radio"
+                        className="validate"
+                        onChange={this.handleChange}
+                        value="4"/>
+                        락토
+                    <input
+                        name="vegantype"
+                        type="radio"
+                        className="validate"
+                        onChange={this.handleChange}
+                        value="5"/>
+                        비건
                 </div>
             </div>
         );
@@ -149,7 +201,7 @@ class Authentication extends React.Component{
                 <Link className="logo" to="/">Chaesong</Link>
                 <div className="card">
                     <div className="header center">
-                        <div className="card-content">{this.props.mode ? "LOGIN" : "REGISTER"}</div>
+                        <div className="card-content">{this.props.mode ? "채송 로그인" : "회원가입"}</div>
                     </div>
                     {this.props.mode ? loginView : registerView }
                 </div>
