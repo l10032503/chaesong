@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 
 const db = {};
+
 const sequelize = new Sequelize('chaesongdb', 'comhong', 'sook2019', {
         host: "chaesong.cccteklwfdo9.ap-northeast-2.rds.amazonaws.com",
         dialect: 'mysql',

@@ -11,8 +11,10 @@ export function registerRequest(user_id, pw, birthyear, height, weight, active, 
 
         return axios.post('/api/MemberJoin/signup',{user_id, pw, birthyear, height, weight, active, vegantype})
             .then((response)=>{
+                console.log("dispatch register success");
                 dispatch(registerSuccess());
             }).catch((error)=>{
+                console.log("dispatch register failure");
                 dispatch(registerFailure(error.response.data.code));
             });
     };

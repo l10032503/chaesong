@@ -1,8 +1,7 @@
 const express = require("express");
-const memberJoin = express.Router();
+const memberJoins = express.Router();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 const Sequelize = require("sequelize");
 
 const sequelize = new Sequelize('chaesongdb', 'comhong', 'sook2019', {
@@ -19,7 +18,7 @@ const sequelize = new Sequelize('chaesongdb', 'comhong', 'sook2019', {
 );
 
 const MemberJoin = sequelize.define(
-    'memberJoins',
+    'memberJoin',
     {
         user_id: {
             type:Sequelize.STRING,
@@ -53,17 +52,24 @@ const MemberJoin = sequelize.define(
     }
 );
 
+memberJoins.use(cors());
 
-memberJoin.use(cors());
+memberJoins.post('/signup', (req, res)=>{
+   const today = new Date();
+   const memberData = {
+       user_id : req.body.user_id,
+       pw: req.body.pw,
+       birthyear: req.body.birthyear,
+       height: req.body.height,
+       weight: req.body.weight,
+       active: req.body.active,
+       register_date: today,
+       vegantype: req.body.vegantype
+   };
 
-process.env.SECRET_KEY = 'secret';
+    let userIDRegex = /^[a-z0-9]+$/;
 
-memberJoin.post('/signup',(req, res)=>{
-    const today = new Date();
-
-    let useridRegex = /^[a-z0-9]+$/;
-
-    if(!useridRegex.test(req.body.user_id)) {
+    if(!userIDRegex.test(req.body.user_id)) {
         return res.status(400).json({ // HTTP 요청에 대한 리스폰스 (json 형식으로)
             error: "BAD USERNAME",
             code: 1
@@ -79,63 +85,55 @@ memberJoin.post('/signup',(req, res)=>{
         });
     }
 
-    MemberJoin.findOne({
-        where:{
-            user_id : req.body.user_id
-        }
-    }).then(memberJoins=>{
-        if(!memberJoins){
-            bcrypt.hash(req.body.pw, 10, (err,hash)=>{
-                console.log('birthyear: ' + req.body.birthyear);
-                req.body.pw = hash;
-                MemberJoin.create({
-                    user_id : req.body.user_id,
-                    pw: req.body.pw,
-                    birthyear: req.body.birthyear,
-                    height: req.body.height,
-                    weight: req.body.weight,
-                    active: req.body.active,
-                    register_date: today,
-                    vegantype: req.body.vegantype
-                }).then(memberJoin=>{
-                    console.log(memberJoins.use + 'register');
-                    res.json({status: memberjoins.user_id + 'registered'});
-                }).catch(err => {
-                        console.log("error register");
-                        res.send('error: '+ err);
-                    });
-            });
-        }else{
-            console.log("error id exists");
-            res.json({error: "ID already exists"});
-        }
-    })
-        .catch(err=>{
-            console.log("same id");
-            res.send('error same id')
-        });
+   MemberJoin.findOne({
+       where:{
+           user_id : req.body.user_id
+       }
+   })
+       .then(memberJoin=>{
+           if(!memberJoin){
+               MemberJoin.create(memberData)
+                   .then(memberJoin=>{
+                       return res.json({success: true})
+                   })
+                   .catch(err=>{
+                       return res.send('error' + err)
+                   })
+           }else{
+               return res.json({
+                   error: "ID already exists",
+                   code : 3
+               })
+           }
+       })
+       .catch(err=>{
+           return res.send('error' + err)
+           })
 });
 
-memberJoin.post('/login',(req, res)=>{
-    MemberJoin.findOne({
-        where:{
-            user_id: req.body.user_id
-        }
-    }).then(memberJoins=>{
-        if(memberJoins){
-            if(bcrypt.compareSync(req.body.pw)){
-                let token = jwt.sign(memberJoins.dataValue, process.env.SECRET_KEY,{
-                    expiresIn: 1440
-                });
-                res.send(token);
-            }else{
-                res.status(400).json({error: "User does not exist"});
-            }
-        }
-    })
-        .catch(err=>{
-            res.status(400).json({error:err});
-        })
+memberJoins.post('/login',(req,res)=>{
+   MemberJoin.findOne({
+       where:{
+           user_id:req.body.user_id
+       }
+   })
+       .then(memberJoin=>{
+           if(req.body.pw == memberJoin.pw){
+
+           }
+       })
 });
 
-module.exports = memberJoin;
+memberJoins.post('/signin', (req, res)=>{
+   return res.json({success: true});
+});
+
+memberJoins.get('/getinfo', (req, res)=>{
+    return res.json({info: null});
+});
+
+memberJoins.post('/logout', (req, res)=>{
+    return res.json({success: true});
+});
+
+module.exports = memberJoins;

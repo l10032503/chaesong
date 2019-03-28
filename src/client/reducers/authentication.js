@@ -16,9 +16,10 @@ const initialState={
 };
 
 export default function authentication(state = initialState, action) {
-    switch(action.type) {
+    switch (action.type) {
         case types.AUTH_REGISTER:
-            return {
+            console.log('reducer waiting');
+            return{
                 ...state,
                 register: {
                     status: 'WAITING',
@@ -26,20 +27,18 @@ export default function authentication(state = initialState, action) {
                 }
             };
         case types.AUTH_REGISTER_SUCCESS:
-            return {
+            console.log('reducer success');
+            return{
                 ...state,
-                register: {
-                    ...state.register,
+                register:{
                     status: 'SUCCESS'
                 }
             };
         case types.AUTH_REGISTER_FAILURE:
-            return {
-                ...state,
-                register:{
-                    status: 'FAILURE',
-                    error: action.error
-                }
+            console.log('reducer failure');
+            return{
+                status: 'FAILURE',
+                error: action.error
             };
         default:
             return state;
