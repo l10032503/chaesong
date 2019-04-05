@@ -963,7 +963,7 @@
     <table id="241" parent="2" name="Ingredient"/>
     <table id="242" parent="2" name="MemberEat"/>
     <table id="243" parent="2" name="MemberScrap"/>
-    <table id="244" parent="2" name="Recipe"/>
+    <table id="244" parent="2" name="Recipes"/>
     <table id="245" parent="2" name="memberJoins"/>
     <table id="246" parent="2" name="test"/>
     <column id="247" parent="241" name="ingredient_id">

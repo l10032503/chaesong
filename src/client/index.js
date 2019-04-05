@@ -5,6 +5,7 @@ import {Register} from '../client/containers';
 import {Login} from '../client/containers';
 import {MainPage} from '../client/containers';
 import {Start} from '../client/containers';
+import {recipeview} from '../client/containers';
 import {Provider} from 'react-redux'
 import {createStore, applyMiddleware} from 'redux';
 import reducers from '../client/reducers';
@@ -21,6 +22,7 @@ ReactDOM.render(
                 <Route path="/login" component={Login}/>
                 <Route path="/MainPage" component={MainPage}/>
                 <Route path="/Start" component={Start}/>
+                <Route path="/recipeview" component={recipeview}/>
             </div>
         </Router>
     </Provider>,

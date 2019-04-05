@@ -1,2 +1,4 @@
 import Authentication from './Authentication';
-export {Authentication};
+import RecipeViewTest from './RecipeViesTest';
+import RecipeBox from './RecipeBox';
+export {Authentication, RecipeViewTest, RecipeBox};
