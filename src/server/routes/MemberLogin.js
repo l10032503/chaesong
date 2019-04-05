@@ -3,7 +3,6 @@ const router = express.Router();
 const cors = require("cors");
 const Sequelize = require("sequelize");
 
-
 const sequelize = new Sequelize('chaesongdb', 'comhong', 'sook2019', {
         host: "chaesong.cccteklwfdo9.ap-northeast-2.rds.amazonaws.com",
         dialect: 'mysql',
@@ -56,6 +55,9 @@ router.post('/signin', (req, res)=> {
                     _id : memberLogin.user_id,
                     user_id: memberLogin.user_id
                 };
+                res.cookie("member", req.body.user_id,{
+                    expires: new Date(Date.now() + 900000)
+                });
                 return res.json({
                     success: true
                 });
@@ -66,6 +68,16 @@ router.post('/signin', (req, res)=> {
                 });
             }
         });
+});
+
+router.get('/getinfo',(req,res)=>{
+    if(typeof req.session.loginInfo === "undefined") {
+        return res.status(401).json({
+            error: "THERE IS NO LOGIN DATA",
+            code: 1
+        });
+    }
+    res.json({ info: req.session.loginInfo });
 });
 
 router.post('/logout', (req, res)=>{

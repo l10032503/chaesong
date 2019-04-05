@@ -5,6 +5,7 @@ const cors = require("cors");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const path =require( 'path');
+const cookieParser = require("cookie-parser");
 import api from './routes';
 
 const connection  = mysql.createConnection({
@@ -25,7 +26,7 @@ app.use(express.static("dist"));
 app.use(cors());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
-
+app.use(cookieParser());
 app.use('/api', api);
 
 
@@ -42,3 +43,7 @@ app.get("/show", (req, res) =>
 app.listen(process.env.PORT || 4000,function(){
     console.log("Started listening on port", 4000);
 });
+
+const options = {
+
+};
