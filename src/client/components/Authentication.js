@@ -44,8 +44,43 @@ class Authentication extends React.Component{
             }
         )
     }
+    handleLogin = () => {
+        let user_id = this.state.user_id;
+        let pw = this.state.pw;
+        this.props.onLogin(user_id, pw).then(
+            (success) => {
+                if(!success) {
+                    this.setState({
+                        pw:''
+                    });
+                }
+            }
+        );
+    }
 
     render(){
+        const loginBoxes =    (
+            <div>
+                <div className="input-field col s12">
+                    <label>ID</label>
+                    <input
+                        name="user_id"
+                        type="text"
+                        className="validate"
+                        onChange={this.handleChange}
+                        value={this.state.user_id}/>
+                </div>
+                <div className="input-field col s12">
+                    <label>PW</label>
+                    <input
+                        name="pw"
+                        type="text"
+                        className="validate"
+                        onChange={this.handleChange}
+                        value={this.state.pw}/>
+                </div>
+            </div>
+        );
         const inputBoxes = (
             <div>
                 <div className="input-field col s12">
@@ -166,24 +201,23 @@ class Authentication extends React.Component{
             </div>
         );
         const loginView=(
-          <div>
-              <div className="card-content">
-                  <div className="row">
-                      {inputBoxes}
-                      <a className="btn">
-
-                      </a>
-                  </div>
-              </div>
-
-            <div className="footer">
+            <div>
                 <div className="card-content">
+                    <div className="row">
+                        {loginBoxes}
+                        <button className="login_btn"
+                                onClick={this.handleLogin}>LOGIN</button>
+                    </div>
+                </div>
+
+                <div className="footer">
+                    <div className="card-content">
                         <div className="right">
                             New Here? <Link to ="/register">Create an account</Link>
                         </div>
+                    </div>
                 </div>
             </div>
-          </div>
         );
 
         const registerView = (
@@ -212,12 +246,14 @@ class Authentication extends React.Component{
 
 Authentication.propTypes = {
     mode: PropTypes.bool,
-    onRegister: PropTypes.func
+    onRegister: PropTypes.func,
+    onLogin: PropTypes.func
 };
 
 Authentication.defaultProps = {
     mode: true,
-    onRegister: (user_id, pw, birthyear, height, weight, active, vegantype) => { console.error("register function is not defined"); }
+    onRegister: (user_id, pw, birthyear, height, weight, active, vegantype) => { console.error("register function is not defined"); },
+    onLogin: (user_id, pw) => {console.error("login function not defined");}
 };
 
 export default Authentication;

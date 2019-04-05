@@ -40,6 +40,32 @@ export default function authentication(state = initialState, action) {
                 status: 'FAILURE',
                 error: action.error
             };
+        case types.AUTH_LOGIN:
+            return {
+                ...state,
+                login : {
+                    status: 'WAITING'
+                }
+            };
+        case types.AUTH_LOGIN_SUCCESS:
+            return {
+                ...state,
+                login: {
+                    status: 'SUCCESS'
+                },
+                status: {
+                    ...state.status,
+                    isLoggedIn: true,
+                    currentUser: action.user_id
+                }
+            };
+        case types.AUTH_LOGIN_FAILURE:
+            return {
+                ...state,
+                login:{
+                    status: 'FAILURE'
+                }
+            };
         default:
             return state;
     }

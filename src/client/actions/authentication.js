@@ -2,7 +2,10 @@ import axios from 'axios';
 import{
     AUTH_REGISTER,
     AUTH_REGISTER_SUCCESS,
-    AUTH_REGISTER_FAILURE
+    AUTH_REGISTER_FAILURE,
+    AUTH_LOGIN,
+    AUTH_LOGIN_SUCCESS,
+    AUTH_LOGIN_FAILURE
 } from './ActionType';
 
 export function registerRequest(user_id, pw, birthyear, height, weight, active, vegantype) {
@@ -36,5 +39,42 @@ export function registerFailure(error) {
     return {
         type: AUTH_REGISTER_FAILURE,
         error
+    };
+}
+export function loginRequest(user_id, pw) {
+    return (dispatch) => {
+        // Inform Login API is starting
+        dispatch(login());
+
+        // API REQUEST
+        return axios.post('/api/MemberLogin/signin', { user_id, pw })
+            .then((response) => {
+                // SUCCEED
+                console.log("dispatch login success");
+                dispatch(loginSuccess(user_id));
+            }).catch((error) => {
+                // FAILED
+                console.log("dispatch login fail");
+                dispatch(loginFailure());
+            });
+    };
+}
+
+export function login() {
+    return {
+        type: AUTH_LOGIN
+    };
+}
+
+export function loginSuccess(user_id) {
+    return {
+        type: AUTH_LOGIN_SUCCESS,
+        user_id
+    };
+}
+
+export function loginFailure() {
+    return {
+        type: AUTH_LOGIN_FAILURE
     };
 }
