@@ -1,7 +1,7 @@
 const express = require("express");
 const memberJoins = express.Router();
 const cors = require("cors");
-const jwt = require("jsonwebtoken");
+
 const Sequelize = require("sequelize");
 
 const sequelize = new Sequelize('chaesongdb', 'comhong', 'sook2019', {
@@ -109,52 +109,6 @@ memberJoins.post('/signup', (req, res)=>{
        .catch(err=>{
            return res.send('error' + err)
            })
-});
-
-memberJoins.post('/signin', (req, res)=>{
-   /* if(typeof req.body.pw !== "string"){
-        return res.status(401).json({
-            error: "PASS WORD IS NOT STRING"
-        });
-    }
-    MemberJoin.findOne({
-        where:{
-            user_id : req.body.user_id
-        }
-    })
-        .then(memberJoin=>{
-            if(!memberJoin){
-                MemberJoin.create(memberData)
-                    .then(memberJoin=>{
-                        return res.status(401).json({
-                            error: "THERE IS NO USER",
-                            code: 2
-                        })
-                    })
-                    .catch(err=>{
-                        return res.send('error' + err)
-                    })
-            }else{
-                if(req.body.pw === memberJoin.pw){
-                    let session = req.session;
-                    session.loginInfo = {
-                        _id: memberJoin._id,
-                        user_id : memberJoin.user_id
-                    };
-                    return res.json({
-                        success: true
-                    });
-                }else{
-                    return res.status(401).json({
-                        error: "PASSWORD IS NOT CORRECT",
-                        code : 3
-                    });
-                }
-            }
-        })
-        .catch(err=>{
-            return res.send('error' + err)
-        })*/
 });
 
 memberJoins.get('/getinfo', (req, res)=>{
