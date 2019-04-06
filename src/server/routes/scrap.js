@@ -58,7 +58,38 @@ const MemberJoin = sequelize.define(
 );
 
 scrap.post('/', (req,res)=>{
+    const loginUserData = {
+        user_id : req.body.user_id,
+    };
+    const recipeData = {
+        recipe_code : req.body.recipe_code
+    };
+    const scrapData = {
+        user_id : req.body.user_id,
+        recipe_code : req.body.recipe_code,
+        SCRAP_DATE : req.body.SCRAP_DATE
+    };
 
+    MemberScrap.findOne({
+        where :{
+            user_id : scrapData.user_id,
+            recipe_code : scrapData.recipe_code
+        }
+    }).then((memberScrap)=>{
+        if(!memberScrap){
+            MemberScrap.create(scrapData)
+                .then(memberJoin=>{
+                    return res.json({success: true})
+                })
+                .catch(err=>{
+                    return res.send('error' + err)
+                })
+        }else{
+
+        }
+    }).catch((err)=>{
+        return res.send('error' + err);
+    })
 });
 
 module.exports = scrap;

@@ -9,6 +9,15 @@ const initialState = {
     star: {
         status: 'INIT',
         error: -1
+    },
+    scrap:{
+        status : 'INIT',
+        error : -1
+    },
+    status: {
+        valid: false,
+        isLoggedIn: false,
+        currentUser: ''
     }
 };
 
@@ -63,6 +72,34 @@ export default function recipe(state = initialState, action) {
                 list:{
                     ...state.list,
                     status: 'FAILURE'
+                }
+            };
+        case types.RECIPE_SCRAP:
+            console.log("scrap reducer");
+            return{
+                ...state,
+                scrap:{
+                    status: 'WAITING',
+                    error : -1
+                }
+            };
+        case types.RECIPE_SCRAP_SUCCESS:
+            console.log("scrap reducer success");
+            return{
+                ...state,
+                scrap:{
+                    ...state.scrap,
+                    status: 'SUCCESS'
+                }
+            };
+        case types.RECIPE_SCRAP_FAILURE:
+            console.log("scrap reducer failure");
+            return{
+                ...state,
+                scrap:{
+                    ...state.scrap,
+                    status: 'FAILURE',
+                    error: action.error
                 }
             };
         default : return state;

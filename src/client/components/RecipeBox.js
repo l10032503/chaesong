@@ -1,7 +1,36 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 class RecipeBox extends Component{
+    state = {
+        user_id:"",
+        recipe_code: ""
+    }
+
+    handleChange = (e) =>{
+        let nextState = {};
+        nextState[e.target.name] = e.target.value;
+        this.setState(nextState);
+    }
+
+    handleScrap = () => {
+        let user_id = Cookies.get('member');
+        let recipe_code = this.state.recipe_code;
+
+        this.props.onScrap(user_id,recipe_code).then(
+            (result) =>{
+                if(!result){
+                    this.setState({
+                        user_id: '',
+                        recipe_code: ''
+                    });
+                }
+            }
+        );
+    }
+
     render() {
         return (
             <div className="container recipe">
@@ -20,7 +49,7 @@ class RecipeBox extends Component{
                         <button>
                             먹었음
                         </button>
-                        <button>
+                        <button onClick={this.handleScrap}>
                             스크랩
                         </button>
                     </div>

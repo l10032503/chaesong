@@ -111,12 +111,5 @@ memberJoins.post('/signup', (req, res)=>{
            })
 });
 
-memberJoins.get('/getinfo', (req, res)=>{
-    return res.json({info: null});
-});
-
-memberJoins.post('/logout', (req, res)=>{
-    return res.json({success: true});
-});
 
 module.exports = memberJoins;
