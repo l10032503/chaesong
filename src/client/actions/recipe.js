@@ -47,32 +47,32 @@ export function recipeListFailure() {
 
 export function scrapRequest(user_id, recipe_id) {
     return (dispatch) =>{
-        dispatch(scrap());
+        dispatch(recipescrap());
 
         return axios.post('/api/scrap', {user_id,recipe_id})
             .then((response)=>{
                 console.log("scrap dispatch success");
-                dispatch(scrapSuccess());
+                dispatch(recipescrapSuccess());
             }).catch((error)=>{
                 console.log("scrap dispatch failure");
-                dispatch(scrapFailure(error.response.data.code));
+                dispatch(recipescrapFailure(error.response.data.code));
             });
     }
 }
 
-export function scrap() {
+export function recipescrap() {
     return{
         type : RECIPE_SCRAP
     };
 }
 
-export function scrapSuccess() {
+export function recipescrapSuccess() {
     return{
         type: RECIPE_SCRAP_SUCCESS
     };
 }
 
-export function scrapFailure(error) {
+export function recipescrapFailure(error) {
     return {
         type: RECIPE_SCRAP_FAILURE,
         error

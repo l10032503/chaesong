@@ -6,9 +6,9 @@ import {RecipeViewTest} from '../components';
 class recipeview extends Component{
 
     handleScrap = (user_id, recipe_id) =>{
-        return this.props.scrapRequest(user_id, recipe_id).then(
+        return this.props.scrapRequest(user_id, recipe_code).then(
             ()=>{
-                if(this.props.status==="SUCCESS"){
+                if(this.props.scrapstatus==="SUCCESS"){
                     console.log("scrap container success");
                     return true;
                 }else{
@@ -27,7 +27,8 @@ class recipeview extends Component{
         return(
           <div className="Wrapper">
               <RecipeViewTest data={this.props.recipeData}
-              onScrap = {this.handleScrap()}/>
+                              currentUser = {this.props.currentUser}
+                              onScrap = {this.handleScrap()}/>
           </div>
         );
     }
@@ -38,7 +39,7 @@ const mapStateToProps = (state) => {
     recipeData : state.recipe.list.data,
     listStatus : state.recipe.list.status,
     isLast: state.recipe.isLast,
-      status: state.recipe.scrap.status,
+      scrapstatus: state.recipe.scrap.status,
       errorCode : state.recipe.scrap.error
   };
 };
@@ -49,7 +50,7 @@ const mapDispatchToProps = (dispatch) => {
             return dispatch(recipeListRequest(isInitial, listType));
         },
         scrapRequest: (user_id, recipe_id) =>{
-            return dispatch(scrapRequest(user_id, recipe_id))
+            return dispatch(scrapRequest(user_id, recipe_code))
         }
     };
 };

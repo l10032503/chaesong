@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import {RecipeBox} from '../components';
 import PropTypes from 'prop-types';
-import {recipeListRequest, scrapRequest} from '../actions/recipe';
-import {connect} from 'react-redux';
-
 
 class RecipeViesTest extends Component{
 
@@ -15,8 +12,10 @@ class RecipeViesTest extends Component{
                     data={recipe}
                     key={recipe.recipe_code}
                     index={i}
-
+                    onScrap={this.handleScrap}
+                    current={this.props.currentUser}
                   />
+
                 );
             })
         };
@@ -30,32 +29,12 @@ class RecipeViesTest extends Component{
 
 RecipeViesTest.propTypes={
   data: PropTypes.array,
+    onScrap: PropTypes.func
 };
 RecipeViesTest.defaultProps={
-  data: []
+  data: [],
+    onScrap: (user_id,recipe_code) =>{console.error("scrap function is not defined");}
 };
 
 
-const mapStateToProps = (state) => {
-    return{
-        recipeData : state.recipe.list.data,
-        listStatus : state.recipe.list.status,
-        isLast: state.recipe.isLast,
-        status: state.recipe.scrap.status,
-        errorCode : state.recipe.scrap.error
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return{
-        recipeListRequest: (isInitial, listType)=>{
-            return dispatch(recipeListRequest(isInitial, listType));
-        },
-        scrapRequest: (user_id, recipe_id) =>{
-            return dispatch(scrapRequest(user_id, recipe_id))
-        }
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(recipeview);
 export default RecipeViesTest;

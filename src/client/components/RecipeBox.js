@@ -4,31 +4,22 @@ import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 class RecipeBox extends Component{
-    state = {
-        user_id:"",
-        recipe_code: ""
-    }
-
-    handleChange = (e) =>{
-        let nextState = {};
-        nextState[e.target.name] = e.target.value;
-        this.setState(nextState);
-    }
 
     handleScrap = () => {
         let user_id = Cookies.get('member');
-        let recipe_code = this.state.recipe_code;
+        let recipe_code = this.props.data.recipe_code;
+        this.props.onScrap(user_id,recipe_code);
 
-        this.props.onScrap(user_id,recipe_code).then(
-            (result) =>{
+        this.props.onRegister(user_id, recipe_code).then(
+            (result) => {
                 if(!result){
                     this.setState({
-                        user_id: '',
-                        recipe_code: ''
+                        user_id:"",
+                        recipe_code:""
                     });
                 }
             }
-        );
+        )
     }
 
     render() {
@@ -60,7 +51,9 @@ class RecipeBox extends Component{
 }
 
 RecipeBox.propTypes={
-  data: PropTypes.object
+  data: PropTypes.object,
+    onScrap: PropTypes.scrap,
+    currentUser: PropTypes.string
 };
 
 RecipeBox.defaultProps={
@@ -70,7 +63,11 @@ RecipeBox.defaultProps={
       recipe_name: '감자튀김',
       content: '',
       imgurl: 'https://i.imgur.com/ryJzBgY.jpg'
-  }
+  },
+    onScrap: (user_id, recipe_code) =>{
+      console.error('recipe function net defined');
+    },
+    currentUser: ''
 };
 
 export default RecipeBox
