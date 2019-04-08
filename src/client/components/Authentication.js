@@ -58,6 +58,16 @@ class Authentication extends React.Component{
         );
     }
 
+    handleKeyPress = (e) => {
+        if(e.charCode==13) {
+            if(this.props.mode) {
+                this.handleLogin();
+            } else {
+                this.handleRegister();
+            }
+        }
+    }
+
     render(){
         const loginBoxes =    (
             <div>
@@ -77,7 +87,8 @@ class Authentication extends React.Component{
                         type="text"
                         className="validate"
                         onChange={this.handleChange}
-                        value={this.state.pw}/>
+                        value={this.state.pw}
+                        onKeyPress={this.handleKeyPress}/>
                 </div>
             </div>
         );
@@ -99,7 +110,8 @@ class Authentication extends React.Component{
                         type="text"
                         className="validate"
                         onChange={this.handleChange}
-                        value={this.state.pw}/>
+                        value={this.state.pw}
+                        onKeyPress={this.handleKeyPress}/>
                 </div>
                 <div className="input-field col s12">
                     <label>출생년도</label>
