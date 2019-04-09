@@ -23,14 +23,17 @@ const MemberScrap = sequelize.define(
             type:Sequelize.STRING,
             primaryKey: true
         },
+        SCRAP_DATE:{
+            type: Sequelize.DATE,
+            defaultValue: Sequelize.NOW,
+            primaryKey: true
+        },
         recipe_code: {
             type:Sequelize.STRING,
             primaryKey: true
-        },
-        SCRAP_DATE:{
-            type: Sequelize.DATE,
-            defaultValue: Sequelize.NOW
         }
+    },{
+        timestamps: false
     }
 );
 const Recipe = sequelize.define(
@@ -58,6 +61,7 @@ const MemberJoin = sequelize.define(
 );
 
 scrap.post('/', (req,res)=>{
+    console.log("scrap post route");
     const loginUserData = {
         user_id : req.body.user_id,
     };
@@ -69,7 +73,7 @@ scrap.post('/', (req,res)=>{
         recipe_code : req.body.recipe_code,
         SCRAP_DATE : req.body.SCRAP_DATE
     };
-
+    console.log("scrap post route2");
     MemberScrap.findOne({
         where :{
             user_id : scrapData.user_id,
@@ -78,14 +82,16 @@ scrap.post('/', (req,res)=>{
     }).then((memberScrap)=>{
         if(!memberScrap){
             MemberScrap.create(scrapData)
-                .then(memberJoin=>{
+                .then(memberScrap=>{
+                    console.log("scrap create");
                     return res.json({success: true})
                 })
                 .catch(err=>{
+                    console.log("scrap error");
                     return res.send('error' + err)
                 })
         }else{
-
+            console.log("already exist scrap recipe");
         }
     }).catch((err)=>{
         return res.send('error' + err);

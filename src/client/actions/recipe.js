@@ -15,7 +15,7 @@ export function recipeListRequest(isInitial, listType){
 
         return axios.get(url)
             .then((response)=>{
-                console.log("recipeviestest dispatch success");
+                console.log("recipeviestest dispatch success" );
                 dispatch(recipeListSuccess(response.data, isInitial, listType));
             }).catch((error) => {
                 console.log("recipeviestest dispatch failure");
@@ -45,13 +45,14 @@ export function recipeListFailure() {
     };
 }
 
-export function scrapRequest(user_id, recipe_id) {
+export function scrapRequest(user_id, recipe_code) {
     return (dispatch) =>{
         dispatch(recipescrap());
 
-        return axios.post('/api/scrap', {user_id,recipe_id})
+        return axios.post('/api/scrap', {user_id,recipe_code})
             .then((response)=>{
-                console.log("scrap dispatch success");
+                console.log("post action: ",user_id, recipe_code);
+                console.log("scrap dispatch success ");
                 dispatch(recipescrapSuccess());
             }).catch((error)=>{
                 console.log("scrap dispatch failure");

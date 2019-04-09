@@ -7,18 +7,20 @@ class RecipeViesTest extends Component{
     render(){
         const mapToComponents = data => {
             return data.map((recipe, i)=>{
+                console.log("recipeviewtest maptocomponent");
                 return (
                   <RecipeBox
                     data={recipe}
                     key={recipe.recipe_code}
                     index={i}
-                    onScrap={this.handleScrap}
                     current={this.props.currentUser}
+                    onScrap={this.props.onScrap}
                   />
 
                 );
             })
         };
+
         return(
             <div>
                 {mapToComponents(this.props.data)}

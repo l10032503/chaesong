@@ -5,10 +5,11 @@ import {RecipeViewTest} from '../components';
 
 class recipeview extends Component{
 
-    handleScrap = (user_id, recipe_id) =>{
+    handleScrap = (user_id, recipe_code) =>{
+        console.log("scrap container ", user_id, recipe_code);
         return this.props.scrapRequest(user_id, recipe_code).then(
             ()=>{
-                if(this.props.scrapstatus==="SUCCESS"){
+                if(this.props.scrapstatus === "SUCCESS"){
                     console.log("scrap container success");
                     return true;
                 }else{
@@ -22,13 +23,13 @@ class recipeview extends Component{
     componentDidMount(){
         this.props.recipeListRequest(true, undefined);
     }
+
     render(){
-        console.log("recipeviewtest containers");
         return(
           <div className="Wrapper">
               <RecipeViewTest data={this.props.recipeData}
                               currentUser = {this.props.currentUser}
-                              onScrap = {this.handleScrap()}/>
+                              onScrap={this.handleScrap}/>
           </div>
         );
     }
@@ -39,7 +40,7 @@ const mapStateToProps = (state) => {
     recipeData : state.recipe.list.data,
     listStatus : state.recipe.list.status,
     isLast: state.recipe.isLast,
-      scrapstatus: state.recipe.scrap.status,
+      scrapstatus: state.recipe.scrap.scrapstatus,
       errorCode : state.recipe.scrap.error
   };
 };
@@ -49,8 +50,8 @@ const mapDispatchToProps = (dispatch) => {
         recipeListRequest: (isInitial, listType)=>{
             return dispatch(recipeListRequest(isInitial, listType));
         },
-        scrapRequest: (user_id, recipe_id) =>{
-            return dispatch(scrapRequest(user_id, recipe_code))
+        scrapRequest: (user_id, recipe_code) =>{
+            return dispatch(scrapRequest(user_id, recipe_code));
         }
     };
 };

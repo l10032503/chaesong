@@ -11,7 +11,7 @@ const initialState = {
         error: -1
     },
     scrap:{
-        status : 'INIT',
+        scrapstatus : 'INIT',
         error : -1
     },
     status: {
@@ -66,6 +66,7 @@ export default function recipe(state = initialState, action) {
                     }
                 }
             }
+
         case types.RECIPE_LIST_FAILURE:
             return{
                 ...state,
@@ -75,11 +76,11 @@ export default function recipe(state = initialState, action) {
                 }
             };
         case types.RECIPE_SCRAP:
-            console.log("scrap reducer");
+            console.log("scrap reducer waiting");
             return{
                 ...state,
                 scrap:{
-                    status: 'WAITING',
+                    scrapstatus: 'WAITING',
                     error : -1
                 }
             };
@@ -89,7 +90,7 @@ export default function recipe(state = initialState, action) {
                 ...state,
                 scrap:{
                     ...state.scrap,
-                    status: 'SUCCESS'
+                    scrapstatus: 'SUCCESS'
                 }
             };
         case types.RECIPE_SCRAP_FAILURE:
@@ -98,7 +99,7 @@ export default function recipe(state = initialState, action) {
                 ...state,
                 scrap:{
                     ...state.scrap,
-                    status: 'FAILURE',
+                    scrapstatus: 'FAILURE',
                     error: action.error
                 }
             };

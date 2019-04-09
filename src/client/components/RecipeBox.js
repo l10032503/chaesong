@@ -6,20 +6,11 @@ import Cookies from 'js-cookie';
 class RecipeBox extends Component{
 
     handleScrap = () => {
+        console.log("click");
         let user_id = Cookies.get('member');
         let recipe_code = this.props.data.recipe_code;
         this.props.onScrap(user_id,recipe_code);
-
-        this.props.onRegister(user_id, recipe_code).then(
-            (result) => {
-                if(!result){
-                    this.setState({
-                        user_id:"",
-                        recipe_code:""
-                    });
-                }
-            }
-        )
+        console.log("recipe box : ",user_id, recipe_code);
     }
 
     render() {
