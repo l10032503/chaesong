@@ -91,7 +91,20 @@ scrap.post('/', (req,res)=>{
                     return res.send('error' + err)
                 })
         }else{
-            console.log("already exist scrap recipe");
+            MemberScrap.destroy({
+                where:{
+                    user_id : scrapData.user_id,
+                    recipe_code : scrapData.recipe_code
+                }
+            })
+                .then(memberScrap=>{
+                    console.log("scrap delete");
+                    return res.json({success: true})
+                })
+                .catch(err=>{
+                    console.log("scrap error");
+                    return res.send('error' + err)
+                })
         }
     }).catch((err)=>{
         return res.send('error' + err);

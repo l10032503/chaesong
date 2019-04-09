@@ -91,7 +91,20 @@ eat.post('/', (req,res)=>{
                     return res.send('error' + err)
                 })
         }else{
-            console.log("already exist eat recipe");
+            MemberEat.destroy({
+                where:{
+                    user_id : eatData.user_id,
+                    recipe_code : eatData.recipe_code
+                }
+            })
+                .then(memberEat=>{
+                    console.log("eat delete");
+                    return res.json({success: true})
+                })
+                .catch(err=>{
+                    console.log("eat error");
+                    return res.send('error' + err)
+                })
         }
     }).catch((err)=>{
         return res.send('error' + err);
