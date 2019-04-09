@@ -6,11 +6,19 @@ import Cookies from 'js-cookie';
 class RecipeBox extends Component{
 
     handleScrap = () => {
-        console.log("click");
+        console.log("scrap click");
         let user_id = Cookies.get('member');
         let recipe_code = this.props.data.recipe_code;
         this.props.onScrap(user_id,recipe_code);
-        console.log("recipe box : ",user_id, recipe_code);
+        console.log("scrap recipe box : ",user_id, recipe_code);
+    }
+
+    handleEat = () => {
+        console.log("eat click");
+        let user_id = Cookies.get('member');
+        let recipe_code = this.props.data.recipe_code;
+        this.props.onEat(user_id,recipe_code);
+        console.log("eat recipe box : ",user_id, recipe_code);
     }
 
     render() {
@@ -28,7 +36,7 @@ class RecipeBox extends Component{
                         </pre>
                     </div>
                     <div className="footer">
-                        <button>
+                        <button onClick={this.handleEat}>
                             먹었음
                         </button>
                         <button onClick={this.handleScrap}>
@@ -43,8 +51,9 @@ class RecipeBox extends Component{
 
 RecipeBox.propTypes={
   data: PropTypes.object,
-    onScrap: PropTypes.scrap,
-    currentUser: PropTypes.string
+  onScrap: PropTypes.scrap,
+  onEat: PropTypes.eat,
+  currentUser: PropTypes.string
 };
 
 RecipeBox.defaultProps={
@@ -56,7 +65,10 @@ RecipeBox.defaultProps={
       imgurl: 'https://i.imgur.com/ryJzBgY.jpg'
   },
     onScrap: (user_id, recipe_code) =>{
-      console.error('recipe function net defined');
+      console.error('scrap recipe function net defined');
+    },
+    onEat: (user_id, recipe_code) =>{
+        console.error('eat recipe function net defined');
     },
     currentUser: ''
 };

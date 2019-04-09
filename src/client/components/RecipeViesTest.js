@@ -15,6 +15,7 @@ class RecipeViesTest extends Component{
                     index={i}
                     current={this.props.currentUser}
                     onScrap={this.props.onScrap}
+                    onEat={this.props.onEat}
                   />
 
                 );
@@ -31,11 +32,13 @@ class RecipeViesTest extends Component{
 
 RecipeViesTest.propTypes={
   data: PropTypes.array,
-    onScrap: PropTypes.func
+  onScrap: PropTypes.func,
+  onEat: PropTypes.func
 };
 RecipeViesTest.defaultProps={
   data: [],
-    onScrap: (user_id,recipe_code) =>{console.error("scrap function is not defined");}
+  onScrap: (user_id,recipe_code) =>{console.error("scrap function is not defined");},
+  onEat: (user_id,recipe_code) =>{console.error("eat function is not defined");}
 };
 
 

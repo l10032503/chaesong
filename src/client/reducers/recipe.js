@@ -14,6 +14,10 @@ const initialState = {
         scrapstatus : 'INIT',
         error : -1
     },
+    eat:{
+        eatstatus : 'INIT',
+        error : -1
+    },
     status: {
         valid: false,
         isLoggedIn: false,
@@ -100,6 +104,34 @@ export default function recipe(state = initialState, action) {
                 scrap:{
                     ...state.scrap,
                     scrapstatus: 'FAILURE',
+                    error: action.error
+                }
+            };
+        case types.RECIPE_EAT:
+            console.log("EAT reducer waiting");
+            return{
+                ...state,
+                eat:{
+                    eatstatus: 'WAITING',
+                    error : -1
+                }
+            };
+        case types.RECIPE_EAT_SUCCESS:
+            console.log("EAT reducer success");
+            return{
+                ...state,
+                eat:{
+                    ...state.eat,
+                    eatstatus: 'SUCCESS'
+                }
+            };
+        case types.RECIPE_EAT_FAILURE:
+            console.log("EAT reducer failure");
+            return{
+                ...state,
+                eat:{
+                    ...state.eat,
+                    eatstatus: 'FAILURE',
                     error: action.error
                 }
             };

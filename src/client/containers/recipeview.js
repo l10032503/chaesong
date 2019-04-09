@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {recipeListRequest, scrapRequest} from '../actions/recipe';
+import {recipeListRequest, scrapRequest, eatRequest} from '../actions/recipe';
 import {connect} from 'react-redux';
 import {RecipeViewTest} from '../components';
 
@@ -20,6 +20,21 @@ class recipeview extends Component{
         );
     }
 
+    handleEat= (user_id, recipe_code) =>{
+        console.log("eat container ", user_id, recipe_code);
+        return this.props.eatRequest(user_id, recipe_code).then(
+            ()=>{
+                if(this.props.eatstatus === "SUCCESS"){
+                    console.log("eat container success");
+                    return true;
+                }else{
+                    console.log("eat container fail");
+                    return false;
+                }
+            }
+        );
+    }
+
     componentDidMount(){
         this.props.recipeListRequest(true, undefined);
     }
@@ -29,7 +44,8 @@ class recipeview extends Component{
           <div className="Wrapper">
               <RecipeViewTest data={this.props.recipeData}
                               currentUser = {this.props.currentUser}
-                              onScrap={this.handleScrap}/>
+                              onScrap={this.handleScrap}
+                              onEat={this.handleEat}/>
           </div>
         );
     }
@@ -41,6 +57,7 @@ const mapStateToProps = (state) => {
     listStatus : state.recipe.list.status,
     isLast: state.recipe.isLast,
       scrapstatus: state.recipe.scrap.scrapstatus,
+      eatstatus: state.recipe.eat.eatstatus,
       errorCode : state.recipe.scrap.error
   };
 };
@@ -52,6 +69,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         scrapRequest: (user_id, recipe_code) =>{
             return dispatch(scrapRequest(user_id, recipe_code));
+        },
+        eatRequest: (user_id, recipe_code) =>{
+            return dispatch(eatRequest(user_id, recipe_code));
         }
     };
 };

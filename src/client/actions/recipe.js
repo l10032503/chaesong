@@ -5,7 +5,10 @@ import{
     RECIPE_LIST_FAILURE,
     RECIPE_SCRAP,
     RECIPE_SCRAP_SUCCESS,
-    RECIPE_SCRAP_FAILURE
+    RECIPE_SCRAP_FAILURE,
+    RECIPE_EAT,
+    RECIPE_EAT_SUCCESS,
+    RECIPE_EAT_FAILURE
 } from './ActionType';
 
 export function recipeListRequest(isInitial, listType){
@@ -79,3 +82,39 @@ export function recipescrapFailure(error) {
         error
     };
 }
+
+export function eatRequest(user_id, recipe_code) {
+    return (dispatch) =>{
+        dispatch(recipeEat());
+
+        return axios.post('/api/eat', {user_id,recipe_code})
+            .then((response)=>{
+                console.log("eat post action: ",user_id, recipe_code);
+                console.log("eat dispatch success ");
+                dispatch(recipeEatSuccess());
+            }).catch((error)=>{
+                console.log("eat dispatch failure");
+                dispatch(recipeEatFailure(error.response.data.code));
+            });
+    }
+}
+
+export function recipeEat() {
+    return{
+        type : RECIPE_EAT
+    };
+}
+
+export function recipeEatSuccess() {
+    return{
+        type: RECIPE_EAT_SUCCESS
+    };
+}
+
+export function recipeEatFailure(error) {
+    return {
+        type: RECIPE_EAT_FAILURE,
+        error
+    };
+}
+
