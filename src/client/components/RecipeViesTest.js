@@ -4,7 +4,41 @@ import PropTypes from 'prop-types';
 
 class RecipeViesTest extends Component{
 
+    handleChange = (e) => {
+        let nextState = {};
+        nextState[e.target.name] = e.target.value;
+        this.setState(nextState);
+    }
+
     render(){
+
+        const recipeCheckBox =(
+          <div>
+              <label>비건 레벨</label>
+              <input
+                  name="seafood"
+                  type="checkbox"
+                  className="validate"
+                  onChange={this.handleChange}
+                  value="1"/>
+              해산물
+              <input
+                  name="milk"
+                  type="checkbox"
+                  className="validate"
+                  onChange={this.handleChange}
+                  value="1"/>
+              우유
+              <input
+                  name="egg"
+                  type="checkbox"
+                  className="validate"
+                  onChange={this.handleChange}
+                  value="1"/>
+              계란
+          </div>
+        );
+
         const mapToComponents = data => {
             return data.map((recipe, i)=>{
                 console.log("recipeviewtest maptocomponent");
@@ -24,6 +58,10 @@ class RecipeViesTest extends Component{
 
         return(
             <div>
+                <div>
+                    {recipeCheckBox}
+                </div>
+                <button>click</button>
                 {mapToComponents(this.props.data)}
             </div>
         );

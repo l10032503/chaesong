@@ -75,6 +75,8 @@ memberJoins.post('/signup', (req, res)=>{
        caloryForDay: 0
    };
 
+
+
     let userIDRegex = /^[a-z0-9]+$/;
 
     if(!userIDRegex.test(req.body.user_id)) {
