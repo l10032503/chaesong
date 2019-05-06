@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
-import {Authentication, Main } from '../components';
+import {Main } from '../components';
 import { connect } from 'react-redux';
-import { loginRequest, getStatusRequest, logoutRequest } from '../actions/authentication';
+import { getStatusRequest, logoutRequest } from '../actions/authentication';
 
 class MainPage extends Component {
 
     componentDidMount() {
+
+
         function getCookie(name) {
             const value = "; " + document.cookie;
             const parts = value.split("; " + name + "=");
             if (parts.length == 2)
                 return parts.pop().split(";").shift();
         }
-
 
         // get loginData from cookie
         let loginData = getCookie('key');
@@ -35,37 +36,53 @@ class MainPage extends Component {
                     // logout the session
                     loginData = {
                         isLoggedIn: false,
-                        user_id: ''
+                        user_id: null
                     };
                     document.cookie='key=' + btoa(JSON.stringify(loginData));
-
                 }
             }
         );
     }
 
-    handleLogout = () => {
+    constructor(props) {
+        super(props);
+        this.handleLogout = this.handleLogout.bind(this);
+    }
+
+    handleLogout() {
         this.props.logoutRequest().then(
             () => {
                 console.log("logout");
                 let loginData = {
+                    _id: '',
                     isLoggedIn: false,
-                    username: ''
+                    user_id: ''
                 };
                 document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-                this.props.history.push('/login');
-                return true;
+               // this.props.history.push('/login');
             }
         );
-    }
+    };
 
     render(){
+        let re = /(login|register)/;
+        let isAuth = re.test(this.props.location.pathname);
+        return (
+            <div>
+                {isAuth ? undefined : <Main isLoggedIn={this.props.status.isLoggedIn}
+                                            onLogout={this.handleLogout}/>}
+                {this.props.children}
+            </div>
+        );
+        /*
         return(
           <Main isLoggedIn={this.props.status.isLoggedIn}
               onLogout={this.handleLogout}/>
         );
+        */
     }
 }
+
 
 const mapStateToProps = (state) => {
     return {
@@ -83,8 +100,5 @@ const mapDispatchToProps = (dispatch) => {
         }
     };
 };
-
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
