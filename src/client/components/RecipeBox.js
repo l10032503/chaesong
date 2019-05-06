@@ -1,7 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 class RecipeBox extends Component{
+
+    handleScrap = () => {
+        console.log("scrap click");
+        let user_id = Cookies.get('member');
+        let recipe_code = this.props.data.recipe_code;
+        this.props.onScrap(user_id,recipe_code);
+        console.log("scrap recipe box : ",user_id, recipe_code);
+    }
+
+    handleEat = () => {
+        console.log("eat click");
+        let user_id = Cookies.get('member');
+        let recipe_code = this.props.data.recipe_code;
+        this.props.onEat(user_id,recipe_code);
+        console.log("eat recipe box : ",user_id, recipe_code);
+    }
+
     render() {
         return (
             <div className="container recipe">
@@ -17,10 +36,10 @@ class RecipeBox extends Component{
                         </pre>
                     </div>
                     <div className="footer">
-                        <button>
+                        <button onClick={this.handleEat}>
                             먹었음
                         </button>
-                        <button>
+                        <button onClick={this.handleScrap}>
                             스크랩
                         </button>
                     </div>
@@ -31,7 +50,10 @@ class RecipeBox extends Component{
 }
 
 RecipeBox.propTypes={
-  data: PropTypes.object
+  data: PropTypes.object,
+  onScrap: PropTypes.scrap,
+  onEat: PropTypes.eat,
+  currentUser: PropTypes.string
 };
 
 RecipeBox.defaultProps={
@@ -41,7 +63,14 @@ RecipeBox.defaultProps={
       recipe_name: '감자튀김',
       content: '',
       imgurl: 'https://i.imgur.com/ryJzBgY.jpg'
-  }
+  },
+    onScrap: (user_id, recipe_code) =>{
+      console.error('scrap recipe function net defined');
+    },
+    onEat: (user_id, recipe_code) =>{
+        console.error('eat recipe function net defined');
+    },
+    currentUser: ''
 };
 
 export default RecipeBox
