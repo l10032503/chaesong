@@ -5,5 +5,5 @@ import {combineReducers} from 'redux';
 
 export default combineReducers({
     authentication,
-    recipe
+    recipe,
 });

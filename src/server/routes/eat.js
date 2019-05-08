@@ -13,17 +13,17 @@ const sequelize = new Sequelize('chaesongdb', 'comhong', 'sook2019', {
         }
     }
 );
-const scrap = express.Router();
-scrap.use(cors());
+const eat = express.Router();
+eat.use(cors());
 
-const MemberScrap = sequelize.define(
-    'MemberScrap',
+const MemberEat = sequelize.define(
+    'MemberEat',
     {
         user_id: {
             type:Sequelize.STRING,
             primaryKey: true
         },
-        SCRAP_DATE:{
+        EATEN_DATE:{
             type: Sequelize.DATE,
             defaultValue: Sequelize.NOW,
             primaryKey: true
@@ -60,49 +60,49 @@ const MemberJoin = sequelize.define(
     }
 );
 
-scrap.post('/', (req,res)=>{
-    console.log("scrap post route");
+eat.post('/', (req,res)=>{
+    console.log("eat post route");
     const loginUserData = {
         user_id : req.body.user_id,
     };
     const recipeData = {
         recipe_code : req.body.recipe_code
     };
-    const scrapData = {
+    const eatData = {
         user_id : req.body.user_id,
         recipe_code : req.body.recipe_code,
-        SCRAP_DATE : req.body.SCRAP_DATE
+        EATEN_DATE : req.body.EATEN_DATE
     };
-    console.log("scrap post route2");
-    MemberScrap.findOne({
+    console.log("eat post route2");
+    MemberEat.findOne({
         where :{
-            user_id : scrapData.user_id,
-            recipe_code : scrapData.recipe_code
+            user_id : eatData.user_id,
+            recipe_code : eatData.recipe_code
         }
-    }).then((memberScrap)=>{
-        if(!memberScrap){
-            MemberScrap.create(scrapData)
-                .then(memberScrap=>{
-                    console.log("scrap create");
+    }).then((memberEat)=>{
+        if(!memberEat){
+            MemberEat.create(eatData)
+                .then(memberEat=>{
+                    console.log("eat create");
                     return res.json({success: true})
                 })
                 .catch(err=>{
-                    console.log("scrap error");
+                    console.log("eat error");
                     return res.send('error' + err)
                 })
         }else{
-            MemberScrap.destroy({
+            MemberEat.destroy({
                 where:{
-                    user_id : scrapData.user_id,
-                    recipe_code : scrapData.recipe_code
+                    user_id : eatData.user_id,
+                    recipe_code : eatData.recipe_code
                 }
             })
-                .then(memberScrap=>{
-                    console.log("scrap delete");
+                .then(memberEat=>{
+                    console.log("eat delete");
                     return res.json({success: true})
                 })
                 .catch(err=>{
-                    console.log("scrap error");
+                    console.log("eat error");
                     return res.send('error' + err)
                 })
         }
@@ -111,4 +111,4 @@ scrap.post('/', (req,res)=>{
     })
 });
 
-module.exports = scrap;
+module.exports = eat;
