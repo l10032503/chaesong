@@ -87,7 +87,7 @@ export function getStatusRequest() {
     return (dispatch) =>{
         return axios.get('/api/MemberLogin/getInfo')
             .then((response) => {
-                dispatch(getStatusSuccess(response.data.info.username)); //HTTP 틍신을 통해 username을 빋이옴
+                dispatch(getStatusSuccess(response.data.info.user_id)); //HTTP 틍신을 통해 username을 이옴
             }).catch((error) => {
                 dispatch(getStatusFailure());
             });
@@ -117,6 +117,7 @@ export function logoutRequest(){
     return (dispatch) => {
         return axios.post('/api/MemberLogin/logout')
             .then((response) => {
+                console.log("dispatch logout success");
                 dispatch(logout());
             });
     }
@@ -127,3 +128,4 @@ export function logout() {
         type: AUTH_LOGOUT
     };
 }
+

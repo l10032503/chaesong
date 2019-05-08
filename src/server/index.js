@@ -34,12 +34,7 @@ app.get('*', function (request, response){
     response.sendFile(path.resolve('dist', 'index.html'))
 });
 
-app.get("/show", (req, res) =>
-    connection.query("SELECT * FROM test", (err, rows) => {
-        if(err) throw err;
-        res.send(rows);
-    })
-);
+
 app.listen(process.env.PORT || 4000,function(){
     console.log("Started listening on port", 4000);
 });
