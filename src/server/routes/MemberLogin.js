@@ -58,7 +58,8 @@ router.post('/signin', (req, res)=> {
                 };
                 res.cookie("member", req.body.user_id,{
                     expires: new Date(Date.now() + 900000)
-                }); // 지워도 괜찮은 코드
+
+                });
                 return res.json({
                     success: true
                 });

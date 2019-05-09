@@ -7,16 +7,19 @@ class Main extends Component{
     constructor(props){
         super(props);
         this.state={
-            user_Id : Cookies.get('member')
+            user_Id : Cookies.get('member'),
         }
     } // cookie
     render(){
-        const userID= Cookies.get('member');
+        const userID = Cookies.get('member');
         const loginSuccess = (
             <div>
                 <h1>
-                    로그인 ID : {userID}
+                    로그인 ID : { userID }
                 </h1>
+                <h2>
+                    calorieForDay : { calorieForDay } //실패
+                </h2>
             </div>
         );
         const loginFail = (
