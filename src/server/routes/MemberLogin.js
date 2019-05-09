@@ -58,6 +58,7 @@ router.post('/signin', (req, res)=> {
                 res.cookie("member", req.body.user_id,{
                     expires: new Date(Date.now() + 900000)
                 });
+                res.cookie("calorieForDay", req.body.calorieForDay);//////
                 return res.json({
                     success: true
                 });
