@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {RecipeBox} from '../components';
 import PropTypes from 'prop-types';
 import {Search} from '../components';
-class RecipeViesTest extends Component{
+class RecipeViewsTest extends Component{
 
     state = {
-        search : false
+        search : ""
     }
 
     toggleSearch = () => {
@@ -23,15 +23,15 @@ class RecipeViesTest extends Component{
     render(){
         const searchBox=(
             <div>
-                <div>
-                    <ul>
-                        <li><a onClick={this.toggleSearch}><i className="material-icons">search</i></a></li>
-                    </ul>
+                <div className="input-field col s12">
+                    <label>ID</label>
+                    <input
+                        name="user_id"
+                        type="text"
+                        className="validate"
+                        onChange={this.handleChange}
+                        value={this.state.user_id}/>
                 </div>
-                {this.state.search ? <Search onClose={this.toggleSearch}
-                                             onSearch={this.props.onSearch}
-                                            searchWord={this.props.searchWord}
-                                            history={this.props.history}/>: undefined}
             </div>
         );
 
@@ -97,7 +97,7 @@ class RecipeViesTest extends Component{
     }
 }
 
-RecipeViesTest.propTypes={
+RecipeViewsTest.propTypes={
   data: PropTypes.array,
   onScrap: PropTypes.func,
   onEat: PropTypes.func,
@@ -105,11 +105,11 @@ RecipeViesTest.propTypes={
                 onSearch: PropTypes.func,
                 history: PropTypes.object
 };
-RecipeViesTest.defaultProps={
+RecipeViewsTest.defaultProps={
   data: [],
   onScrap: (user_id,recipe_code) =>{console.error("scrap function is not defined");},
   onEat: (user_id,recipe_code) =>{console.error("eat function is not defined");}
 };
 
 
-export default RecipeViesTest;
+export default RecipeViewsTest;
