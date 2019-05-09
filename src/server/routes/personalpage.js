@@ -13,7 +13,9 @@ const sequelize = new Sequelize('chaesongdb', 'comhong', 'sook2019', {
         }
     }
 );
+
 const personalpage = express.Router();
+
 const Recipes = sequelize.define(
     'Recipe',
     {
