@@ -122,7 +122,7 @@ RecipeViewsTest.defaultProps={
   data: [],
   onScrap: (user_id,recipe_code) =>{console.error("scrap function is not defined");},
   onEat: (user_id,recipe_code) =>{console.error("eat function is not defined");},
-    onSearch:(searchWord)->{console.error("search function is not defined")}
+    onSearch:(searchWord)=>{console.error("search function is not defined")}
 };
 
 
