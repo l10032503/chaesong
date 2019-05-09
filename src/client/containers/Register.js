@@ -5,8 +5,8 @@ import {registerRequest} from '../actions/authentication';
 
 class Register extends Component{
 
-    handleRegister = (user_id, pw, birthyear, height, weight, active, vegantype) => {
-        return this.props.registerRequest(user_id, pw, birthyear, height, weight, active, vegantype).then(
+    handleRegister = (user_id, pw, birthyear, sex, height, weight, active, vegantype) => {
+        return this.props.registerRequest(user_id, pw, birthyear, sex, height, weight, active, vegantype).then(
             ()=> {
                 if(this.props.status === "SUCCESS"){
                     console.log('container success');
@@ -43,8 +43,8 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
   return{
-     registerRequest: (user_id, pw, birthyear, height, weight, active, vegantype) =>{
-         return dispatch(registerRequest(user_id, pw, birthyear, height, weight, active, vegantype));
+     registerRequest: (user_id, pw, birthyear, sex, height, weight, active, vegantype) =>{
+         return dispatch(registerRequest(user_id, pw, birthyear, sex, height, weight, active, vegantype));
      }
   } ;
 };

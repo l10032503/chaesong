@@ -30,6 +30,9 @@ const MemberJoin = sequelize.define(
         birthyear:{
             type: Sequelize.INTEGER
         },
+        sex:{
+            type: Sequelize.INTEGER
+        },
         height:{
             type: Sequelize.INTEGER
         },
@@ -44,6 +47,9 @@ const MemberJoin = sequelize.define(
             defaultValue: Sequelize.NOW
         },
         vegantype:{
+            type: Sequelize.INTEGER
+        },
+        caloryForDay:{
             type: Sequelize.INTEGER
         }
     },
@@ -60,12 +66,16 @@ memberJoins.post('/signup', (req, res)=>{
        user_id : req.body.user_id,
        pw: req.body.pw,
        birthyear: req.body.birthyear,
+       sex: req.body.sex,
        height: req.body.height,
        weight: req.body.weight,
        active: req.body.active,
        register_date: today,
-       vegantype: req.body.vegantype
+       vegantype: req.body.vegantype,
+       caloryForDay: 0
    };
+
+
 
     let userIDRegex = /^[a-z0-9]+$/;
 
@@ -111,12 +121,5 @@ memberJoins.post('/signup', (req, res)=>{
            })
 });
 
-memberJoins.get('/getinfo', (req, res)=>{
-    return res.json({info: null});
-});
-
-memberJoins.post('/logout', (req, res)=>{
-    return res.json({success: true});
-});
 
 module.exports = memberJoins;

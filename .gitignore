@@ -1,10 +1,14 @@
 # Created by https://www.gitignore.io/api/node
 # Edit at https://www.gitignore.io/?templates=node
 ### IntelliJ IDEA ###
+.idea/
 .idea
 *.iws
 *.iml
 *.ipr
+
+bundle.js
+
 
 ### Node ###
 # Logs

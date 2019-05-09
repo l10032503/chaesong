@@ -13,6 +13,7 @@ const sequelize = new Sequelize('chaesongdb', 'comhong', 'sook2019', {
         }
     }
 );
+const Op = Sequelize.Op;
 const recipe = express.Router();
 
 const Recipe = sequelize.define(
@@ -33,6 +34,18 @@ const Recipe = sequelize.define(
         },
         imgurl: {
             type: Sequelize.TEXT
+        },
+        vegantype: {
+            type: Sequelize.TEXT
+        },
+        seafood: {
+            type: Sequelize.TEXT
+        },
+        milk: {
+            type: Sequelize.TEXT
+        },
+        egg: {
+            type: Sequelize.TEXT
         }
     },{
         timestamps: false
@@ -42,7 +55,7 @@ const Recipe = sequelize.define(
 recipe.use(cors());
 
 recipe.get('/', (req,res)=>{
-    console.log("recipeviewtest routes")
+    console.log("recipeviewtest routes");
     Recipe.findAll()
         .then(recipes=>{
             return res.json(recipes)
@@ -50,6 +63,39 @@ recipe.get('/', (req,res)=>{
         .catch(err=>{
             return res.send('error' + err)
         })
+});
+
+recipe.get('/filter', (req,res)=>{
+   console.log("recipeFilter routes");
+});
+
+recipe.get('/search/:searchWord',(req,res, next)=>{
+    let searchWord = req.params.searchWord;
+
+    Recipe.findAll({
+        where:{
+            [Op.or]: [
+                {
+                    recipe_name: {
+                        [Op.like]: "%" + searchWord + "%"
+                    }
+                },
+                {
+                    content:{
+                        [Op.like]: "%" + searchWord + "%"
+                    }
+                }
+            ]
+        }
+    }).then(recipes=>{
+        return res.json(recipes);
+    }).catch(err=>{
+        console.log(err);
+    })
+});
+
+recipe.get('/search', (req,res)=>{
+    res.json([]);
 });
 
 module.exports = recipe;
