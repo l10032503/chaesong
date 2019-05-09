@@ -48,8 +48,8 @@ const MemberJoin = sequelize.define(
         }
     },
     {
-        timestamps: false
-    }
+    timestamps: false
+}
 );
 
 memberJoins.use(cors());
