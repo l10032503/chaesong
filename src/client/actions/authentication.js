@@ -12,10 +12,10 @@ import{
     AUTH_GET_STATUS_FAILURE
 } from './ActionType';
 
-
 export function registerRequest(user_id, pw, birthyear, sex, height, weight, active, vegantype) {
     return (dispatch) =>{
         dispatch(register());
+
         return axios.post('/api/MemberJoin/signup',{user_id, pw, birthyear, sex, height, weight, active, vegantype})
             .then((response)=>{
                 console.log("dispatch register success");
