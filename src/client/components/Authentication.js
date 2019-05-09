@@ -23,18 +23,20 @@ class Authentication extends React.Component{
         let user_id = this.state.user_id;
         let pw = this.state.pw;
         let birthyear = this.state.birthyear;
+        let sex = this.state.sex;
         let height = this.state.height;
         let weight = this.state.weight;
         let active = this.state.active;
         let vegantype = this.state.vegantype;
 
-        this.props.onRegister(user_id, pw, birthyear, height, weight, active, vegantype).then(
+        this.props.onRegister(user_id, pw, birthyear, sex, height, weight, active, vegantype).then(
             (result) => {
                 if(!result){
                     this.setState({
                         user_id:"",
                         pw:"",
                         birthyear:"",
+                        sex:"",
                         height:"",
                         weight:"",
                         active:"",
@@ -121,6 +123,27 @@ class Authentication extends React.Component{
                         className="validate"
                         onChange={this.handleChange}
                         value={this.state.birthyear}/>
+                </div>
+                <div className="radio">
+                    <label>성별</label>
+                    <label>
+                        <input
+                            name="sex"
+                            type="radio"
+                            className="validate"
+                            onChange={this.handleChange}
+                            value="0"/>
+                        여자
+                    </label>
+                    <label>
+                        <input
+                            name="sex"
+                            type="radio"
+                            className="validate"
+                            onChange={this.handleChange}
+                            value="1"/>
+                        남자
+                    </label>
                 </div>
                 <div className="input-field col s12">
                     <label>키</label>
@@ -264,7 +287,7 @@ Authentication.propTypes = {
 
 Authentication.defaultProps = {
     mode: true,
-    onRegister: (user_id, pw, birthyear, height, weight, active, vegantype) => { console.error("register function is not defined"); },
+    onRegister: (user_id, pw, birthyear, sex, height, weight, active, vegantype) => { console.error("register function is not defined"); },
     onLogin: (user_id, pw) => {console.error("login function not defined");}
 };
 

@@ -7,6 +7,9 @@
 *.iml
 *.ipr
 
+bundle.js
+
+
 ### Node ###
 # Logs
 logs

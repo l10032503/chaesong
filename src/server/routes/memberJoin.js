@@ -30,6 +30,9 @@ const MemberJoin = sequelize.define(
         birthyear:{
             type: Sequelize.INTEGER
         },
+        sex:{
+            type: Sequelize.INTEGER
+        },
         height:{
             type: Sequelize.INTEGER
         },
@@ -54,8 +57,8 @@ const MemberJoin = sequelize.define(
         }
     },
     {
-        timestamps: false
-    }
+    timestamps: false
+}
 );
 
 memberJoins.use(cors());
@@ -66,6 +69,7 @@ memberJoins.post('/signup', (req, res)=>{
        user_id : req.body.user_id,
        pw: req.body.pw,
        birthyear: req.body.birthyear,
+       sex: req.body.sex,
        height: req.body.height,
        weight: req.body.weight,
        active: req.body.active,
@@ -124,7 +128,7 @@ memberJoins.post('/signup', (req, res)=>{
         return totalCalRequired;
     }
 
-   memberData.calorieForDay = calorieForDay(req.body.height, req.body.weight, req.body.active);
+    memberData.calorieForDay = calorieForDay(req.body.height, req.body.weight, req.body.active);
 
    let userIDRegex = /^[a-z0-9]+$/;
 
