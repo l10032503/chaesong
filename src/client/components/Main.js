@@ -12,14 +12,13 @@ class Main extends Component{
     } // cookie
     render(){
         const userID = Cookies.get('member');
-        const calorieForDay = Cookies.get('calorieForDay');//////
         const loginSuccess = (
             <div>
                 <h1>
                     로그인 ID : { userID }
                 </h1>
                 <h2>
-                    calorieForDay : { calorieForDay }//////
+                    calorieForDay : { calorieForDay } //실패
                 </h2>
             </div>
         );

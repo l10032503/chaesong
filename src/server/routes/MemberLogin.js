@@ -60,9 +60,6 @@ router.post('/signin', (req, res)=> {
                     expires: new Date(Date.now() + 900000)
 
                 });
-                res.cookie("calorieForDay", req.body.calorieForDay,{
-
-                }); // 지워도 괜찮은 코드
                 return res.json({
                     success: true
                 });

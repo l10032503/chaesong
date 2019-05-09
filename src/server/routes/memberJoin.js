@@ -74,7 +74,6 @@ memberJoins.post('/signup', (req, res)=>{
        sex: 0,
        calorieForDay: 0
    };
-
    //개인 표준몸무게(standWeight)는 키(height)에 따라 다르다
    const grantStandWeight = (height) => {
        let standWeight;
