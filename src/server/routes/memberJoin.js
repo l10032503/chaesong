@@ -49,7 +49,10 @@ const MemberJoin = sequelize.define(
         vegantype:{
             type: Sequelize.INTEGER
         },
-        caloryForDay:{
+        sex:{
+            type: Sequelize.INTEGER
+        },
+        calorieForDay:{
             type: Sequelize.INTEGER
         }
     },
@@ -72,28 +75,78 @@ memberJoins.post('/signup', (req, res)=>{
        active: req.body.active,
        register_date: today,
        vegantype: req.body.vegantype,
-       caloryForDay: 0
+       sex: 0,
+       calorieForDay: 0
    };
-
-
-
-    let userIDRegex = /^[a-z0-9]+$/;
-
-    if(!userIDRegex.test(req.body.user_id)) {
-        return res.status(400).json({ // HTTP 요청에 대한 리스폰스 (json 형식으로)
-            error: "BAD USERNAME",
-            code: 1
-        });
+   //개인 표준몸무게(standWeight)는 키(height)에 따라 다르다
+   const grantStandWeight = (height) => {
+       let standWeight;
+       if(height < 150) { standWeight = height - 100; }
+       else if(height >= 150 && height < 160) { standWeight = (height - 150) / 2 + 50; }
+       else if(height >= 160) { standWeight = (height - 100) * 0.9; }
+       return standWeight;
+   }
+   //개인의 체중범위(weightRange)는 실제 체중(weight)과 표준몸무게(standWeight)로 측정한다
+   const grantWeightRange = (weight, standWeight) => {
+       let overweightPercent = weight / standWeight * 100.0;
+       if (overweightPercent <= 90) { return 1; } //저체중
+       else if (overweightPercent >= 90 && overweightPercent < 110) { return 2;	} //정상
+       else if (overweightPercent >= 110 && overweightPercent < 120) { return 3; } //과체중
+       else if (overweightPercent >= 120 && overweightPercent < 140) { return 4; } //비만
+       else if (overweightPercent > 140) { return 5; } //심한 비만
+   }
+   //1kg당 필요한 칼로리(requiredCalPerKg)는 체중범위(weightRange)와 활동량(active)으로 측정한다
+   const grantRequiredCalPerKg = (weightRange, active) => {
+       let requiredCalPerKg;
+       if(weightRange >= 3) {
+           switch(active) {
+               case "1": requiredCalPerKg = 22.5; break;
+               case "2": requiredCalPerKg = 27.5; break;
+               case "3": requiredCalPerKg = 32.5; break;
+           }
+       }
+       else if(weightRange === 2) {
+           switch(active) {
+               case "1": requiredCalPerKg = 27.5; break;
+               case "2": requiredCalPerKg = 32.5; break;
+               case "3": requiredCalPerKg = 37.5; break;
+           }
+       }
+       else if(weightRange === 1) {
+           switch(active) {
+               case "1": requiredCalPerKg = 32.5; break;
+               case "2": requiredCalPerKg = 37.5; break;
+               case "3": requiredCalPerKg = 42.5; break;
+           }
+       }
+       return requiredCalPerKg;
+   }
+   const calorieForDay = (height, weight, active) => {
+        let standWeight = grantStandWeight(height);
+        let weightRange = grantWeightRange(weight, standWeight);
+        let totalCalRequired = weight * grantRequiredCalPerKg(weightRange, active);
+        return totalCalRequired;
     }
 
-    // CHECK PASS LENGTH
-    // 비밀번호 유형 검사 (4보다 작거나, 들어온 비밀번호의 값이 문자열이 아닐 경우)
-    if(req.body.pw.length < 4 || typeof req.body.pw !== "string") {
-        return res.status(400).json({
-            error: "BAD PASSWORD",
-            code: 2
-        });
-    }
+    memberData.calorieForDay = calorieForDay(req.body.height, req.body.weight, req.body.active);
+
+   let userIDRegex = /^[a-z0-9]+$/;
+
+   if(!userIDRegex.test(req.body.user_id)) {
+       return res.status(400).json({ // HTTP 요청에 대한 리스폰스 (json 형식으로)
+           error: "BAD USERNAME",
+           code: 1
+       });
+   }
+
+   // CHECK PASS LENGTH
+   //비밀번호 유형 검사 (4보다 작거나, 들어온 비밀번호의 값이 문자열이 아닐 경우)
+   if(req.body.pw.length < 4 || typeof req.body.pw !== "string") {
+       return res.status(400).json({
+           error: "BAD PASSWORD",
+           code: 2
+       });
+   }
 
    MemberJoin.findOne({
        where:{

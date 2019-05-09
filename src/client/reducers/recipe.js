@@ -45,7 +45,7 @@ export default function recipe(state = initialState, action) {
                         ...state.list,
                         status: 'SUCCESS',
                         data: action.data,
-                        isLast : action.data.length <6
+                        isLast : action.data.length < 6
                     }
                 }
             } else {
