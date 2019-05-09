@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const cors = require("cors");
 const Sequelize = require("sequelize");
+const session = require("express-session");
 
 const sequelize = new Sequelize('chaesongdb', 'comhong', 'sook2019', {
         host: "chaesong.cccteklwfdo9.ap-northeast-2.rds.amazonaws.com",
@@ -57,8 +58,11 @@ router.post('/signin', (req, res)=> {
                 };
                 res.cookie("member", req.body.user_id,{
                     expires: new Date(Date.now() + 900000)
+
                 });
-                res.cookie("calorieForDay", req.body.calorieForDay);//////
+                res.cookie("calorieForDay", req.body.calorieForDay,{
+
+                }); // 지워도 괜찮은 코드
                 return res.json({
                     success: true
                 });
@@ -82,7 +86,12 @@ router.get('/getinfo',(req,res)=>{
 });
 
 router.post('/logout', (req, res)=>{
-    req.session.destroy(err => {if(err) throw err;});
+    let session = req.session;
+    console.log(req.session);
+    session.destroy(function(){
+        req.session;
+    });
+    console.log(req.session);
     return res.json({success: true});
 });
 

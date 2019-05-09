@@ -9,7 +9,7 @@ class Main extends Component{
         this.state={
             user_Id : Cookies.get('member'),
         }
-    }
+    } // cookie
     render(){
         const userID = Cookies.get('member');
         const calorieForDay = Cookies.get('calorieForDay');//////
@@ -35,8 +35,8 @@ class Main extends Component{
         );
         return(
             <div>
-                {this.props.isLoggedIn ? loginSuccess : loginFail}
-                {this.props.isLoggedIn ? logoutButton : undefined}
+                {this.props.isLoggedIn? loginSuccess : loginFail}
+                {logoutButton}
             </div>
         )
     }

@@ -6,13 +6,13 @@ import {Login} from '../client/containers';
 import {MainPage} from '../client/containers';
 import {Start} from '../client/containers';
 import {recipeview} from '../client/containers';
+import {App} from '../client/containers';
 import {Provider} from 'react-redux'
 import {createStore, applyMiddleware} from 'redux';
 import reducers from '../client/reducers';
 import thunk from 'redux-thunk';
 
 const store = createStore(reducers, applyMiddleware(thunk));
-
 
 ReactDOM.render(
     <Provider store={store}>
