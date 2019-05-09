@@ -24,7 +24,7 @@ class RecipeViewsTest extends Component{
         const searchBox=(
             <div>
                 <div className="input-field col s12">
-                    <label>ID</label>
+                    <label>검색</label>
                     <input
                         name="user_id"
                         type="text"
@@ -89,7 +89,7 @@ class RecipeViewsTest extends Component{
                 </div>
                 <div>
                     {recipeCheckBox}
-                    <button>click</button>
+                    <button>검색</button>
                 </div>
                 {mapToComponents(this.props.data)}
             </div>
