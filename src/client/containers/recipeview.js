@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {recipeListRequest, scrapRequest, eatRequest} from '../actions/recipe';
+import {recipeListRequest, scrapRequest, eatRequest, recipeSearchRequest} from '../actions/recipe';
 import {connect} from 'react-redux';
 import {RecipeViewTest} from '../components';
 
@@ -35,6 +35,11 @@ class recipeview extends Component{
         );
     }
 
+    handleSearch = (searchWord) =>{
+        console.log("search container");
+        this.props.recipeSearchRequest(searchWord);
+    }
+
     componentDidMount(){
         this.props.recipeListRequest(true, undefined);
     }
@@ -45,7 +50,9 @@ class recipeview extends Component{
               <RecipeViewTest data={this.props.recipeData}
                               currentUser = {this.props.currentUser}
                               onScrap={this.handleScrap}
-                              onEat={this.handleEat}/>
+                              onEat={this.handleEat}
+                                searchWord={this.handleSearch}
+                                history={this.props.history}/>
           </div>
         );
     }
@@ -58,7 +65,8 @@ const mapStateToProps = (state) => {
     isLast: state.recipe.isLast,
       scrapstatus: state.recipe.scrap.scrapstatus,
       eatstatus: state.recipe.eat.eatstatus,
-      errorCode : state.recipe.scrap.error
+      errorCode : state.recipe.scrap.error,
+      searchResults: state.search.searchWord
   };
 };
 
@@ -72,6 +80,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         eatRequest: (user_id, recipe_code) =>{
             return dispatch(eatRequest(user_id, recipe_code));
+        },
+        recipeSearchRequest:(searchWord) =>{
+            return dispatch(recipeSearchRequest(searchWord));
         }
     };
 };

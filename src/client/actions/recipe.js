@@ -8,7 +8,10 @@ import{
     RECIPE_SCRAP_FAILURE,
     RECIPE_EAT,
     RECIPE_EAT_SUCCESS,
-    RECIPE_EAT_FAILURE
+    RECIPE_EAT_FAILURE,
+    RECIPE_SEARCH,
+    RECIPE_SEARCH_SUCCESS,
+    RECIPE_SEARCH_FAILURE
 } from './ActionType';
 
 export function recipeListRequest(isInitial, listType){
@@ -118,3 +121,34 @@ export function recipeEatFailure(error) {
     };
 }
 
+export function recipeSearchRequest(searchWord){
+    return (dispatch) =>{
+        dispatch(recipeSearch());
+
+        return axios.get('/api/recipe/search/' + searchWord)
+            .then((response)=>{
+                dispatch(recipeSearchSuccess(response.data));
+            }).catch((error) =>{
+                dispatch(recipeSearchFailure());
+            });
+    };
+}
+
+export function recipeSearch(){
+    return{
+        type: RECIPE_SEARCH
+    };
+}
+
+export function recipeSearchSuccess(searchWord){
+    return{
+        type: RECIPE_SEARCH_SUCCESS,
+        searchWord
+    }
+}
+
+export function recipeSearchFailure(){
+    return {
+        type: RECIPE_SEARCH_FAILURE
+    }
+}

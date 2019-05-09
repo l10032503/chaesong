@@ -30,6 +30,9 @@ const MemberJoin = sequelize.define(
         birthyear:{
             type: Sequelize.INTEGER
         },
+        sex:{
+            type: Sequelize.INTEGER
+        },
         height:{
             type: Sequelize.INTEGER
         },
@@ -44,9 +47,6 @@ const MemberJoin = sequelize.define(
             defaultValue: Sequelize.NOW
         },
         vegantype:{
-            type: Sequelize.INTEGER
-        },
-        sex:{
             type: Sequelize.INTEGER
         },
         caloryForDay:{
@@ -66,12 +66,12 @@ memberJoins.post('/signup', (req, res)=>{
        user_id : req.body.user_id,
        pw: req.body.pw,
        birthyear: req.body.birthyear,
+       sex: req.body.sex,
        height: req.body.height,
        weight: req.body.weight,
        active: req.body.active,
        register_date: today,
        vegantype: req.body.vegantype,
-       sex: 0,
        caloryForDay: 0
    };
 
