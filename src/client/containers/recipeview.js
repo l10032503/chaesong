@@ -37,7 +37,17 @@ class recipeview extends Component{
 
     handleSearch = (searchWord) =>{
         console.log("search container");
-        this.props.recipeSearchRequest(searchWord);
+        this.props.recipeSearchRequest(searchWord).then(
+            ()=>{
+                if(this.props.searchstatus === "SUCCESS"){
+                    console.log("eat container success");
+                    return true;
+                }else{
+                    console.log("eat container fail");
+                    return false;
+                }
+            }
+        );
     }
 
     componentDidMount(){
@@ -51,7 +61,7 @@ class recipeview extends Component{
                               currentUser = {this.props.currentUser}
                               onScrap={this.handleScrap}
                               onEat={this.handleEat}
-                                searchWord={this.handleSearch}
+                                onSearch={this.handleSearch}
                                 history={this.props.history}/>
           </div>
         );
@@ -66,7 +76,7 @@ const mapStateToProps = (state) => {
       scrapstatus: state.recipe.scrap.scrapstatus,
       eatstatus: state.recipe.eat.eatstatus,
       errorCode : state.recipe.scrap.error,
-      searchResults: state.search.searchWord
+      searchstatus: state.search.searchWord
   };
 };
 

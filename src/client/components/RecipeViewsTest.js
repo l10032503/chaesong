@@ -5,13 +5,7 @@ import {Search} from '../components';
 class RecipeViewsTest extends Component{
 
     state = {
-        search : ""
-    }
-
-    toggleSearch = () => {
-        this.setState({
-            search: !this.state.search
-        });
+        searchWord : ""
     }
 
     handleChange = (e) => {
@@ -20,17 +14,36 @@ class RecipeViewsTest extends Component{
         this.setState(nextState);
     }
 
+    handleSearch = () => {
+        let searchWord = this.state.searchWord;
+
+        this.props.onSearch(searchWord).then(
+            (result)=>{
+                if(!result){
+                    this.setState({searchWord:""});
+                }
+            }
+        )
+    }
+
+    handleKeyPress = (e) => {
+        if(e.charCode==13) {
+            this.handleSearch();
+        }
+    }
+
     render(){
         const searchBox=(
             <div>
                 <div className="input-field col s12">
                     <label>검색</label>
                     <input
-                        name="user_id"
+                        name="searchWord"
                         type="text"
                         className="validate"
                         onChange={this.handleChange}
-                        value={this.state.user_id}/>
+                        value={this.state.searchWord}
+                        onKeyPress={this.handleKeyPress}/>
                 </div>
             </div>
         );
@@ -89,7 +102,7 @@ class RecipeViewsTest extends Component{
                 </div>
                 <div>
                     {recipeCheckBox}
-                    <button>검색</button>
+                    <button onClick={this.handleSearch}>검색</button>
                 </div>
                 {mapToComponents(this.props.data)}
             </div>
@@ -108,7 +121,8 @@ RecipeViewsTest.propTypes={
 RecipeViewsTest.defaultProps={
   data: [],
   onScrap: (user_id,recipe_code) =>{console.error("scrap function is not defined");},
-  onEat: (user_id,recipe_code) =>{console.error("eat function is not defined");}
+  onEat: (user_id,recipe_code) =>{console.error("eat function is not defined");},
+    onSearch:(searchWord)=>{console.error("search function is not defined")}
 };
 
 
