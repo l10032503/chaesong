@@ -5,6 +5,7 @@ import recipe from './recipe';
 import scrap from './scrap';
 import MainPage from './mainpage';
 import personalpage from './personalpage';
+import recommendPage from './recommendPage';
 
 import eat from './eat';
 
@@ -17,6 +18,7 @@ router.use('/scrap', scrap);
 
 router.use('/MainPage', MainPage);
 router.use('/personalpage', personalpage);
+router.use('/recommendpage', recommendPage);
 router.use('/eat', eat);
 
 export default router;

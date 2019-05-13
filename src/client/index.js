@@ -7,6 +7,7 @@ import {MainPage} from '../client/containers';
 import {Start} from '../client/containers';
 import {recipeview} from '../client/containers';
 import {personalview} from '../client/containers';
+import {recommendview} from '../client/containers';
 import {App} from '../client/containers';
 import {Provider} from 'react-redux'
 import {createStore, applyMiddleware} from 'redux';
@@ -25,6 +26,7 @@ ReactDOM.render(
                 <Route path="/Start" component={Start}/>
                 <Route path="/recipeview" component={recipeview}/>
                 <Route path="/personalpage" component={personalview} />
+                <Route path="/recommendview" component={recommendview} />
             </div>
         </Router>
     </Provider>,
