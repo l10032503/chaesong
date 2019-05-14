@@ -121,13 +121,14 @@ export function recipeEatFailure(error) {
     };
 }
 
-export function recipeSearchRequest(searchWord){
+export function recipeSearchRequest(searchWord, isInitial, listType){
     return (dispatch) =>{
         dispatch(recipeSearch());
 
         return axios.get('/api/recipe/search/' + searchWord)
             .then((response)=>{
-                dispatch(recipeSearchSuccess(response.data));
+                console.log("search dispatch success" );
+                dispatch(recipeSearchSuccess(searchWord, response.data, isInitial, listType));
             }).catch((error) =>{
                 dispatch(recipeSearchFailure());
             });
@@ -140,10 +141,13 @@ export function recipeSearch(){
     };
 }
 
-export function recipeSearchSuccess(searchWord){
+export function recipeSearchSuccess(searchWord, data, isInitial, listType){
     return{
         type: RECIPE_SEARCH_SUCCESS,
-        searchWord
+        searchWord,
+        data,
+        isInitial,
+        listType
     }
 }
 

@@ -22,6 +22,11 @@ const initialState = {
         valid: false,
         isLoggedIn: false,
         currentUser: ''
+    },
+    search:{
+        searchstatus: 'INIT',
+        data: [],
+        isLast: false
     }
 };
 
@@ -70,7 +75,6 @@ export default function recipe(state = initialState, action) {
                     }
                 }
             }
-
         case types.RECIPE_LIST_FAILURE:
             return{
                 ...state,
@@ -79,6 +83,8 @@ export default function recipe(state = initialState, action) {
                     status: 'FAILURE'
                 }
             };
+
+            ////////////////////////////////////
         case types.RECIPE_SCRAP:
             console.log("scrap reducer waiting");
             return{
@@ -107,6 +113,8 @@ export default function recipe(state = initialState, action) {
                     error: action.error
                 }
             };
+
+            ////////////////////////////////////////////////
         case types.RECIPE_EAT:
             console.log("EAT reducer waiting");
             return{
@@ -135,6 +143,61 @@ export default function recipe(state = initialState, action) {
                     error: action.error
                 }
             };
+
+        ///////////////////////////////////////////////////////
+        case types.RECIPE_SEARCH:
+            console.log('recipe search reducers');
+            return{
+                ...state,
+                search: {
+                    ...state.search,
+                    searchstatus : 'WAITING'
+                }
+            }
+        case types.RECIPE_SEARCH_SUCCESS:
+            console.log('recipe search reducers success');
+            if(action.isInitial){
+                return{
+                    ...state,
+                    search: {
+                        ...state.search,
+                        searchstatus: 'SUCCESS',
+                        data: action.data,
+                        isLast : action.data.length <6
+                    }
+                }
+            } else {
+                if(action.listType === 'new'){
+                    return {
+                        ...state,
+                        search:{
+                            ...state.search,
+                            searchstatus: 'SUCCESS',
+                            data: [...action.data, ...state.search.data]
+                        }
+                    }
+                } else {
+                    return {
+                        ...state,
+                        search:{
+                            ...state.search,
+                            searchstatus: 'SUCCESS',
+                            data: [...state.search.data, ...action.data],
+                            islast: action.data.length < 6
+                        }
+                    }
+                }
+            }
+        case types.RECIPE_SEARCH_FAILURE:
+            console.log('recipe search reducers failure');
+            return{
+                ...state,
+                search:{
+                    ...state.search,
+                    search: 'FAILURE'
+                }
+            };
+
         default : return state;
     }
 }

@@ -17,13 +17,7 @@ class RecipeViewsTest extends Component{
     handleSearch = () => {
         let searchWord = this.state.searchWord;
 
-        this.props.onSearch(searchWord).then(
-            (result)=>{
-                if(!result){
-                    this.setState({searchWord:""});
-                }
-            }
-        )
+        this.props.onSearch(searchWord);
     }
 
     handleKeyPress = (e) => {
@@ -111,18 +105,20 @@ class RecipeViewsTest extends Component{
 }
 
 RecipeViewsTest.propTypes={
+  mode: PropTypes.bool,
   data: PropTypes.array,
   onScrap: PropTypes.func,
   onEat: PropTypes.func,
-                searchWord: PropTypes.array,
-                onSearch: PropTypes.func,
-                history: PropTypes.object
+  onSearch: PropTypes.func,
+  history: PropTypes.object
 };
+
 RecipeViewsTest.defaultProps={
+  mode: true,
   data: [],
   onScrap: (user_id,recipe_code) =>{console.error("scrap function is not defined");},
   onEat: (user_id,recipe_code) =>{console.error("eat function is not defined");},
-    onSearch:(searchWord)=>{console.error("search function is not defined")}
+  onSearch:(searchWord)=>{console.error("search function is not defined")}
 };
 
 

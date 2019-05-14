@@ -69,9 +69,9 @@ recipe.get('/filter', (req,res)=>{
    console.log("recipeFilter routes");
 });
 
-recipe.get('/search/:searchWord',(req,res, next)=>{
+recipe.get('/search/:searchWord',(req,res)=>{
     let searchWord = req.params.searchWord;
-
+    console.log(req.params.searchWord + " & " +searchWord);
     Recipe.findAll({
         where:{
             [Op.or]: [
@@ -88,6 +88,7 @@ recipe.get('/search/:searchWord',(req,res, next)=>{
             ]
         }
     }).then(recipes=>{
+        console.log("router success");
         return res.json(recipes);
     }).catch(err=>{
         console.log(err);

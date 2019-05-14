@@ -40,10 +40,12 @@ class recipeview extends Component{
         this.props.recipeSearchRequest(searchWord).then(
             ()=>{
                 if(this.props.searchstatus === "SUCCESS"){
-                    console.log("eat container success");
+                    console.log("search container success");
+                    this.props.history.push('/recipeview/search/' + searchWord);
+
                     return true;
                 }else{
-                    console.log("eat container fail");
+                    console.log("search container fail");
                     return false;
                 }
             }
@@ -76,7 +78,7 @@ const mapStateToProps = (state) => {
       scrapstatus: state.recipe.scrap.scrapstatus,
       eatstatus: state.recipe.eat.eatstatus,
       errorCode : state.recipe.scrap.error,
-      searchstatus: state.search.searchWord
+      searchstatus: state.recipe.search.searchstatus
   };
 };
 
@@ -91,8 +93,8 @@ const mapDispatchToProps = (dispatch) => {
         eatRequest: (user_id, recipe_code) =>{
             return dispatch(eatRequest(user_id, recipe_code));
         },
-        recipeSearchRequest:(searchWord) =>{
-            return dispatch(recipeSearchRequest(searchWord));
+        recipeSearchRequest:(searchWord, isInitial, listType) =>{
+            return dispatch(recipeSearchRequest(searchWord, isInitial, listType));
         }
     };
 };
