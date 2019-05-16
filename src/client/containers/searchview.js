@@ -40,7 +40,6 @@ class recipeview extends Component{
         this.props.recipeSearchRequest(searchWord).then(
             ()=>{
                 console.log(this.props.searchstatus);
-
                 if(this.props.searchstatus === "SUCCESS"){
                     console.log("search container success" + searchWord);
                     this.props.history.push('/searchview');

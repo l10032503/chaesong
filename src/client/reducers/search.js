@@ -2,7 +2,9 @@ import * as types from '../actions/ActionType';
 
 const initialState = {
     status: 'INIT',
-    searchWord: []
+    searchWord: [],
+    data: [],
+    isLast: false
 };
 
 export default function search(state = initialState, action) {
@@ -19,7 +21,9 @@ export default function search(state = initialState, action) {
             return{
                 ...state,
                 status: 'SUCCESS',
-                searchWord: action.searchWord
+                searchWord: action.searchWord,
+                data: action.data,
+                isLast : action.data.length <6
             }
         case types.RECIPE_SEARCH_FAILURE:
             console.log('search reducers failure');

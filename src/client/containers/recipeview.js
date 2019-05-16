@@ -46,7 +46,10 @@ class recipeview extends Component{
         this.props.recipeSearchRequest(searchWord).then(
             ()=>{
                 if(this.props.searchstatus === "SUCCESS"){
-                    console.log("search container success" + searchWord);
+                    console.log(this.props.searchstatus);
+                    console.log(this.props.searchData);
+                    this.setState({recipeData : this.props.searchData});
+                    console.log("search container success: " + searchWord);
                     return true;
                 }else{
                     console.log("search container fail");
@@ -69,17 +72,34 @@ class recipeview extends Component{
 
 
     render(){
+        console.log("container-> ");
         console.log(this.props.recipeData);
-        return(
-          <div className="Wrapper">
-              <RecipeViewTest data={this.props.recipeData}
-                              currentUser = {this.props.currentUser}
-                              onScrap={this.handleScrap}
-                              onEat={this.handleEat}
-                                onSearch={this.handleSearch}
-                                history={this.props.history}/>
-          </div>
-        );
+        if(this.props.searchstatus === "SUCCESS"){
+            console.log("container search=====> ");
+            return(
+                <div className="Wrapper">
+                    <RecipeViewTest data={this.props.searchData}
+                                    currentUser = {this.props.currentUser}
+                                    onScrap={this.handleScrap}
+                                    onEat={this.handleEat}
+                                    onSearch={this.handleSearch}
+                                    history={this.props.history}/>
+                </div>
+            );
+        }else{
+            console.log("container first=====> ");
+            return(
+                <div className="Wrapper">
+                    <RecipeViewTest data={this.props.recipeData}
+                                    currentUser = {this.props.currentUser}
+                                    onScrap={this.handleScrap}
+                                    onEat={this.handleEat}
+                                    onSearch={this.handleSearch}
+                                    history={this.props.history}/>
+                </div>
+            );
+        }
+
     }
 }
 
@@ -91,7 +111,8 @@ const mapStateToProps = (state) => {
       scrapstatus: state.recipe.scrap.scrapstatus,
       eatstatus: state.recipe.eat.eatstatus,
       errorCode : state.recipe.scrap.error,
-      searchstatus: state.search.status
+      searchstatus: state.search.status,
+      searchData : state.search.data,
   };
 };
 
