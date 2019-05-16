@@ -55,10 +55,14 @@ const Recipe = sequelize.define(
 );
 
 
-search.get('/:searchWord', (req,res)=>{
+search.get('/:searchWord/:seafood/:milk/:egg', (req,res)=>{
     console.log("recipe search routes");
     let searchWord = req.params.searchWord;
+    let seafood = req.params.seafood;
+    let milk = req.params.milk;
+    let egg = req.params.egg;
     console.log(req.params.searchWord + " & " +searchWord);
+    console.log("seafood: "  + seafood +"/ milk: " + milk + "/ egg: " + egg);
     Recipe.findAll({
         where:{
             [Op.or]: [
@@ -71,8 +75,17 @@ search.get('/:searchWord', (req,res)=>{
                     content:{
                         [Op.like]: "%" + searchWord + "%"
                     }
-                }
-            ]
+                },
+            ],
+            seafood : {
+                [Op.lte] : req.params.seafood
+            },
+            milk : {
+                [Op.lte] : req.params.milk
+            },
+            egg : {
+                [Op.lte] : req.params.egg
+            }
         }
     }).then(recipes=>{
         //console.log(recipes);

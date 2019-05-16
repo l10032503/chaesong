@@ -5,7 +5,13 @@ import {Search} from '../components';
 class RecipeViewsTest extends Component{
 
     state = {
-        searchWord : ""
+        searchWord : "",
+        seafoodchecked:true,
+        milkchecked:true,
+        eggchecked:true,
+        seafood : 0,
+        milk: 0,
+        egg: 0
     }
 
     handleChange = (e) => {
@@ -14,10 +20,24 @@ class RecipeViewsTest extends Component{
         this.setState(nextState);
     }
 
+    handleSeafoodChange = (event) =>{
+        this.setState({ seafoodchecked: event.target.checked }) ;
+    }
+    handleMilkChange = (event) =>{
+        this.setState({ milkchecked: event.target.checked }) ;
+    }
+    handleEggChange = (event) =>{
+        this.setState({ eggchecked: event.target.checked }) ;
+    }
+
     handleSearch = () => {
-        let searchWord = this.state.searchWord;
+        let searchWord = !this.state.searchWord? " ": this.state.searchWord;
+        let seafood = this.state.seafoodchecked? 1: 0;
+        let milk = this.state.milkchecked? 1:0;
+        let egg = this.state.eggchecked? 1:0;
         console.log("container: "+ searchWord);
-        this.props.onSearch(searchWord);
+        console.log("seafood: "  + seafood +"/ milk: " + milk + "/ egg: " + egg);
+        this.props.onSearch(searchWord, seafood, milk, egg);
     }
 
     handleKeyPress = (e) => {
@@ -49,24 +69,24 @@ class RecipeViewsTest extends Component{
                   name="seafood"
                   type="checkbox"
                   className="validate"
-                  checked= {true}
-                  onChange={this.handleChange}
+                  checked={this.state.seafoodchecked}
+                  onChange={this.handleSeafoodChange}
                   value="1"/>
               해산물
               <input
                   name="milk"
                   type="checkbox"
                   className="validate"
-                  checked= {true}
-                  onChange={this.handleChange}
+                  checked={this.state.milkchecked}
+                  onChange={this.handleMilkChange}
                   value="1"/>
               우유
               <input
                   name="egg"
                   type="checkbox"
                   className="validate"
-                  checked= {true}
-                  onChange={this.handleChange}
+                  checked={this.state.eggchecked}
+                  onChange={this.handleEggChange}
                   value="1"/>
               계란
           </div>
@@ -117,7 +137,7 @@ RecipeViewsTest.defaultProps={
   data: [],
   onScrap: (user_id,recipe_code) =>{console.error("scrap function is not defined");},
   onEat: (user_id,recipe_code) =>{console.error("eat function is not defined");},
-  onSearch:(searchWord)=>{console.error("search function is not defined")}
+  onSearch:(searchWord, seafood, milk, egg)=>{console.error("search function is not defined")}
 };
 
 

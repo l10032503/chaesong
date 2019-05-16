@@ -41,9 +41,9 @@ class recipeview extends Component{
         return true;
     }*/
 
-    handleSearch = (searchWord) =>{
+    handleSearch = (searchWord, seafood, milk, egg) =>{
         console.log("search container");
-        this.props.recipeSearchRequest(searchWord).then(
+        this.props.recipeSearchRequest(searchWord, seafood, milk, egg).then(
             ()=>{
                 if(this.props.searchstatus === "SUCCESS"){
                     console.log(this.props.searchstatus);
@@ -73,7 +73,6 @@ class recipeview extends Component{
 
     render(){
         console.log("container-> ");
-        console.log(this.props.recipeData);
         if(this.props.searchstatus === "SUCCESS"){
             console.log("container search=====> ");
             return(
@@ -127,8 +126,8 @@ const mapDispatchToProps = (dispatch) => {
         eatRequest: (user_id, recipe_code) =>{
             return dispatch(eatRequest(user_id, recipe_code));
         },
-        recipeSearchRequest:(searchWord) =>{
-            return dispatch(recipeSearchRequest(searchWord));
+        recipeSearchRequest:(searchWord, seafood, milk, egg) =>{
+            return dispatch(recipeSearchRequest(searchWord, seafood, milk, egg));
         }
     };
 };
