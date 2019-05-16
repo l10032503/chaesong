@@ -47,7 +47,6 @@ class recipeview extends Component{
             ()=>{
                 if(this.props.searchstatus === "SUCCESS"){
                     console.log("search container success" + searchWord);
-                    this.props.history.push('/recipeview');
                     return true;
                 }else{
                     console.log("search container fail");
@@ -70,6 +69,7 @@ class recipeview extends Component{
 
 
     render(){
+        console.log(this.props.recipeData);
         return(
           <div className="Wrapper">
               <RecipeViewTest data={this.props.recipeData}

@@ -65,7 +65,7 @@ recipe.get('/', (req,res)=>{
         })
 });
 
-recipe.get('/:searchWord', (req,res)=>{
+/*recipe.get('/:searchWord', (req,res)=>{
     console.log("recipeviewtest routes");
     let searchWord = req.params.searchWord;
     console.log(req.params.searchWord + " & " +searchWord);
@@ -128,6 +128,6 @@ recipe.get('/search/:searchWord',(req,res)=>{
 
 recipe.get('/search', (req,res)=>{
     res.json([]);
-});
+});*/
 
 module.exports = recipe;

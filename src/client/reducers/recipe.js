@@ -38,6 +38,7 @@ export default function recipe(state = initialState, action) {
             };
         case types.RECIPE_LIST_SUCCESS:
             console.log("recipeviewtest reducer success");
+            console.log(action.data);
             if(action.isInitial){
                 return{
                     ...state,

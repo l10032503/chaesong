@@ -9,13 +9,13 @@ export default function search(state = initialState, action) {
     switch (action.type) {
         case types.RECIPE_SEARCH:
             console.log('search reducers waiting');
-            console.log(initialState.status);
             return{
                 ...state,
                 status: 'WAITING'
             }
         case types.RECIPE_SEARCH_SUCCESS:
             console.log('search reducers success');
+            console.log(action.data);
             return{
                 ...state,
                 status: 'SUCCESS',
