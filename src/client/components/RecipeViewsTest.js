@@ -16,7 +16,7 @@ class RecipeViewsTest extends Component{
 
     handleSearch = () => {
         let searchWord = this.state.searchWord;
-
+        console.log("container: "+ searchWord);
         this.props.onSearch(searchWord);
     }
 
@@ -74,7 +74,6 @@ class RecipeViewsTest extends Component{
 
         const mapToComponents = data => {
             return data.map((recipe, i)=>{
-                console.log("recipeviewtest maptocomponent");
                 return (
                   <RecipeBox
                     data={recipe}

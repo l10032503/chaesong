@@ -14,7 +14,9 @@ const sequelize = new Sequelize('chaesongdb', 'comhong', 'sook2019', {
     }
 );
 const Op = Sequelize.Op;
-const recipe = express.Router();
+const search = express.Router();
+
+search.use(cors());
 
 const Recipe = sequelize.define(
     'Recipe',
@@ -52,21 +54,9 @@ const Recipe = sequelize.define(
     }
 );
 
-recipe.use(cors());
 
-recipe.get('/', (req,res)=>{
-    console.log("recipeviewtest routes");
-    Recipe.findAll()
-        .then(recipes=>{
-            return res.json(recipes)
-        })
-        .catch(err=>{
-            return res.send('error' + err)
-        })
-});
-
-recipe.get('/:searchWord', (req,res)=>{
-    console.log("recipeviewtest routes");
+search.get('/:searchWord', (req,res)=>{
+    console.log("recipe search routes");
     let searchWord = req.params.searchWord;
     console.log(req.params.searchWord + " & " +searchWord);
     Recipe.findAll({
@@ -85,49 +75,12 @@ recipe.get('/:searchWord', (req,res)=>{
             ]
         }
     }).then(recipes=>{
-            return res.json(recipes)
-        })
-        .catch(err=>{
-            return res.send('error' + err)
-        })
-});
-
-
-
-
-recipe.get('/filter', (req,res)=>{
-   console.log("recipeFilter routes");
-});
-
-recipe.get('/search/:searchWord',(req,res)=>{
-    let searchWord = req.params.searchWord;
-    console.log(req.params.searchWord + " & " +searchWord);
-    Recipe.findAll({
-        where:{
-            [Op.or]: [
-                {
-                    recipe_name: {
-                        [Op.like]: "%" + searchWord + "%"
-                    }
-                },
-                {
-                    content:{
-                        [Op.like]: "%" + searchWord + "%"
-                    }
-                }
-            ]
-        }
-    }).then(recipes=>{
-        console.log("router success");
         //console.log(recipes);
-        return res.json(recipes);
-    }).catch(err=>{
-        console.log(err);
+        return res.json(recipes)
     })
+        .catch(err=>{
+            return res.send('error' + err)
+        })
 });
 
-recipe.get('/search', (req,res)=>{
-    res.json([]);
-});
-
-module.exports = recipe;
+module.exports = search;

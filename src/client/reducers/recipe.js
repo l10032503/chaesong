@@ -22,11 +22,6 @@ const initialState = {
         valid: false,
         isLoggedIn: false,
         currentUser: ''
-    },
-    search:{
-        searchstatus: 'INIT',
-        data: [],
-        isLast: false
     }
 };
 
@@ -145,58 +140,6 @@ export default function recipe(state = initialState, action) {
             };
 
         ///////////////////////////////////////////////////////
-        case types.RECIPE_SEARCH:
-            console.log('recipe search reducers');
-            return{
-                ...state,
-                search: {
-                    ...state.search,
-                    searchstatus : 'WAITING'
-                }
-            }
-        case types.RECIPE_SEARCH_SUCCESS:
-            console.log('recipe search reducers success');
-            if(action.isInitial){
-                return{
-                    ...state,
-                    search: {
-                        ...state.search,
-                        searchstatus: 'SUCCESS',
-                        data: action.data,
-                        isLast : action.data.length <6
-                    }
-                }
-            } else {
-                if(action.listType === 'new'){
-                    return {
-                        ...state,
-                        search:{
-                            ...state.search,
-                            searchstatus: 'SUCCESS',
-                            data: [...action.data, ...state.search.data]
-                        }
-                    }
-                } else {
-                    return {
-                        ...state,
-                        search:{
-                            ...state.search,
-                            searchstatus: 'SUCCESS',
-                            data: [...state.search.data, ...action.data],
-                            islast: action.data.length < 6
-                        }
-                    }
-                }
-            }
-        case types.RECIPE_SEARCH_FAILURE:
-            console.log('recipe search reducers failure');
-            return{
-                ...state,
-                search:{
-                    ...state.search,
-                    search: 'FAILURE'
-                }
-            };
 
         default : return state;
     }

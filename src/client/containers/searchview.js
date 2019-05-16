@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import {recipeListRequest, scrapRequest, eatRequest, recipeSearchRequest} from '../actions/recipe';
 import {connect} from 'react-redux';
 import {RecipeViewTest} from '../components';
-import shallowEqual from 'fbjs/lib/shallowEqual';
 
 class recipeview extends Component{
-
 
     handleScrap = (user_id, recipe_code) =>{
         console.log("scrap container ", user_id, recipe_code);
@@ -37,17 +35,15 @@ class recipeview extends Component{
         );
     }
 
-    /*shouldComponentUpdate(nextProps, nextState){
-        return true;
-    }*/
-
     handleSearch = (searchWord) =>{
         console.log("search container");
         this.props.recipeSearchRequest(searchWord).then(
             ()=>{
+                console.log(this.props.searchstatus);
+
                 if(this.props.searchstatus === "SUCCESS"){
                     console.log("search container success" + searchWord);
-                    this.props.history.push('/recipeview');
+                    this.props.history.push('/searchview');
                     return true;
                 }else{
                     console.log("search container fail");
@@ -57,17 +53,9 @@ class recipeview extends Component{
         );
     }
 
-    /*shouldComponentUpdate(nextProps, nextState, nextContext){
-        console.log('shouldComponentUpdate');
-        console.log(!shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState));
-        return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
-    }*/
-
     componentDidMount(){
         this.props.recipeListRequest(true, undefined);
     }
-
-
 
     render(){
         return(
