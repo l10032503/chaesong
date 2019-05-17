@@ -8,6 +8,7 @@ import {Start} from '../client/containers';
 import {recipeview} from '../client/containers';
 import {personalview} from '../client/containers';
 import {recommendview} from '../client/containers';
+import {App} from '../client/containers';
 import {Provider} from 'react-redux'
 import {createStore, applyMiddleware} from 'redux';
 import reducers from '../client/reducers';

@@ -17,14 +17,8 @@ const sequelize = new Sequelize('chaesongdb', 'comhong', 'sook2019', {
 );
 
 const personalpage = express.Router();
-
-<<<<<<< HEAD
 const MemberScrap = sequelize.define(
     'MemberScrap',
-=======
-const Recipes = sequelize.define(
-    'Recipe',
->>>>>>> 13ee3130c21997cb0319239bbe984b1efc1af9bf
     {
         user_id: {
             type: Sequelize.STRING,

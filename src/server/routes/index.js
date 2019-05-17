@@ -5,10 +5,7 @@ import recipe from './recipe';
 import scrap from './scrap';
 import MainPage from './mainpage';
 import personalpage from './personalpage';
-<<<<<<< HEAD
-=======
 import recommendPage from './recommendPage';
->>>>>>> 13ee3130c21997cb0319239bbe984b1efc1af9bf
 import eat from './eat';
 import search from './search';
 
