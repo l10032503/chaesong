@@ -5,13 +5,13 @@ import {Search} from '../components';
 class RecipeViewsTest extends Component{
 
     state = {
-        search : ""
-    }
-
-    toggleSearch = () => {
-        this.setState({
-            search: !this.state.search
-        });
+        searchWord : "",
+        seafoodchecked:true,
+        milkchecked:true,
+        eggchecked:true,
+        seafood : 0,
+        milk: 0,
+        egg: 0
     }
 
     handleChange = (e) => {
@@ -20,17 +20,44 @@ class RecipeViewsTest extends Component{
         this.setState(nextState);
     }
 
+    handleSeafoodChange = (event) =>{
+        this.setState({ seafoodchecked: event.target.checked }) ;
+    }
+    handleMilkChange = (event) =>{
+        this.setState({ milkchecked: event.target.checked }) ;
+    }
+    handleEggChange = (event) =>{
+        this.setState({ eggchecked: event.target.checked }) ;
+    }
+
+    handleSearch = () => {
+        let searchWord = !this.state.searchWord? " ": this.state.searchWord;
+        let seafood = this.state.seafoodchecked? 1: 0;
+        let milk = this.state.milkchecked? 1:0;
+        let egg = this.state.eggchecked? 1:0;
+        console.log("container: "+ searchWord);
+        console.log("seafood: "  + seafood +"/ milk: " + milk + "/ egg: " + egg);
+        this.props.onSearch(searchWord, seafood, milk, egg);
+    }
+
+    handleKeyPress = (e) => {
+        if(e.charCode==13) {
+            this.handleSearch();
+        }
+    }
+
     render(){
         const searchBox=(
             <div>
                 <div className="input-field col s12">
-                    <label>ID</label>
+                    <label>검색</label>
                     <input
-                        name="user_id"
+                        name="searchWord"
                         type="text"
                         className="validate"
                         onChange={this.handleChange}
-                        value={this.state.user_id}/>
+                        value={this.state.searchWord}
+                        onKeyPress={this.handleKeyPress}/>
                 </div>
             </div>
         );
@@ -42,24 +69,24 @@ class RecipeViewsTest extends Component{
                   name="seafood"
                   type="checkbox"
                   className="validate"
-                  checked= {true}
-                  onChange={this.handleChange}
+                  checked={this.state.seafoodchecked}
+                  onChange={this.handleSeafoodChange}
                   value="1"/>
               해산물
               <input
                   name="milk"
                   type="checkbox"
                   className="validate"
-                  checked= {true}
-                  onChange={this.handleChange}
+                  checked={this.state.milkchecked}
+                  onChange={this.handleMilkChange}
                   value="1"/>
               우유
               <input
                   name="egg"
                   type="checkbox"
                   className="validate"
-                  checked= {true}
-                  onChange={this.handleChange}
+                  checked={this.state.eggchecked}
+                  onChange={this.handleEggChange}
                   value="1"/>
               계란
           </div>
@@ -67,7 +94,6 @@ class RecipeViewsTest extends Component{
 
         const mapToComponents = data => {
             return data.map((recipe, i)=>{
-                console.log("recipeviewtest maptocomponent");
                 return (
                   <RecipeBox
                     data={recipe}
@@ -89,7 +115,7 @@ class RecipeViewsTest extends Component{
                 </div>
                 <div>
                     {recipeCheckBox}
-                    <button>click</button>
+                    <button onClick={this.handleSearch}>검색</button>
                 </div>
                 {mapToComponents(this.props.data)}
             </div>
@@ -98,17 +124,20 @@ class RecipeViewsTest extends Component{
 }
 
 RecipeViewsTest.propTypes={
+  mode: PropTypes.bool,
   data: PropTypes.array,
   onScrap: PropTypes.func,
   onEat: PropTypes.func,
-                searchWord: PropTypes.array,
-                onSearch: PropTypes.func,
-                history: PropTypes.object
+  onSearch: PropTypes.func,
+  history: PropTypes.object
 };
+
 RecipeViewsTest.defaultProps={
+  mode: true,
   data: [],
   onScrap: (user_id,recipe_code) =>{console.error("scrap function is not defined");},
-  onEat: (user_id,recipe_code) =>{console.error("eat function is not defined");}
+  onEat: (user_id,recipe_code) =>{console.error("eat function is not defined");},
+  onSearch:(searchWord, seafood, milk, egg)=>{console.error("search function is not defined")}
 };
 
 
