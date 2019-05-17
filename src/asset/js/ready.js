@@ -11,10 +11,10 @@ jQuery(document).ready(function(){
 
 $(document).ready(function(){
 
-	const toggle_sidebar = false;
-	const toggle_topbar = false;
-	const nav_open = 0;
-	const topbar_open = 0;
+	let toggle_sidebar = false;
+	let toggle_topbar = false;
+	let nav_open = 0;
+	let topbar_open = 0;
 
 	if(!toggle_sidebar) {
 		const $toggle = $('.sidenav-toggler');
