@@ -5,5 +5,5 @@ import Main from './Main';
 import PersonalPage from './PersonalPage'
 import PersonalBox from './PersonalBox'
 import Search from './Search';
-
-export {Authentication, RecipeViewTest, RecipeBox, Main, Search, PersonalPage, PersonalBox};
+import Header from './Header';
+export {Header, Authentication, RecipeViewTest, RecipeBox, Main, Search, PersonalPage, PersonalBox};

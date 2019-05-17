@@ -5,7 +5,6 @@ import recipe from './recipe';
 import scrap from './scrap';
 import MainPage from './mainpage';
 import personalpage from './personalpage';
-
 import eat from './eat';
 
 const router = express.Router();
