@@ -1,19 +1,22 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
 import Cookies from 'js-cookie';
+const CanvasJSReact = require('../../canvasjs.react.js');
+const CanvasJS = CanvasJSReact.CanvasJS;
+const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class PersonalBox extends Component{
     render(){
+        let current_id = Cookies.get('member');
+        console.log(current_id);
         return (
-            <div className = "container eaten">
+            <div className = "container scrap">
                 <div className = "info">
-                    <h3 className = "recipename">{this.props.data.recipe_code} </h3>
+                    <h3 className = "recipename">{this.props.data.recipe_name} </h3>
                 </div>
-                <div className = "card-content">
-                    <pre>
-                        {this.props.data.user_id}
-                    </pre>
+                <div className="card-content">
+                    <img src={this.props.data.imgurl} alt="recipe"/>
+                    <br/>
                 </div>
             </div>
         );
@@ -22,7 +25,8 @@ class PersonalBox extends Component{
 
 PersonalBox.propTypes={
     data: PropTypes.object,
-    currentUser: PropTypes.string
+    currentUser: PropTypes.string,
+    current_id : PropTypes.string
 };
 
 PersonalBox.defaultProps = {

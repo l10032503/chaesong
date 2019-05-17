@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {PersonalBox} from '../components';
 import PropTypes from 'prop-types';
 
-class PersonalPage extends Component{
+class PersonalGraph extends Component{
     render(){
         const mapToComponents = data => {
             return data.map((personalpage, i)=>{
@@ -26,11 +26,11 @@ class PersonalPage extends Component{
     }
 }
 
-PersonalPage.propTypes={
+PersonalGraph.propTypes={
     data: PropTypes.array
 };
-PersonalPage.defaultProps={
+PersonalGraph.defaultProps={
     data: []
 };
 
-export default PersonalPage;
+export default PersonalGraph;
