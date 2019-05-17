@@ -1,3 +1,5 @@
+import jQuery from "jquery";
+window.$ = window.jQuery = jQuery;
 
 Circles.create({
 	id:           'task-complete',
