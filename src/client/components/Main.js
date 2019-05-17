@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes, {instanceOf} from 'prop-types';
+import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
 
 class Main extends Component{
     constructor(props){
         super(props);
-        console.log(Cookies.get('name'));
-        console.log(Cookies.get('key'));
-        console.log(Cookies.get('member'));
         this.state={
             user_Id : Cookies.get('member')
         }

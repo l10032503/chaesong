@@ -42,7 +42,7 @@ const Recipe = sequelize.define(
 recipe.use(cors());
 
 recipe.get('/', (req,res)=>{
-    console.log("recipeviewtest routes")
+    console.log("recipeviewtest routes");
     Recipe.findAll()
         .then(recipes=>{
             return res.json(recipes)
