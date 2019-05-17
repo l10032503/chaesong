@@ -11,13 +11,13 @@ jQuery(document).ready(function(){
 
 $(document).ready(function(){
 
-	var toggle_sidebar = false,
-	toggle_topbar = false,
-	nav_open = 0,
-	topbar_open = 0;
+	const toggle_sidebar = false;
+	const toggle_topbar = false;
+	const nav_open = 0;
+	const topbar_open = 0;
 
 	if(!toggle_sidebar) {
-		$toggle = $('.sidenav-toggler');
+		const $toggle = $('.sidenav-toggler');
 
 		$toggle.click(function() {
 			if (nav_open == 1){
@@ -34,7 +34,7 @@ $(document).ready(function(){
 	}
 	// 상단 우측 ... 누르면 나오는 검색창
 	if(!toggle_topbar) {
-		$topbar = $('.topbar-toggler');
+		const $topbar = $('.topbar-toggler');
 
 		$topbar.click(function(){
 			if (topbar_open == 1) {
@@ -52,7 +52,7 @@ $(document).ready(function(){
 
 //select all
 $('[data-select="checkbox"]').change(function(){
-	$target = $(this).attr('data-target');
+	const $target = $(this).attr('data-target');
 	$($target).prop('checked', $(this).prop("checked"));
 })
 
