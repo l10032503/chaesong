@@ -20,6 +20,18 @@ class Authentication extends React.Component{
         this.setState(nextState);
     }
 
+    activechange = (e) => {
+        let nextState = {};
+        nextState[e.target.name] = e.target.value;
+        this.setState(nextState);
+    }
+
+    sexChange = (e) => {
+        let nextState = {};
+        nextState[e.target.name] = e.target.value;
+        this.setState(nextState);
+    }
+
     handleRegister = () => {
         let user_id = this.state.user_id;
         let pw = this.state.pw;
@@ -131,26 +143,18 @@ class Authentication extends React.Component{
                         onChange={this.handleChange}
                         value={this.state.birthyear}/>
                 </div>
-                <div className="radio">
-                    <label>성별</label>
-                    <label>
-                        <input
-                            name="sex"
-                            type="radio"
-                            className="validate"
-                            onChange={this.handleChange}
-                            value="0"/>
-                        여자
-                    </label>
-                    <label>
-                        <input
-                            name="sex"
-                            type="radio"
-                            className="validate"
-                            onChange={this.handleChange}
-                            value="1"/>
-                        남자
-                    </label>
+                <div className="register-row">
+                    <h3 className="register-title">
+                        <label htmlFor="active">성별</label>
+                    </h3>
+                    <div id="sex">
+                        <label className="radio-inline"><input type="radio" name="sex" className="validate"
+                                                               onChange={this.sexChange}
+                                                               value="0"/>여자</label>
+                        <label className="radio-inline"><input type="radio" name="sex" className="validate"
+                                                               onChange={this.sexChange}
+                                                               value="1"/>남자</label>
+                    </div>
                 </div>
                 <div className="register-row">
                     <h3 className="register-title">
@@ -180,14 +184,13 @@ class Authentication extends React.Component{
                     </h3>
                     <div id="active">
                         <label className="radio-inline"><input type="radio" name="active" className="validate"
-                                                               onChange={this.handleChange}
-                                                               value="1"
-                                                               checked/>적다</label>
+                                                               onChange={this.activeChange}
+                                                               value="1"/>적다</label>
                         <label className="radio-inline"><input type="radio" name="active" className="validate"
-                                                               onChange={this.handleChange}
+                                                               onChange={this.activeChange}
                                                                value="2"/>보통이다</label>
                         <label className="radio-inline"><input type="radio" name="active" className="validate"
-                                                               onChange={this.handleChange}
+                                                               onChange={this.activeChange}
                                                                value="3"/>많다</label>
                     </div>
                 </div>
@@ -235,12 +238,14 @@ class Authentication extends React.Component{
         );
 
         const registerView = (
-            <div className="card-content">
-                <div className="row">
-                    {inputBoxes}
-                    <button className="btn"
-                            onClick={this.handleRegister}>CREATE</button>
-                    <p className="message">이미 회원이신가요? <a href="/login">로그인</a></p>
+            <div>
+                <div className = "card-content">
+                    <div className="register-form">
+                        {inputBoxes}
+                        <button className="btn"
+                                onClick={this.handleRegister}>CREATE</button>
+                        <p className="message">이미 회원이신가요? <a href="/login">로그인</a></p>
+                    </div>
                 </div>
             </div>
         );

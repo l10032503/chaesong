@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300');
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-#active, #vegantype {
+
+#active, #vegantype, #sex {
     font-family: 'Noto Sans KR', "Roboto", sans-serif;
     font-size: 13px;
     float: left;
@@ -11,11 +12,18 @@
 }
 #vegantype {
     height: 50px;
-    align-self: auto;
     width: 100%;
     margin-bottom: 20px;
 }
 #active label {
+    /* display: inline-block; */
+    width: auto;
+    margin-right: 25px;
+    margin-bottom: 20px;
+    padding: 2px;
+}
+
+#sex label {
     /* display: inline-block; */
     width: auto;
     margin-right: 25px;
@@ -82,7 +90,7 @@
     transition: all;
     cursor: pointer;
 }
-.form button:hover,.form button:active,.form button:focus {
+.form button:hover,.form button:active,.form button:focus, .form button:sex {
     background: #43A047;
 }
 .form .message {
@@ -93,9 +101,6 @@
 .form .message a {
     color: #4CAF50;
     text-decoration: none;
-}
-.form .register-form {
-    display: none;
 }
 .container {
     position: relative;

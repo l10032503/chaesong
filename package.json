@@ -38,7 +38,7 @@
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "sequelize": "^5.2.1"
+    "sequelize": "^5.8.6"
   },
   "main": "app.js",
   "devDependencies": {
@@ -46,6 +46,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
+    "babel-plugin-import": "^1.11.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
