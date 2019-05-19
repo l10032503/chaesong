@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
 import {RecipeViewTest} from "./index";
+import {eatRequest, recipeListRequest, recipeSearchRequest, scrapRequest} from "../actions/recipe";
+import {connect} from "react-redux";
 
 class Main extends Component{
     constructor(props){
@@ -11,36 +13,78 @@ class Main extends Component{
             user_Id : Cookies.get('member')
         }
     } // cookie
+
+    handleScrap = (user_id, recipe_code) =>{
+        console.log("scrap container ", user_id, recipe_code);
+        return this.props.scrapRequest(user_id, recipe_code).then(
+            ()=>{
+                if(this.props.scrapstatus === "SUCCESS"){
+                    console.log("scrap container success");
+                    return true;
+                }else{
+                    console.log("scrap container fail");
+                    return false;
+                }
+            }
+        );
+    }
+
+    handleEat= (user_id, recipe_code) =>{
+        console.log("eat container ", user_id, recipe_code);
+        return this.props.eatRequest(user_id, recipe_code).then(
+            ()=>{
+                if(this.props.eatstatus === "SUCCESS"){
+                    console.log("eat container success");
+                    return true;
+                }else{
+                    console.log("eat container fail");
+                    return false;
+                }
+            }
+        );
+    }
+
+    /*shouldComponentUpdate(nextProps, nextState){
+        return true;
+    }*/
+
+    handleSearch = (searchWord, seafood, milk, egg) =>{
+        console.log("search container");
+        this.props.recipeSearchRequest(searchWord, seafood, milk, egg).then(
+            ()=>{
+                if(this.props.searchstatus === "SUCCESS"){
+                    console.log(this.props.searchstatus);
+                    console.log(this.props.searchData);
+                    this.setState({recipeData : this.props.searchData});
+                    console.log("search container success: " + searchWord);
+                    return true;
+                }else{
+                    console.log("search container fail");
+                    return false;
+                }
+            }
+        );
+    }
+
+    componentDidMount(){
+        this.props.recipeListRequest(true, undefined);
+    }
+
     render(){
-        const userID= Cookies.get('member');
-        const loginSuccess = (
-            <div>
-                <h1>
-                    로그인 ID : {userID}
-                </h1>
-            </div>
-        );
-        const loginFail = (
-            <h1>
-                비로그인 상태
-            </h1>
-        );
-        const logoutButton =(
-          <button onClick={this.props.onLogout}>
-              로그아웃
-          </button>
-        );
+
         return(
             <div className="main-panel" id="main-panel">
                 <div className="content">
                     <div className="container-fluid">
                         <h4 className="page-title">조회된 레시피</h4>
-                        <RecipeViewTest data={this.props.recipeData}
-                                        currentUser = {this.props.currentUser}
-                                        onScrap={this.handleScrap}
-                                        onEat={this.handleEat}
-                                        onSearch={this.handleSearch}
-                                        history={this.props.history}/>
+                        <div className="row">
+                            <RecipeViewTest data={this.props.recipeData}
+                                            currentUser = {this.props.currentUser}
+                                            onScrap={this.handleScrap}
+                                            onEat={this.handleEat}
+                                            onSearch={this.handleSearch}
+                                            history={this.props.history}/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -71,6 +115,22 @@ const mapStateToProps = (state) => {
     };
 };
 
+const mapDispatchToProps = (dispatch) => {
+    return{
+        recipeListRequest: (isInitial, listType)=>{
+            return dispatch(recipeListRequest(isInitial, listType));
+        },
+        scrapRequest: (user_id, recipe_code) =>{
+            return dispatch(scrapRequest(user_id, recipe_code));
+        },
+        eatRequest: (user_id, recipe_code) =>{
+            return dispatch(eatRequest(user_id, recipe_code));
+        },
+        recipeSearchRequest:(searchWord, seafood, milk, egg) =>{
+            return dispatch(recipeSearchRequest(searchWord, seafood, milk, egg));
+        }
+    };
+};
 
 
-export default Main;
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
