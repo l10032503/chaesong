@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300');
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
+<<<<<<< HEAD
 .form input[type=radio]
 {
     position: relative;
@@ -9,6 +10,8 @@
     -webkit-appearance:radio;
 }
 
+=======
+>>>>>>> 127a5adf8f9f64d27efaa917c6dd3d80db6b5d30
 #active, #vegantype, #sex {
     font-family: 'Noto Sans KR', "Roboto", sans-serif;
     font-size: 13px;
