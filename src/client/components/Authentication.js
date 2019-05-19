@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
-
 class Authentication extends React.Component{
     state={
         user_id:"",
         pw:"",
+        sex:"",
         birthyear:"",
         height:"",
         weight:"",
@@ -126,7 +126,7 @@ class Authentication extends React.Component{
                     </h3>
                     <input
                         name="pw"
-                        type="text"
+                        type="password"
                         className="validate"
                         onChange={this.handleChange}
                         value={this.state.pw}
@@ -148,10 +148,11 @@ class Authentication extends React.Component{
                         <label htmlFor="active">성별</label>
                     </h3>
                     <div id="sex">
-                        <label className="radio-inline"><input type="radio" name="sex" className="validate"
-                                                               onChange={this.sexChange}
-                                                               value="0"/>여자</label>
-                        <label className="radio-inline"><input type="radio" name="sex" className="validate"
+                        <label className="radio-inline">
+                            <input type="radio" name="sex" className="validate"
+                                                               onChange={this.sexChange} value="0"/>여자</label>
+                        <label className="radio-inline">
+                            <input type="radio" name="sex" className="validate"
                                                                onChange={this.sexChange}
                                                                value="1"/>남자</label>
                     </div>
@@ -162,7 +163,7 @@ class Authentication extends React.Component{
                     </h3>
                     <input
                         name="height"
-                        type="int"
+                        type="number"
                         className="validate"
                         onChange={this.handleChange}
                         value={this.state.height}/>
@@ -173,7 +174,7 @@ class Authentication extends React.Component{
                     </h3>
                     <input
                         name="weight"
-                        type="int"
+                        type="number"
                         className="validate"
                         onChange={this.handleChange}
                         value={this.state.weight}/>
@@ -194,7 +195,7 @@ class Authentication extends React.Component{
                                                                value="3"/>많다</label>
                     </div>
                 </div>
-                <div className="register-row form-group">
+                <div className="register-row">
                     <h3 className="register-title">
                         <label htmlFor="vegantype">채식타입</label>
                     </h3>
