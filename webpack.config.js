@@ -9,7 +9,8 @@ module.exports = {
         "./src/client/style.css",
         "./src/asset/css/ready.css",
         "./src/asset/css/bootstrap.min.css",
-        "./src/asset/css/demo.css"
+        "./src/asset/css/demo.css",
+        "./src/asset/sass/ready.scss"
         ],
     output: {
         path: path.join(__dirname, outputDirectory),
@@ -62,7 +63,15 @@ module.exports = {
                         }
                     }
                 ]
-            }
+            },
+            {
+                test: /\.scss$/,
+                loaders: [
+                    require.resolve( 'style-loader' ),
+                    require.resolve( 'css-loader' ),
+                    require.resolve( 'sass-loader' )
+                ]
+            },
         ]
     },
     devServer: {

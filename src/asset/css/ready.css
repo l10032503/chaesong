@@ -6552,6 +6552,7 @@ body {
     border-bottom-width: 0px;
   }
 }
+
 @media screen and (min-width: 992px) {
   .main-header .logo-header {
     line-height: 52px;
@@ -6565,6 +6566,7 @@ body {
     opacity: 1;
   }
 }
+
 @media screen and (max-width: 991px) {
   .sidebar {
     position: fixed;
@@ -6603,6 +6605,7 @@ body {
 
   .main-header {
     transition: all .5s;
+    height: 55px;
   }
 
   .main-panel {
