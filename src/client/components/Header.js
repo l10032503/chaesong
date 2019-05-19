@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Cookies from "js-cookie";
 import jQuery from "jquery";
+import {recipeSearchRequest} from "../actions/recipe";
+import {connect} from "react-redux";
 window.$ = window.jQuery = jQuery;
 
 class Header extends Component {
@@ -192,6 +194,22 @@ Header.propTypes = {
 
 Header.defaultProps = {
     isLoggedIn: false
+};
+
+const mapStateToProps = (state) => {
+    return{
+        errorCode : state.recipe.scrap.error,
+        searchstatus: state.search.status,
+        searchData : state.search.data,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        recipeSearchRequest:(searchWord, seafood, milk, egg) =>{
+            return dispatch(recipeSearchRequest(searchWord, seafood, milk, egg));
+        }
+    };
 };
 
 export default Header;

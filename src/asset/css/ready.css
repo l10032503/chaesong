@@ -13,6 +13,26 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
  */
+.radio-inline{
+  float: left;
+  clear: none;
+  display: block;
+  padding: 2px 1em 0 0;
+}
+
+
+.form input[type=radio], input.radio
+{
+
+  position: relative;
+  left: 0;
+  float: left;
+  -webkit-appearance:radio;
+  clear: none;
+  margin: 7px 1px 0 2px;
+  width: max-content;
+}
+
 /*   Background   */
 .bg-default {
   background: #607D8B !important;
@@ -2260,7 +2280,7 @@ body {
 .main-panel .content {
   padding: 30px 15px;
   min-height: calc(100% - 123px);
-  margin-top: 55px;
+  margin-top: 10px;
 }
 
 .footer {
