@@ -1,6 +1,5 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const img = require("url-loader");
 const outputDirectory = "dist";
 
 module.exports = {
@@ -62,7 +61,15 @@ module.exports = {
                         }
                     }
                 ]
-            }
+            },
+            {
+                test: /\.scss$/,
+                loaders: [
+                    require.resolve( 'style-loader' ),
+                    require.resolve( 'css-loader' ),
+                    require.resolve( 'sass-loader' )
+                ]
+            },
         ]
     },
     devServer: {

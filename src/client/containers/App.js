@@ -51,7 +51,6 @@ class App extends Component {
     render(){
         let re = /(login|register|startpage)/;
         let isAuth = re.test(this.props.location.pathname);
-
         return (
             <div>
                 {isAuth ? undefined :<Header isLoggedIn={this.props.status.isLoggedIn}/> }

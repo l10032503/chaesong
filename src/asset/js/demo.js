@@ -41,7 +41,7 @@ Chartist.Pie('#monthlyChart', {
 });
 
 // trafficChart
-var chart = new Chartist.Line('#trafficChart', {
+let chart = new Chartist.Line('#trafficChart', {
 	labels: [1, 2, 3, 4, 5, 6, 7],
 	series: [
 	[5, 9, 7, 8, 5, 3, 5],
@@ -57,7 +57,7 @@ var chart = new Chartist.Line('#trafficChart', {
 });
 
 // salesChart
-var dataSales = {
+let dataSales = {
 	labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
 	series: [
 	[5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
@@ -65,7 +65,7 @@ var dataSales = {
 	]
 }
 
-var optionChartSales = {
+let optionChartSales = {
 	plugins: [
 	Chartist.plugins.tooltip()
 	],
@@ -76,7 +76,7 @@ var optionChartSales = {
 	height: "245px",
 }
 
-var responsiveChartSales = [
+let responsiveChartSales = [
 ['screen and (max-width: 640px)', {
 	seriesBarDistance: 5,
 	axisX: {
