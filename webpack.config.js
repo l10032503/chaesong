@@ -1,6 +1,5 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const img = require("url-loader");
 const outputDirectory = "dist";
 
 module.exports = {
@@ -9,8 +8,7 @@ module.exports = {
         "./src/client/style.css",
         "./src/asset/css/ready.css",
         "./src/asset/css/bootstrap.min.css",
-        "./src/asset/css/demo.css",
-        "./src/asset/sass/ready.scss"
+        "./src/asset/css/demo.css"
         ],
     output: {
         path: path.join(__dirname, outputDirectory),

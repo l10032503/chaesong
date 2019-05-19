@@ -2251,6 +2251,7 @@ body {
 
 .main-panel {
   position: relative;
+  top: 55px;
   width: calc(100% - 260px);
   min-height: 100%;
   float: right;
@@ -6664,6 +6665,11 @@ body {
 
   .nav_open.topbar_open .main-panel {
     transform: translate3d(260px, 125px, 0) !important;
+  }
+
+  nav.navbar-header{
+    position: relative;
+    top: 0;
   }
 
   .navbar-header .navbar-nav {

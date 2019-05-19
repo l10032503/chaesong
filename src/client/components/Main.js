@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
+import {RecipeViewTest} from "./index";
 
 class Main extends Component{
     constructor(props){
@@ -30,9 +31,18 @@ class Main extends Component{
           </button>
         );
         return(
-            <div>
-                {this.props.isLoggedIn? loginSuccess : loginFail}
-                {logoutButton}
+            <div className="main-panel" id="main-panel">
+                <div className="content">
+                    <div className="container-fluid">
+                        <h4 className="page-title">조회된 레시피</h4>
+                        <RecipeViewTest data={this.props.recipeData}
+                                        currentUser = {this.props.currentUser}
+                                        onScrap={this.handleScrap}
+                                        onEat={this.handleEat}
+                                        onSearch={this.handleSearch}
+                                        history={this.props.history}/>
+                    </div>
+                </div>
             </div>
         )
     }
@@ -47,5 +57,20 @@ Main.defaultProps = {
     isLoggedIn : false,
     onLogout: () => {console.error("logout function not defined")}
 };
+
+const mapStateToProps = (state) => {
+    return{
+        recipeData : state.recipe.list.data,
+        listStatus : state.recipe.list.status,
+        isLast: state.recipe.isLast,
+        scrapstatus: state.recipe.scrap.scrapstatus,
+        eatstatus: state.recipe.eat.eatstatus,
+        errorCode : state.recipe.scrap.error,
+        searchstatus: state.search.status,
+        searchData : state.search.data,
+    };
+};
+
+
 
 export default Main;

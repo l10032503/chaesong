@@ -143,7 +143,7 @@ class Header extends Component {
         )
 
         const HEADER = (
-            <div className="wrapper">
+            <div >
                 <div className="main-header">
                     <div className="logo-header">
                         <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FbYhiUv%2FbtqvpAxTrJt%2Fnv4acApc3o0VWm7PMBBgKk%2Fimg.png" alt="logo"/>
