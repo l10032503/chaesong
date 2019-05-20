@@ -95,7 +95,7 @@ class Main extends Component{
         console.log("seafood: "  + seafood +"/ milk: " + milk + "/ egg: " + egg);
 
         if(!searchWord){
-            this.props.recipeListRequest(true, undefined);
+            this.props.recipeSearchRequest(" ",seafood,milk,egg);
         } else{
             this.props.recipeSearchRequest(query.searchWord,seafood,milk,egg);
             console.log("searchData->");
@@ -109,7 +109,21 @@ class Main extends Component{
         const query = queryString.parse(location.search);
         console.log(query);
         const searchWord = query.searchWord;
-        if(!searchWord) {
+        return(
+            <div className="main-panel" id="main-panel">
+                <div className="content">
+                    <div className="container-fluid">
+                        <h4 className="page-title">조회된 레시피</h4>
+                        <RecipeViewTest data={this.props.searchData}
+                                        currentUser = {this.props.currentUser}
+                                        onScrap={this.handleScrap}
+                                        onEat={this.handleEat}
+                                        onSearch={this.handleSearch}
+                                        history={this.props.history}/>
+                    </div>
+                </div>
+            </div>)
+        /*if(!searchWord) {
             return(
                 <div className="main-panel" id="main-panel">
                     <div className="content">
@@ -129,22 +143,9 @@ class Main extends Component{
             )
         } else{
             console.log("searchData rendering====================");
-            return(
-                <div className="main-panel" id="main-panel">
-                    <div className="content">
-                        <div className="container-fluid">
-                            <h4 className="page-title">조회된 레시피</h4>
-                            <RecipeViewTest data={this.props.searchData}
-                                            currentUser = {this.props.currentUser}
-                                            onScrap={this.handleScrap}
-                                            onEat={this.handleEat}
-                                            onSearch={this.handleSearch}
-                                            history={this.props.history}/>
-                        </div>
-                    </div>
-                </div>
+
             )
-        }
+        }*/
     }
 }
 
