@@ -69,11 +69,35 @@ class Main extends Component{
         console.log(location.search);
         const query = queryString.parse(location.search);
         console.log(query);
-        const searchWord = query.searchWord;
+        const searchWord = query.searchWord
+        let egg = 1;
+        let milk = 1;
+        let seafood = 1;
+
+        const vegantype = Cookies.get('vegantype');
+        if( vegantype === "페스코 베지테리언"){
+            console.log("페스코");
+            seafood = 1; milk = 1; egg = 1;
+        } else if( vegantype === "락토 오보 베지테리언"){
+            console.log("락토 오보");
+            seafood = 0; milk = 1; egg = 1;
+        } else if( vegantype === "오보 베지테리언"){
+            console.log("오보");
+            seafood = 0; milk = 0; egg = 1;
+        } else if( vegantype === "락토 베지테리언"){
+            console.log("락토");
+            seafood = 0; milk = 1; egg = 0;
+        } else if( vegantype === "비건"){
+            console.log("비건");
+            seafood = 0; milk = 0; egg = 0;
+        }
+
+        console.log("seafood: "  + seafood +"/ milk: " + milk + "/ egg: " + egg);
+
         if(!searchWord){
             this.props.recipeListRequest(true, undefined);
         } else{
-            this.props.recipeSearchRequest(query.searchWord,1,1,1);
+            this.props.recipeSearchRequest(query.searchWord,seafood,milk,egg);
             console.log("searchData->");
             console.log(this.props.searchData);
         }

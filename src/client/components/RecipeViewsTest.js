@@ -110,7 +110,6 @@ class RecipeViewsTest extends Component{
 
         return(
             <div className="row">
-
                 {mapToComponents(this.props.data)}
             </div>
         );
