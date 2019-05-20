@@ -15,6 +15,7 @@ const sequelize = new Sequelize('chaesongdb', 'comhong', 'sook2019', {
 );
 const Op = Sequelize.Op;
 const recipe = express.Router();
+const querystring = require("querystring");
 
 const Recipe = sequelize.define(
     'Recipe',
@@ -56,7 +57,6 @@ recipe.use(cors());
 
 recipe.get('/', (req,res)=>{
     console.log("recipeviewtest routes");
-
 
     Recipe.findAll()
         .then(recipes=>{

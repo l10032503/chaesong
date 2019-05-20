@@ -109,19 +109,21 @@ class RecipeViewsTest extends Component{
         };
 
         return(
-            <div>
-                <div>
-                    {searchBox}
-                </div>
-                <div>
-                    {recipeCheckBox}
-                    <button onClick={this.handleSearch}>검색</button>
-                </div>
+            <div className="row">
+
                 {mapToComponents(this.props.data)}
             </div>
         );
     }
 }
+
+/*<div>
+                    {searchBox}
+                </div>
+                <div>
+                    {recipeCheckBox}
+                    <button onClick={this.handleSearch}>검색</button>
+                </div>*/
 
 RecipeViewsTest.propTypes={
   mode: PropTypes.bool,

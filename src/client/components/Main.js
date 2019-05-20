@@ -6,7 +6,10 @@ import {RecipeViewTest} from "./index";
 import {eatRequest, recipeListRequest, recipeSearchRequest, scrapRequest} from "../actions/recipe";
 import {connect} from "react-redux";
 
+const queryString = require('query-string');
+
 class Main extends Component{
+
     constructor(props){
         super(props);
         this.state={
@@ -63,19 +66,51 @@ class Main extends Component{
     }
 
     componentDidMount(){
-        this.props.recipeListRequest(true, undefined);
+        console.log(location.search);
+        const query = queryString.parse(location.search);
+        console.log(query);
+        const searchWord = query.searchWord;
+        if(!searchWord){
+            this.props.recipeListRequest(true, undefined);
+        } else{
+            this.props.recipeSearchRequest(query.searchWord,1,1,1);
+            console.log("searchData->");
+            console.log(this.props.searchData);
+        }
+
     }
 
+
     render(){
-        console.log("searchstatus; " + this.props.searchstatus);
-        console.log(this.props.searchData);
-        return(
-            <div className="main-panel" id="main-panel">
-                <div className="content">
-                    <div className="container-fluid">
-                        <h4 className="page-title">조회된 레시피</h4>
-                        <div className="row">
-                            <RecipeViewTest data={this.props.recipeData}
+        const query = queryString.parse(location.search);
+        console.log(query);
+        const searchWord = query.searchWord;
+        if(!searchWord) {
+            return(
+                <div className="main-panel" id="main-panel">
+                    <div className="content">
+                        <div className="container-fluid">
+                            <h4 className="page-title">조회된 레시피</h4>
+                            <div className="row">
+                                <RecipeViewTest data={this.props.recipeData}
+                                                currentUser = {this.props.currentUser}
+                                                onScrap={this.handleScrap}
+                                                onEat={this.handleEat}
+                                                onSearch={this.handleSearch}
+                                                history={this.props.history}/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        } else{
+            console.log("searchData rendering====================");
+            return(
+                <div className="main-panel" id="main-panel">
+                    <div className="content">
+                        <div className="container-fluid">
+                            <h4 className="page-title">조회된 레시피</h4>
+                            <RecipeViewTest data={this.props.searchData}
                                             currentUser = {this.props.currentUser}
                                             onScrap={this.handleScrap}
                                             onEat={this.handleEat}
@@ -84,8 +119,8 @@ class Main extends Component{
                         </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        }
     }
 }
 
