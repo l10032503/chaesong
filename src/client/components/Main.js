@@ -71,7 +71,6 @@ class Main extends Component{
     }
 
     render(){
-
         return(
             <div className="main-panel" id="main-panel">
                 <div className="content">

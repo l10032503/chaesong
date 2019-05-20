@@ -1,8 +1,5 @@
 import axios from 'axios';
 import {
-    EATEN_LIST,
-    EATEN_LIST_SUCCESS,
-    EATEN_LIST_FAILURE,
     SCRAP_LOAD,
     SCRAP_LOAD_SUCCESS,
     SCRAP_LOAD_FAILURE

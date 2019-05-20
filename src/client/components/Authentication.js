@@ -143,29 +143,23 @@ class Authentication extends React.Component{
                         onChange={this.handleChange}
                         value={this.state.birthyear}/>
                 </div>
+
                 <div className="register-row">
                     <h3 className="register-title">
                         <label htmlFor="active">성별</label>
                     </h3>
                     <div id="sex">
-<<<<<<< HEAD
                         <label className="radio-inline">
                             <input type="radio" name="sex" className="validate"
-                                                               onChange={this.sexChange} value="0"/>여자</label>
+                                                               onChange={this.sexChange}
+                                   value="0"/>여자</label>
                         <label className="radio-inline">
                             <input type="radio" name="sex" className="validate"
                                                                onChange={this.sexChange}
                                                                value="1"/>남자</label>
-=======
-                        <input type="radio" name="sex" className="validate"
-                               onChange={this.sexChange}
-                               value="0"/> <label className="radio-inline col-12">여자</label>
-                        <input type="radio" name="sex" className="validate"
-                               onChange={this.sexChange}
-                               value="1"/><label className="radio-inline col-12">남자</label>
->>>>>>> 127a5adf8f9f64d27efaa917c6dd3d80db6b5d30
                     </div>
                 </div>
+
                 <div className="register-row">
                     <h3 className="register-title">
                         <label htmlFor="height">키(cm)</label>
@@ -188,25 +182,24 @@ class Authentication extends React.Component{
                         onChange={this.handleChange}
                         value={this.state.weight}/>
                 </div>
+
                 <div className="register-row">
                     <h3 className="register-title">
                         <label htmlFor="active">활동량</label>
                     </h3>
                     <div id="active">
-                        <input type="radio" name="active" className="radio"
-                               onChange={this.activechange}
-                               value="1"/>
-                               <label className="radio-inline col-12">적다</label>
-                        <input type="radio" name="active" className="radio"
-                               onChange={this.activechange}
-                               value="2"/>
-                        <label className="radio-inline col-12">보통이다</label>
-                        <input type="radio" name="active" className="radio"
-                               onChange={this.activechange}
-                               value="3"/>
-                        <label className="radio-inline col-12">많다</label>
+                        <label className="radio-inline"><input type="radio" name="active" className="validate"
+                                                               onChange={this.activeChange}
+                                                               value="1"/>적다</label>
+                        <label className="radio-inline"><input type="radio" name="active" className="validate"
+                                                               onChange={this.activeChange}
+                                                               value="2"/>보통이다</label>
+                        <label className="radio-inline"><input type="radio" name="active" className="validate"
+                                                               onChange={this.activeChange}
+                                                               value="3"/>많다</label>
                     </div>
                 </div>
+
                 <div className="register-row">
                     <h3 className="register-title">
                         <label htmlFor="vegantype">채식타입</label>

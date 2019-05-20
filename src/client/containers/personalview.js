@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import {scrapListRequest} from "../actions/personal";
 import {connect} from 'react-redux';
-import {PersonalPage} from '../components';
+import {ScrapPage} from '../components';
 import CanvasJSReact from '../../canvasjs.react.js';
 const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class personalview extends Component{
     componentDidMount() {
-        this.props.eatenListRequest(true, undefined);
+        this.props.scrapListRequest(true, undefined);
     }
 
     render(){
@@ -51,12 +51,10 @@ class personalview extends Component{
         }
 
         return (
-            <div className="Wrapper">
-                <PersonalPage data={this.props.scrapData}
-                              currentUser = {this.props.currentUser}
+            <div>
+                <ScrapPage data={this.props.scrapData}
+                           currentUser = {this.props.currentUser}
                               />
-                <CanvasJSChart options = {options}/>
-
             </div>
         );
     }
@@ -71,7 +69,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        eatenListRequest: (isInitial, listType) => {
+        scrapListRequest: (isInitial, listType) => {
             return dispatch(scrapListRequest(isInitial, listType));
         }
     };
