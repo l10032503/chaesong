@@ -2,9 +2,28 @@ import React, { Component } from 'react';
 import {Header, RecipeViewTest} from '../components';
 import { connect } from 'react-redux';
 import { getStatusRequest } from '../actions/authentication';
+import {recipeSearchRequest} from "../actions/recipe";
 
 
 class App extends Component {
+
+    handleSearch = (searchWord, seafood, milk, egg) =>{
+        console.log("search container");
+        this.props.recipeSearchRequest(searchWord, seafood, milk, egg).then(
+            ()=>{
+                if(this.props.searchstatus === "SUCCESS"){
+                    console.log(this.props.searchstatus);
+                    console.log(this.props.searchData);
+                    this.setState({recipeData : this.props.searchData});
+                    console.log("search container success: " + searchWord);
+                    return true;
+                }else{
+                    console.log("search container fail");
+                    return false;
+                }
+            }
+        );
+    }
 
     componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
         // get cookie by name
@@ -49,7 +68,7 @@ class App extends Component {
     }
 
     render(){
-        let re = /(login|register|startpage)/;
+        let re = /(login|register|startpage|recipeview)/;
         let isAuth = re.test(this.props.location.pathname);
         return (
             <div>
@@ -64,7 +83,10 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        status: state.authentication.status
+        status: state.authentication.status,
+        errorCode : state.recipe.scrap.error,
+        searchstatus: state.search.status,
+        searchData : state.search.data,
     };
 };
 
@@ -72,6 +94,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getStatusRequest: () => {
             return dispatch(getStatusRequest());
+        },
+        recipeSearchRequest:(searchWord, seafood, milk, egg) =>{
+            return dispatch(recipeSearchRequest(searchWord, seafood, milk, egg));
         }
     };
 };

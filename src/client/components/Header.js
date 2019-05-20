@@ -224,7 +224,6 @@ class Header extends Component {
 
 Header.propTypes = {
     isLoggedIn: PropTypes.bool,
-    data: PropTypes.array,
     onSearch: PropTypes.func,
     history: PropTypes.object
 };
