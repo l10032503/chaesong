@@ -33,6 +33,19 @@
   width: max-content;
 }
 
+input[type=checkbox]
+{
+
+  position: relative;
+  left: 0;
+  float: left;
+  -webkit-appearance:checkbox;
+  clear: none;
+  margin: 7px 1px 0 2px;
+  width: max-content;
+}
+
+
 /*   Background   */
 .bg-default {
   background: #607D8B !important;

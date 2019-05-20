@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Header} from '../components';
+import {Header, RecipeViewTest} from '../components';
 import { connect } from 'react-redux';
 import { getStatusRequest } from '../actions/authentication';
 
@@ -53,7 +53,10 @@ class App extends Component {
         let isAuth = re.test(this.props.location.pathname);
         return (
             <div>
-                {isAuth ? undefined :<Header isLoggedIn={this.props.status.isLoggedIn}/> }
+                {isAuth ? undefined :<Header isLoggedIn={this.props.status.isLoggedIn}
+                                             currentUser = {this.props.currentUser}
+                                             onSearch={this.handleSearch}
+                                             history={this.props.history}/> }
             </div>
         );
     }

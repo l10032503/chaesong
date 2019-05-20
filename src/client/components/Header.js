@@ -11,9 +11,39 @@ class Header extends Component {
     constructor(props){
         super(props);
         this.state={
-            user_Id : Cookies.get('member')
+            user_Id : Cookies.get('member'),
+            searchWord : "",
+            seafoodchecked:true,
+            milkchecked:true,
+            eggchecked:true,
+            seafood : 0,
+            milk: 0,
+            egg: 0
         }
     }
+
+    handleChange = (e) => {
+        let nextState = {};
+        nextState[e.target.name] = e.target.value;
+        this.setState(nextState);
+    }
+
+    handleSearch = () => {
+        let searchWord = !this.state.searchWord? " ": this.state.searchWord;
+        let seafood = this.state.seafoodchecked? 1: 0;
+        let milk = this.state.milkchecked? 1:0;
+        let egg = this.state.eggchecked? 1:0;
+        console.log("container: "+ searchWord);
+        console.log("seafood: "  + seafood +"/ milk: " + milk + "/ egg: " + egg);
+        this.props.onSearch(searchWord, seafood, milk, egg);
+    }
+
+    handleKeyPress = (e) => {
+        if(e.charCode==13) {
+            this.handleSearch();
+        }
+    }
+
     componentDidMount() {
         let toggle_sidebar = false;
         let toggle_topbar = false;
@@ -162,7 +192,12 @@ class Header extends Component {
                         <div className="container-fluid">
                             <form className="navbar-left navbar-form nav-search mr-md-3 mt-2" action="">
                                 <div className="input-group">
-                                    <input type="text" placeholder="Search ..." className="form-control"/>
+                                    <input type="text" placeholder="Search ..."
+                                           name="searchWord"
+                                           className="form-control"
+                                           onChange={this.handleChange}
+                                           value={this.state.searchWord}
+                                           onKeyPress={this.handleKeyPress}/>
                                     <div className="input-group-append">
 								        <span className="input-group-text">
 									    <i className="la la-search search-icon">
@@ -188,27 +223,16 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-    isLoggedIn: PropTypes.bool
+    isLoggedIn: PropTypes.bool,
+    data: PropTypes.array,
+    onSearch: PropTypes.func,
+    history: PropTypes.object
 };
 
 Header.defaultProps = {
-    isLoggedIn: false
-};
-
-const mapStateToProps = (state) => {
-    return{
-        errorCode : state.recipe.scrap.error,
-        searchstatus: state.search.status,
-        searchData : state.search.data,
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return{
-        recipeSearchRequest:(searchWord, seafood, milk, egg) =>{
-            return dispatch(recipeSearchRequest(searchWord, seafood, milk, egg));
-        }
-    };
+    isLoggedIn: false,
+    data: [],
+    onSearch:(searchWord, seafood, milk, egg)=>{console.error("search function is not defined")}
 };
 
 export default Header;
