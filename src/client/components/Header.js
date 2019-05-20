@@ -86,7 +86,8 @@ class Header extends Component {
     }
 
     render(){
-        const userID= Cookies.get('member')
+        const userID= Cookies.get('member');
+        const vegantype = Cookies.get('vegantype');
 
         const topbar = (
             <div className="navbar-nav topbar-nav ml-md-auto align-items-center">
@@ -110,27 +111,6 @@ class Header extends Component {
             </div>
         );
 
-        const nav_header = (
-            <div>
-                <nav className="navbar navbar-header navbar-expand-lg">
-                    <div className="container-fluid">
-                        <form className="navbar-left navbar-form nav-search mr-md-3 mt-2" action="">
-                            <div className="input-group">
-                                <input type="text" placeholder="Search ..." className="form-control"/>
-                                <div className="input-group-append">
-								        <span className="input-group-text">
-									    <i className="la la-search search-icon">
-                                        </i>
-								        </span>
-                                </div>
-                            </div>
-                        </form>
-                        {topbar}
-                    </div>
-                </nav>
-            </div>
-        );
-
         const side_bar = (
             <div className="sidebar">
                 <div className="scrollbar-inner sidebar-wrapper">
@@ -139,7 +119,7 @@ class Header extends Component {
                             <a className="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 							<span>
                                 {userID} 님
-                                <span className="user-level">락토오보 베지테리언</span>
+                                <span className="user-level">{vegantype}</span>
                                 </span>
                             </a>
                             <div className="clearfix">
