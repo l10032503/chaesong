@@ -224,13 +224,14 @@ class Header extends Component {
 
 Header.propTypes = {
     isLoggedIn: PropTypes.bool,
+    searchWord: PropTypes.array,
     onSearch: PropTypes.func,
     history: PropTypes.object
 };
 
 Header.defaultProps = {
     isLoggedIn: false,
-    data: [],
+    searchWord: [],
     onSearch:(searchWord, seafood, milk, egg)=>{console.error("search function is not defined")}
 };
 

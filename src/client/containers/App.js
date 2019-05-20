@@ -8,21 +8,7 @@ import {recipeSearchRequest} from "../actions/recipe";
 class App extends Component {
 
     handleSearch = (searchWord, seafood, milk, egg) =>{
-        console.log("search container");
-        this.props.recipeSearchRequest(searchWord, seafood, milk, egg).then(
-            ()=>{
-                if(this.props.searchstatus === "SUCCESS"){
-                    console.log(this.props.searchstatus);
-                    console.log(this.props.searchData);
-                    this.setState({recipeData : this.props.searchData});
-                    console.log("search container success: " + searchWord);
-                    return true;
-                }else{
-                    console.log("search container fail");
-                    return false;
-                }
-            }
-        );
+        this.props.recipeSearchRequest(searchWord,seafood,milk,egg);
     }
 
     componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
@@ -75,6 +61,7 @@ class App extends Component {
                 {isAuth ? undefined :<Header isLoggedIn={this.props.status.isLoggedIn}
                                              currentUser = {this.props.currentUser}
                                              onSearch={this.handleSearch}
+                                             searchWord={this.props.searchWord}
                                              history={this.props.history}/> }
             </div>
         );
@@ -85,6 +72,7 @@ const mapStateToProps = (state) => {
     return {
         status: state.authentication.status,
         errorCode : state.recipe.scrap.error,
+        searchWord: state.search.searchWord,
         searchstatus: state.search.status,
         searchData : state.search.data,
     };
