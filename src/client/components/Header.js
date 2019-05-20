@@ -14,7 +14,6 @@ class Header extends Component {
             user_Id : Cookies.get('member')
         }
     }
-
     componentDidMount() {
         let toggle_sidebar = false;
         let toggle_topbar = false;
@@ -119,7 +118,7 @@ class Header extends Component {
                     </div>
                     <ul className="nav">
                         <li className="nav-item">
-                            <a href="">
+                            <a href="/personalpage">
                                 <i className="la la-bookmark-o">
                                 </i>
                                 <p>Scrapped Recipe</p>
