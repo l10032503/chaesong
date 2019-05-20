@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Main } from '../components';
+import {Main, RecipeViewTest} from '../components';
 import { connect } from 'react-redux';
 import { getStatusRequest, logoutRequest } from '../actions/authentication';
 
@@ -83,7 +83,7 @@ class MainPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        status: state.authentication.status
+        status: state.authentication.status,
     };
 };
 
