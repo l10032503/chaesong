@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route }from 'react-router-dom';
+import {BrowserRouter as Router, Redirect, Route} from 'react-router-dom';
 import {Register} from '../client/containers';
 import {Login} from '../client/containers';
 import {MainPage} from '../client/containers';
@@ -22,14 +22,15 @@ ReactDOM.render(
     <Provider store={store}>
         <Router>
             <div>
+                <Route exact path="/" component={() => <Redirect to="/login" />}/>
                 <Route path="/" component={App}/>
                 <Route path="/register" component={Register}/>
                 <Route path="/login" component={Login}/>
                 <Route path="/MainPage" component={MainPage}/>
-                <Route path="/Start" component={Start}/>
                 <Route path="/recipeview" component={recipeview}/>
                 <Route path="/personalpage" component={personalview} />
                 <Route path="/recommendview" component={recommendview} />
+                <Route path="/Start" component={Start}/>
             </div>
         </Router>
     </Provider>,

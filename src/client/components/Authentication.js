@@ -58,7 +58,8 @@ class Authentication extends React.Component{
                 }
             }
         )
-    }
+    };
+
     handleLogin = () => {
         let user_id = this.state.user_id;
         let pw = this.state.pw;
@@ -99,7 +100,7 @@ class Authentication extends React.Component{
                     <input
                         placeholder="비밀번호"
                         name="pw"
-                        type="password"
+                       type="password"
                         className="validate"
                         onChange={this.handleChange}
                         value={this.state.pw}
@@ -108,7 +109,7 @@ class Authentication extends React.Component{
             </div>
         );
         const inputBoxes = (
-            <div>
+            <form>
                 <div className="register-row">
                     <h3 className="register-title">
                         <label htmlFor="id">아이디</label>
@@ -120,18 +121,20 @@ class Authentication extends React.Component{
                         onChange={this.handleChange}
                         value={this.state.user_id}/>
                 </div>
+                <form>
                 <div className="register-row">
                     <h3 className="register-title">
                         <label htmlFor="pw">비밀번호</label>
                     </h3>
                     <input
                         name="pw"
-                        type="password"
+                        type="text"
                         className="validate"
                         onChange={this.handleChange}
                         value={this.state.pw}
                         onKeyPress={this.handleKeyPress}/>
                 </div>
+                </form>
                 <div className="register-row">
                     <h3 className="register-title">
                         <label htmlFor="birthyear">출생연도</label>
@@ -228,7 +231,7 @@ class Authentication extends React.Component{
                                 value="5">비건</option>
                     </select>
                 </div>
-            </div>
+            </form>
         );
         const loginView=(
             <div>
@@ -248,7 +251,7 @@ class Authentication extends React.Component{
                 <div className = "card-content">
                     <div className="register-form">
                         {inputBoxes}
-                        <button className="btn"
+                        <button className="register_btn"
                                 onClick={this.handleRegister}>CREATE</button>
                         <p className="message">이미 회원이신가요? <a href="/login">로그인</a></p>
                     </div>

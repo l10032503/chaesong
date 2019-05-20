@@ -5,6 +5,20 @@ import { getStatusRequest } from '../actions/authentication';
 
 
 class App extends Component {
+    handleLogout() {
+        this.props.logoutRequest().then(
+            () => {
+                console.log("logout");
+                let loginData = {
+                    _id: '',
+                    isLoggedIn: false,
+                    user_id: ''
+                };
+                document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+                 this.props.history.push('/login');
+            }
+        );
+    };
 
     componentDidMount() { //컴포넌트 렌더링이 맨 처음 완료된 이후에 바로 세션확인
         // get cookie by name
@@ -49,11 +63,12 @@ class App extends Component {
     }
 
     render(){
-        let re = /(login|register|startpage)/;
+        let re = /(login|register|start)/;
         let isAuth = re.test(this.props.location.pathname);
         return (
             <div>
-                {isAuth ? undefined :<Header isLoggedIn={this.props.status.isLoggedIn}/> }
+                {isAuth ? undefined :<Header isLoggedIn={this.props.status.isLoggedIn}
+                                             onLogout={this.handleLogout}/> }
             </div>
         );
     }

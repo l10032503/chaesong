@@ -1,5 +1,5 @@
 const express = require("express");
-const memberJoins = express.Router();
+const router = express.Router();
 const cors = require("cors");
 
 const Sequelize = require("sequelize");
@@ -30,9 +30,6 @@ const MemberJoin = sequelize.define(
         birthyear:{
             type: Sequelize.INTEGER
         },
-        sex:{
-            type: Sequelize.INTEGER
-        },
         height:{
             type: Sequelize.INTEGER
         },
@@ -54,13 +51,13 @@ const MemberJoin = sequelize.define(
         }
     },
     {
-    timestamps: false
-}
+        timestamps: false
+    }
 );
 
-memberJoins.use(cors());
+router.use(cors());
 
-memberJoins.post('/signup', (req, res)=>{
+router.post('/signup', (req, res)=>{
    const today = new Date();
    const memberData = {
        user_id : req.body.user_id,
@@ -72,10 +69,8 @@ memberJoins.post('/signup', (req, res)=>{
        active: req.body.active,
        register_date: today,
        vegantype: req.body.vegantype,
-       caloryForDay: 0
+       caloryForDay : 0
    };
-
-
 
     let userIDRegex = /^[a-z0-9]+$/;
 
@@ -104,12 +99,14 @@ memberJoins.post('/signup', (req, res)=>{
            if(!memberJoin){
                MemberJoin.create(memberData)
                    .then(memberJoin=>{
+                       console.log("회원가입 성공");
                        return res.json({success: true})
                    })
                    .catch(err=>{
                        return res.send('error' + err)
                    })
            }else{
+               console.log("회원가입 실패");
                return res.json({
                    error: "ID already exists",
                    code : 3
@@ -122,4 +119,4 @@ memberJoins.post('/signup', (req, res)=>{
 });
 
 
-module.exports = memberJoins;
+module.exports = router;

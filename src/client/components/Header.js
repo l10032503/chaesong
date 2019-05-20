@@ -132,7 +132,7 @@ class Header extends Component {
                             </a>
                         </li>
                         <li className="nav-item update-pro">
-                            <button data-toggle="modal" data-target="#modalUpdate">
+                            <button data-toggle="modal" data-target="#modalUpdate" onChange={this.handleLogout}>
                                 <i className="la la-reply">
                                 </i>
                                 <p>Logout</p>
@@ -147,7 +147,7 @@ class Header extends Component {
             <div >
                 <div className="main-header">
                     <div className="logo-header">
-                        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FbYhiUv%2FbtqvpAxTrJt%2Fnv4acApc3o0VWm7PMBBgKk%2Fimg.png" alt="logo"/>
+                        <a href="/mainpage"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FbYhiUv%2FbtqvpAxTrJt%2Fnv4acApc3o0VWm7PMBBgKk%2Fimg.png" alt="logo"/> </a>
                         <button className="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                                 data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon">
