@@ -44,10 +44,6 @@ class Main extends Component{
         );
     }
 
-    /*shouldComponentUpdate(nextProps, nextState){
-        return true;
-    }*/
-
     handleSearch = (searchWord, seafood, milk, egg) =>{
         console.log("search container");
         this.props.recipeSearchRequest(searchWord, seafood, milk, egg).then(
@@ -71,6 +67,8 @@ class Main extends Component{
     }
 
     render(){
+        console.log("searchstatus; " + this.props.searchstatus);
+        console.log(this.props.searchData);
         return(
             <div className="main-panel" id="main-panel">
                 <div className="content">

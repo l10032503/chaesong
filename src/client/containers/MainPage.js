@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getStatusRequest, logoutRequest } from '../actions/authentication';
 
 class MainPage extends Component {
+
     componentDidMount() {
         function getCookie(name) {
             const value = "; " + document.cookie;
