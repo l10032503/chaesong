@@ -48,6 +48,9 @@ const MemberJoin = sequelize.define(
         },
         calorieForDay:{
             type: Sequelize.INTEGER
+        },
+        sex:{
+            type: Sequelize.INTEGER
         }
     },
     {
@@ -71,6 +74,7 @@ router.post('/signup', (req, res)=>{
        vegantype: req.body.vegantype,
        calorieForDay : 0
    };
+   console.log(memberData.vegantype+" / " + memberData.sex);
     const grantStandWeight = (height) => {
         let standWeight;
         if(height < 150) { standWeight = height - 100; }

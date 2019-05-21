@@ -11,7 +11,7 @@ class Authentication extends React.Component{
         height:"",
         weight:"",
         active:"",
-        vegantype:"",
+        vegantype: 5,
     }
 
     handleChange = (e) => {
@@ -31,6 +31,11 @@ class Authentication extends React.Component{
         nextState[e.target.name] = e.target.value;
         this.setState(nextState);
     }
+    vegantypeChange = (e) => {
+        let nextState = {};
+        nextState[e.target.name] = e.target.value;
+        this.setState(nextState);
+    }
 
     handleRegister = () => {
         let user_id = this.state.user_id;
@@ -41,6 +46,7 @@ class Authentication extends React.Component{
         let weight = this.state.weight;
         let active = this.state.active;
         let vegantype = this.state.vegantype;
+        console.log("타입" + vegantype+" 활동량 " + active +" 성별 " +sex);
 
         this.props.onRegister(user_id, pw, birthyear, sex, height, weight, active, vegantype).then(
             (result) => {
@@ -205,27 +211,23 @@ class Authentication extends React.Component{
                     <h3 className="register-title">
                         <label htmlFor="vegantype">채식타입</label>
                     </h3>
-                    <select className="form-control" name="vegantype" id="vegantype">
+                    <select className="form-control" name="vegantype" id="vegantype"
+                            value={this.state.vegantype} onChange={this.vegantypeChange}>
                         <option selected>채식타입을 선택해주세요!</option>
                         <option name="vegantype"
                                 className="validate"
-                                onChange={this.handleChange}
                                 value="1">페스코 베지테리언</option>
                         <option name="vegantype"
                                 className="validate"
-                                onChange={this.handleChange}
                                 value="2">락토오보 베지테리언</option>
                         <option name="vegantype"
                                 className="validate"
-                                onChange={this.handleChange}
                                 value="3">오보 베지테리언</option>
                         <option name="vegantype"
                                 className="validate"
-                                onChange={this.handleChange}
                                 value="4">락토 베지테리언</option>
                         <option name="vegantype"
                                 className="validate"
-                                onChange={this.handleChange}
                                 value="5">비건</option>
                     </select>
                 </div>
