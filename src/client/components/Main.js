@@ -6,7 +6,10 @@ import {RecipeViewTest} from "./index";
 import {eatRequest, recipeListRequest, recipeSearchRequest, scrapRequest} from "../actions/recipe";
 import {connect} from "react-redux";
 
+const queryString = require('query-string');
+
 class Main extends Component{
+
     constructor(props){
         super(props);
         this.state={
@@ -44,10 +47,6 @@ class Main extends Component{
         );
     }
 
-    /*shouldComponentUpdate(nextProps, nextState){
-        return true;
-    }*/
-
     handleSearch = (searchWord, seafood, milk, egg) =>{
         console.log("search container");
         this.props.recipeSearchRequest(searchWord, seafood, milk, egg).then(
@@ -67,27 +66,86 @@ class Main extends Component{
     }
 
     componentDidMount(){
-        this.props.recipeListRequest(true, undefined);
+        console.log(location.search);
+        const query = queryString.parse(location.search);
+        console.log(query);
+        const searchWord = query.searchWord
+        let egg = 1;
+        let milk = 1;
+        let seafood = 1;
+
+        const vegantype = Cookies.get('vegantype');
+        if( vegantype === "페스코 베지테리언"){
+            console.log("페스코");
+            seafood = 1; milk = 1; egg = 1;
+        } else if( vegantype === "락토 오보 베지테리언"){
+            console.log("락토 오보");
+            seafood = 0; milk = 1; egg = 1;
+        } else if( vegantype === "오보 베지테리언"){
+            console.log("오보");
+            seafood = 0; milk = 0; egg = 1;
+        } else if( vegantype === "락토 베지테리언"){
+            console.log("락토");
+            seafood = 0; milk = 1; egg = 0;
+        } else if( vegantype === "비건"){
+            console.log("비건");
+            seafood = 0; milk = 0; egg = 0;
+        }
+
+        console.log("seafood: "  + seafood +"/ milk: " + milk + "/ egg: " + egg);
+
+        if(!searchWord){
+            this.props.recipeSearchRequest(" ",seafood,milk,egg);
+        } else{
+            this.props.recipeSearchRequest(query.searchWord,seafood,milk,egg);
+            console.log("searchData->");
+            console.log(this.props.searchData);
+        }
+
     }
 
+
     render(){
+        const query = queryString.parse(location.search);
+        console.log(query);
+        const searchWord = query.searchWord;
         return(
             <div className="main-panel" id="main-panel">
                 <div className="content">
                     <div className="container-fluid">
                         <h4 className="page-title">조회된 레시피</h4>
-                        <div className="row">
-                            <RecipeViewTest data={this.props.recipeData}
-                                            currentUser = {this.props.currentUser}
-                                            onScrap={this.handleScrap}
-                                            onEat={this.handleEat}
-                                            onSearch={this.handleSearch}
-                                            history={this.props.history}/>
+                        <RecipeViewTest data={this.props.searchData}
+                                        currentUser = {this.props.currentUser}
+                                        onScrap={this.handleScrap}
+                                        onEat={this.handleEat}
+                                        onSearch={this.handleSearch}
+                                        history={this.props.history}/>
+                    </div>
+                </div>
+            </div>)
+        /*if(!searchWord) {
+            return(
+                <div className="main-panel" id="main-panel">
+                    <div className="content">
+                        <div className="container-fluid">
+                            <h4 className="page-title">조회된 레시피</h4>
+                            <div className="row">
+                                <RecipeViewTest data={this.props.recipeData}
+                                                currentUser = {this.props.currentUser}
+                                                onScrap={this.handleScrap}
+                                                onEat={this.handleEat}
+                                                onSearch={this.handleSearch}
+                                                history={this.props.history}/>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        } else{
+            console.log("searchData rendering====================");
+
+            )
+        }*/
     }
 }
 

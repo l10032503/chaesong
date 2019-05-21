@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
-import {Header} from '../components';
+import {Header, RecipeViewTest} from '../components';
 import { connect } from 'react-redux';
-import { getStatusRequest } from '../actions/authentication';
+import { logoutRequest, getStatusRequest } from '../actions/authentication';
+import {recipeSearchRequest} from "../actions/recipe";
 
 
 class App extends Component {
-    handleLogout() {
+
+    handleSearch = (searchWord, seafood, milk, egg) =>{
+        this.props.recipeSearchRequest(searchWord,seafood,milk,egg);
+    };
+
+    constructor(props) {
+        super(props);
+        this.handleLogout = this.handleLogout.bind(this);
+    }
+
+    handleLogout = () => {
         this.props.logoutRequest().then(
             () => {
                 console.log("logout");
@@ -15,7 +26,8 @@ class App extends Component {
                     user_id: ''
                 };
                 document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-                 this.props.history.push('/login');
+                this.props.history.push('/login');
+                return true;
             }
         );
     };
@@ -63,12 +75,16 @@ class App extends Component {
     }
 
     render(){
-        let re = /(login|register|start)/;
+        let re = /(login|register|startpage|recipeview)/;
         let isAuth = re.test(this.props.location.pathname);
         return (
             <div>
                 {isAuth ? undefined :<Header isLoggedIn={this.props.status.isLoggedIn}
-                                             onLogout={this.handleLogout}/> }
+                                             onLogout={this.props.handleLogout}
+                                             currentUser = {this.props.currentUser}
+                                             onSearch={this.handleSearch}
+                                             searchWord={this.props.searchWord}
+                                             history={this.props.history}/> }
             </div>
         );
     }
@@ -76,7 +92,11 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        status: state.authentication.status
+        status: state.authentication.status,
+        errorCode : state.recipe.scrap.error,
+        searchWord: state.search.searchWord,
+        searchstatus: state.search.status,
+        searchData : state.search.data,
     };
 };
 
@@ -84,6 +104,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getStatusRequest: () => {
             return dispatch(getStatusRequest());
+        },
+        recipeSearchRequest:(searchWord, seafood, milk, egg) =>{
+            return dispatch(recipeSearchRequest(searchWord, seafood, milk, egg));
+        },
+        logoutRequest: () => {
+            return dispatch(logoutRequest());
         }
     };
 };

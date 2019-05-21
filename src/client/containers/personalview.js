@@ -7,6 +7,7 @@ const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class personalview extends Component{
+
     componentDidMount() {
         this.props.scrapListRequest(true, undefined);
     }

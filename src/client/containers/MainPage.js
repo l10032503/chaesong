@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {Main } from '../components';
+import {Main, RecipeViewTest} from '../components';
 import { connect } from 'react-redux';
-import { getStatusRequest, logoutRequest } from '../actions/authentication';
+import { getStatusRequest } from '../actions/authentication';
 
 class MainPage extends Component {
+
     componentDidMount() {
         function getCookie(name) {
             const value = "; " + document.cookie;
@@ -43,31 +44,14 @@ class MainPage extends Component {
 
     constructor(props) {
         super(props);
-        this.handleLogout = this.handleLogout.bind(this);
     }
-
-    handleLogout() {
-        this.props.logoutRequest().then(
-            () => {
-                console.log("logout");
-                let loginData = {
-                    _id: '',
-                    isLoggedIn: false,
-                    user_id: ''
-                };
-                document.cookie = 'key=' + btoa(JSON.stringify(loginData));
-               // this.props.history.push('/login');
-            }
-        );
-    };
 
     render(){
         let re = /(login|register)/;
         let isAuth = re.test(this.props.location.pathname);
         return (
             <div>
-                {isAuth ? undefined : <Main isLoggedIn={this.props.status.isLoggedIn}
-                                            onLogout={this.handleLogout}/>}
+                {isAuth ? undefined : <Main isLoggedIn={this.props.status.isLoggedIn}/>}
                 {this.props.children}
             </div>
         );
@@ -83,7 +67,7 @@ class MainPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        status: state.authentication.status
+        status: state.authentication.status,
     };
 };
 
@@ -91,9 +75,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getStatusRequest: () => {
             return dispatch(getStatusRequest());
-        },
-        logoutRequest: () => {
-            return dispatch(logoutRequest());
         }
     };
 };

@@ -21,11 +21,15 @@ const store = createStore(reducers, applyMiddleware(thunk));
 ReactDOM.render(
     <Provider store={store}>
         <Router>
-            <div>
+            <div id = "full_body">
                 <Route exact path="/" component={() => <Redirect to="/login" />}/>
                 <Route path="/" component={App}/>
+                <div id="member_body">
                 <Route path="/register" component={Register}/>
+                </div>
+                <div id="member_body">
                 <Route path="/login" component={Login}/>
+                </div>
                 <Route path="/MainPage" component={MainPage}/>
                 <Route path="/recipeview" component={recipeview}/>
                 <Route path="/personalpage" component={personalview} />

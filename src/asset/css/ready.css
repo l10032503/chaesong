@@ -13,11 +13,16 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
  */
-.radio-inline{
+
+#hidetest{
+  visibility: hidden;
+}
+
+label.radio-inline{
   float: left;
   clear: none;
   display: block;
-  padding: 2px 1em 0 0;
+  padding: 0;
 }
 
 
@@ -29,9 +34,22 @@
   float: left;
   -webkit-appearance:radio;
   clear: none;
+  margin: 0;
+  width: max-content;
+}
+
+input[type=checkbox]
+{
+
+  position: relative;
+  left: 0;
+  float: left;
+  -webkit-appearance:checkbox;
+  clear: none;
   margin: 7px 1px 0 2px;
   width: max-content;
 }
+
 
 /*   Background   */
 .bg-default {

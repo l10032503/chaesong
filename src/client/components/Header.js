@@ -11,9 +11,44 @@ class Header extends Component {
     constructor(props){
         super(props);
         this.state={
-            user_Id : Cookies.get('member')
+            user_Id : Cookies.get('member'),
+            searchWord : "",
+            seafoodchecked:true,
+            milkchecked:true,
+            eggchecked:true,
+            seafood : 0,
+            milk: 0,
+            egg: 0
         }
     }
+
+    handleChange = (e) => {
+        let nextState = {};
+        nextState[e.target.name] = e.target.value;
+        this.setState(nextState);
+    }
+
+    handleLogout = (e) => {
+        console.log("logout doing");
+        this.props.onLogout();
+    }
+
+    handleSearch = () => {
+        let searchWord = !this.state.searchWord? " ": this.state.searchWord;
+        let seafood = this.state.seafoodchecked? 1: 0;
+        let milk = this.state.milkchecked? 1:0;
+        let egg = this.state.eggchecked? 1:0;
+        console.log("container: "+ searchWord);
+        console.log("seafood: "  + seafood +"/ milk: " + milk + "/ egg: " + egg);
+        this.props.onSearch(searchWord, seafood, milk, egg);
+    }
+
+    handleKeyPress = (e) => {
+        if(e.charCode==13) {
+            this.handleSearch();
+        }
+    }
+
     componentDidMount() {
         let toggle_sidebar = false;
         let toggle_topbar = false;
@@ -56,7 +91,8 @@ class Header extends Component {
     }
 
     render(){
-        const userID= Cookies.get('member')
+        const userID= Cookies.get('member');
+        const vegantype = Cookies.get('vegantype');
 
         const topbar = (
             <div className="navbar-nav topbar-nav ml-md-auto align-items-center">
@@ -80,27 +116,6 @@ class Header extends Component {
             </div>
         );
 
-        const nav_header = (
-            <div>
-                <nav className="navbar navbar-header navbar-expand-lg">
-                    <div className="container-fluid">
-                        <form className="navbar-left navbar-form nav-search mr-md-3 mt-2" action="">
-                            <div className="input-group">
-                                <input type="text" placeholder="Search ..." className="form-control"/>
-                                <div className="input-group-append">
-								        <span className="input-group-text">
-									    <i className="la la-search search-icon">
-                                        </i>
-								        </span>
-                                </div>
-                            </div>
-                        </form>
-                        {topbar}
-                    </div>
-                </nav>
-            </div>
-        );
-
         const side_bar = (
             <div className="sidebar">
                 <div className="scrollbar-inner sidebar-wrapper">
@@ -109,7 +124,7 @@ class Header extends Component {
                             <a className="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 							<span>
                                 {userID} 님
-                                <span className="user-level">락토오보 베지테리언</span>
+                                <span className="user-level">{vegantype}</span>
                                 </span>
                             </a>
                             <div className="clearfix">
@@ -132,11 +147,13 @@ class Header extends Component {
                             </a>
                         </li>
                         <li className="nav-item update-pro">
-                            <button data-toggle="modal" data-target="#modalUpdate" onChange={this.handleLogout}>
+                            <a href = "/login">
+                            <button data-toggle="modal" data-target="#modalUpdate">
                                 <i className="la la-reply">
                                 </i>
                                 <p>Logout</p>
                             </button>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -162,7 +179,12 @@ class Header extends Component {
                         <div className="container-fluid">
                             <form className="navbar-left navbar-form nav-search mr-md-3 mt-2" action="">
                                 <div className="input-group">
-                                    <input type="text" placeholder="Search ..." className="form-control"/>
+                                    <input type="text" placeholder="Search ..."
+                                           name="searchWord"
+                                           className="form-control"
+                                           onChange={this.handleChange}
+                                           value={this.state.searchWord}
+                                           onKeyPress={this.handleKeyPress}/>
                                     <div className="input-group-append">
 								        <span className="input-group-text">
 									    <i className="la la-search search-icon">
@@ -188,27 +210,18 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-    isLoggedIn: PropTypes.bool
+    isLoggedIn: PropTypes.bool,
+    searchWord: PropTypes.array,
+    onSearch: PropTypes.func,
+    history: PropTypes.object,
+    onLogout : PropTypes.func
 };
 
 Header.defaultProps = {
-    isLoggedIn: false
-};
-
-const mapStateToProps = (state) => {
-    return{
-        errorCode : state.recipe.scrap.error,
-        searchstatus: state.search.status,
-        searchData : state.search.data,
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return{
-        recipeSearchRequest:(searchWord, seafood, milk, egg) =>{
-            return dispatch(recipeSearchRequest(searchWord, seafood, milk, egg));
-        }
-    };
+    isLoggedIn: false,
+    searchWord: [],
+    onSearch:(searchWord, seafood, milk, egg)=>{console.error("search function is not defined")},
+    onLogout: () => {console.error("logout function not defined")}
 };
 
 export default Header;
