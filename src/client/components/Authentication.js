@@ -11,7 +11,7 @@ class Authentication extends React.Component{
         height:"",
         weight:"",
         active:"",
-        vegantype: 5,
+        vegantype: "",
     }
 
     handleChange = (e) => {
