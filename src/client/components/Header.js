@@ -28,6 +28,11 @@ class Header extends Component {
         this.setState(nextState);
     }
 
+    handleLogout = (e) => {
+        console.log("logout doing");
+        this.props.onLogout();
+    }
+
     handleSearch = () => {
         let searchWord = !this.state.searchWord? " ": this.state.searchWord;
         let seafood = this.state.seafoodchecked? 1: 0;
@@ -142,11 +147,13 @@ class Header extends Component {
                             </a>
                         </li>
                         <li className="nav-item update-pro">
+                            <a href = "/login">
                             <button data-toggle="modal" data-target="#modalUpdate">
                                 <i className="la la-reply">
                                 </i>
                                 <p>Logout</p>
                             </button>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -157,7 +164,7 @@ class Header extends Component {
             <div >
                 <div className="main-header">
                     <div className="logo-header">
-                        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FbYhiUv%2FbtqvpAxTrJt%2Fnv4acApc3o0VWm7PMBBgKk%2Fimg.png" alt="logo"/>
+                        <a href="/mainpage"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FbYhiUv%2FbtqvpAxTrJt%2Fnv4acApc3o0VWm7PMBBgKk%2Fimg.png" alt="logo"/> </a>
                         <button className="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                                 data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon">
@@ -206,13 +213,15 @@ Header.propTypes = {
     isLoggedIn: PropTypes.bool,
     searchWord: PropTypes.array,
     onSearch: PropTypes.func,
-    history: PropTypes.object
+    history: PropTypes.object,
+    onLogout : PropTypes.func
 };
 
 Header.defaultProps = {
     isLoggedIn: false,
     searchWord: [],
-    onSearch:(searchWord, seafood, milk, egg)=>{console.error("search function is not defined")}
+    onSearch:(searchWord, seafood, milk, egg)=>{console.error("search function is not defined")},
+    onLogout: () => {console.error("logout function not defined")}
 };
 
 export default Header;
