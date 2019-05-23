@@ -31,7 +31,12 @@ const MemberEat = sequelize.define(
         recipe_code: {
             type:Sequelize.STRING,
             primaryKey: true
-        }
+        },
+        EATEN_TIME:{
+            type: Sequelize.TIME,
+            defaultValue: Sequelize.NOW,
+            primaryKey: true
+        },
     },{
         timestamps: false
     }
