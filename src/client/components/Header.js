@@ -129,10 +129,10 @@ class Header extends Component {
             </div>
         );
 
-        const ModalButton = (
+        const floatingModal = (
             <div>
                 <Modal visible={this.state.visible} width="400" height="300" effect="fadeInRight" onClickAway={() => this.closeModal()}>
-                    <div>
+                    <div id="floating-Modal-content">
                         <h1>Title</h1>
                         <p>Some Contents</p>
                         <a href="javascript:void(0);" onClick={() => this.closeModal()}>Close</a>
@@ -235,7 +235,7 @@ class Header extends Component {
                     </nav>
                 </div>
                 {floatingButton}
-                {ModalButton}
+                {floatingModal}
                 {side_bar}
             </div>
         )

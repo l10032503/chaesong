@@ -187,3 +187,15 @@ body {
     height: 30%;
     float: right;
 }
+
+#floating-Modal-content{
+    margin: 5px;
+}
+
+#recipe-modal-content{
+    margin: 5px;
+}
+
+#recipe-modal-content p{
+    white-space:pre-line
+}
