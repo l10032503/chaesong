@@ -36,3 +36,4 @@ export const SCRAP_LOAD = "SCRAP_LOAD";
 export const SCRAP_LOAD_SUCCESS = "SCRAP_LOAD_SUCCESS";
 export const SCRAP_LOAD_FAILURE = "SCRAP_LOAD_FAILURE";
 
+

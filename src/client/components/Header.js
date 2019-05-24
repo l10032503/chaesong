@@ -174,7 +174,7 @@ class Header extends Component {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a href="">
+                            <a href="/personalgraph">
                                 <i className="la la-check-circle-o">
                                 </i>
                                 <p>Nutritional Status</p>
