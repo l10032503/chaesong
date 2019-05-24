@@ -212,3 +212,13 @@ body {
 .modal-body p{
     white-space:pre-line;
 }
+
+#eatButton{
+    float: right;
+    margin: 3px;
+}
+
+#scrapButton{
+    float: right;
+    margin: 3px;
+}
