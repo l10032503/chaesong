@@ -89,13 +89,13 @@ export function recipescrapFailure(error) {
     };
 }
 
-export function eatRequest(user_id, recipe_code) {
+export function eatRequest(user_id, ingredient_code) {
     return (dispatch) =>{
         dispatch(recipeEat());
 
-        return axios.post('/api/eat', {user_id,recipe_code})
+        return axios.post('/api/eat', {user_id,ingredient_code})
             .then((response)=>{
-                console.log("eat post action: ",user_id, recipe_code);
+                console.log("eat post action: ",user_id, ingredient_code);
                 console.log("eat dispatch success ");
                 dispatch(recipeEatSuccess());
             }).catch((error)=>{

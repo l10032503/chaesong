@@ -28,7 +28,7 @@ const MemberEat = sequelize.define(
             defaultValue: Sequelize.NOW,
             primaryKey: true
         },
-        recipe_code: {
+        ingredient_code: {
             type:Sequelize.STRING,
             primaryKey: true
         },
@@ -75,14 +75,15 @@ eat.post('/', (req,res)=>{
     };
     const eatData = {
         user_id : req.body.user_id,
-        recipe_code : req.body.recipe_code,
-        EATEN_DATE : req.body.EATEN_DATE
+        ingredient_code : req.body.ingredient_code,
+        EATEN_DATE : req.body.EATEN_DATE,
+        EATEN_TIME: req.body.EATEN_TIME
     };
     console.log("eat post route2");
     MemberEat.findOne({
         where :{
             user_id : eatData.user_id,
-            recipe_code : eatData.recipe_code
+            ingredient_code : eatData.ingredient_code
         }
     }).then((memberEat)=>{
         if(!memberEat){
@@ -99,7 +100,7 @@ eat.post('/', (req,res)=>{
             MemberEat.destroy({
                 where:{
                     user_id : eatData.user_id,
-                    recipe_code : eatData.recipe_code
+                    ingredient_code : eatData.ingredient_code
                 }
             })
                 .then(memberEat=>{
