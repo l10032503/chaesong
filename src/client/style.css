@@ -207,6 +207,7 @@ body {
 
 .modal-body{
     overflow: scroll;
+    height: 541px;
 }
 
 .modal-body p{
