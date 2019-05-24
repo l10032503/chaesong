@@ -1,6 +1,7 @@
 import authentication from './authentication';
 import recipe from './recipe';
-import personalpage from './personalpage'
+import personalpage from './personalpage';
+import personalgraph from './personalgraph';
 import search from './search';
 import recommendpage from './recommendpage';
 import {combineReducers} from 'redux';
@@ -12,5 +13,5 @@ export default combineReducers({
     personalpage,
     search,
     ingredient,
-    recommendpage
+    personalgraph
 });
