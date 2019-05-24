@@ -23,7 +23,7 @@ class NutritionGraph extends Component{
             }, 0);
         }
 
-        let input = ["ENERGY", "PROCPN", "FAT", "CHOTDF", "CA", "NA", "FE"];
+        let input = ["ENERGY", "PROCNP", "FAT", "CHOTDF", "CA", "NA", "FE"];
 
         let totalAmount0 = parseInt(sumProperty(this.props.eatenData, input[0]));
         let totalAmount1 = parseInt(sumProperty(this.props.eatenData, input[1]));
@@ -59,7 +59,7 @@ class NutritionGraph extends Component{
                 indexLabelFontColor: "white",
                 dataPoints: [
                     {label: "ENERGY", y: totalAmount0},
-                    {label: "PROCPN", y: totalAmount1},
+                    {label: "PROCNP", y: totalAmount1},
                     {label: "FAT(지방)", y: totalAmount2},
                     {label: "CHOTDF", y: totalAmount3},
                     {label: "CA", y: totalAmount4},
@@ -76,7 +76,7 @@ class NutritionGraph extends Component{
                     indexLabelFontColor: "white",
                     dataPoints: [
                         {label: "ENERGY", y: (100-totalAmount0 > 0) ? 100-totalAmount0 : 0},
-                        {label: "PROCPN", y: 100-totalAmount1},
+                        {label: "PROCNP", y: 100-totalAmount1},
                         {label: "FAT(지방)", y: 100-totalAmount2},
                         {label: "CHOTDF", y: 100-totalAmount3},
                         {label: "CA", y: 100-totalAmount4},

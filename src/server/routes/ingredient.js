@@ -39,7 +39,7 @@ const Ingredient = sequelize.define(
 ingredient.get('/search/:ingredientname', (req,res) =>{
     let ingredientname = req.params.ingredientname;
     Ingredient.findAll({where:{
-            ingredient_id : req.body.ingredient_id
+            ingredient_name : req.body.ingredient_name
         }
     }).then(ingredients=> {
         return res.json(ingredients);
