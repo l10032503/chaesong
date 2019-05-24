@@ -15,6 +15,7 @@ import reducers from '../client/reducers';
 import thunk from 'redux-thunk';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../asset/sass/ready.scss';
+import PersonalGraph from "./containers/PersonalGraph";
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
@@ -33,6 +34,7 @@ ReactDOM.render(
                 <Route path="/MainPage" component={MainPage}/>
                 <Route path="/recipeview" component={recipeview}/>
                 <Route path="/personalpage" component={personalview} />
+                <Route path="/personalgraph" component={PersonalGraph}/>
                 <Route path="/recommendview" component={recommendview} />
                 <Route path="/Start" component={Start}/>
             </div>

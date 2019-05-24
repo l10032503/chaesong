@@ -33,7 +33,7 @@ class RecipeBox extends Component{
                         <br/>
                     </div>
                     <div className="footer">
-                        <button onClick={this.handleEat}>
+                        <button class="btn btn-default btn-sm" onClick={this.handleEat}>
                             먹었음
                         </button>
                         <button onClick={this.handleScrap}>
