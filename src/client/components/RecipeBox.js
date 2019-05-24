@@ -1,9 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import Modal from 'react-awesome-modal';
 import Cookies from 'js-cookie';
 
 class RecipeBox extends Component{
+
+    constructor(props){
+        super(props);
+        this.state={
+            visible : false
+        }
+    }
+
+    openModal() {
+        this.setState({
+            visible : true
+        });
+    }
+
+    closeModal() {
+        this.setState({
+            visible : false
+        });
+    }
 
     handleScrap = () => {
         console.log("scrap click");
@@ -22,14 +41,27 @@ class RecipeBox extends Component{
     }
 
     render() {
+
+        const recipeModal = (
+            <div>
+                <Modal visible={this.state.visible} width="400" height="300" effect="fadeInRight" onClickAway={() => this.closeModal()}>
+                    <div id="recipe-modal-content">
+                        <h1>{this.props.data.recipe_name}</h1>
+                        <p>{this.props.data.content}</p>
+                        <a href="javascript:void(0);" onClick={() => this.closeModal()}>Close</a>
+                    </div>
+                </Modal>
+            </div>
+        )
+
         return (
             <div className="col-md-4 recipe-box">
                 <div className="card">
                     <div className="card-header">
-                        <h3 className="card-title">{this.props.data.recipe_name}</h3>
+                        <h3 className="card-title" onClick={() => this.openModal()} >{this.props.data.recipe_name}</h3>
                     </div>
                     <div className="card-body">
-                        <img src={this.props.data.imgurl} alt="recipe"/>
+                        <img src={this.props.data.imgurl} onClick={() => this.openModal()} alt="recipe"/>
                         <br/>
                     </div>
                     <div className="footer">
@@ -41,6 +73,7 @@ class RecipeBox extends Component{
                         </button>
                     </div>
                 </div>
+                {recipeModal}
             </div>
         );
     }

@@ -10,4 +10,4 @@ import RecommendPage from './RecommendPage';
 import ScrapPage from './ScrapPage';
 import NutritionGraph from './NutritionGraph';
 
-export {Header,Authentication, RecipeViewTest, RecipeBox, Main, Search, ScrapView, ScrapPage, ScrapBox, RecommendPage, NutritionGraph};
+export {Header,Authentication, RecipeViewTest, RecipeBox, Main, Search, ScrapView, ScrapPage, ScrapBox, RecommendPage, NutritionGraph, FloatingButton};

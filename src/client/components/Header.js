@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Cookies from "js-cookie";
 import jQuery from "jquery";
-import {recipeSearchRequest} from "../actions/recipe";
-import {connect} from "react-redux";
+import Modal from 'react-awesome-modal';
 window.$ = window.jQuery = jQuery;
 
 class Header extends Component {
@@ -18,9 +16,23 @@ class Header extends Component {
             eggchecked:true,
             seafood : 0,
             milk: 0,
-            egg: 0
+            egg: 0,
+            visible : false
         }
     }
+
+    openModal() {
+        this.setState({
+            visible : true
+        });
+    }
+
+    closeModal() {
+        this.setState({
+            visible : false
+        });
+    }
+
 
     handleChange = (e) => {
         let nextState = {};
@@ -94,6 +106,7 @@ class Header extends Component {
         const userID= Cookies.get('member');
         const vegantype = Cookies.get('vegantype');
 
+
         const topbar = (
             <div className="navbar-nav topbar-nav ml-md-auto align-items-center">
                 <ul className="navbar-nav topbar-nav ml-md-auto align-items-center">
@@ -115,6 +128,27 @@ class Header extends Component {
                 </ul>
             </div>
         );
+
+        const floatingModal = (
+            <div>
+                <Modal visible={this.state.visible} width="400" height="300" effect="fadeInRight" onClickAway={() => this.closeModal()}>
+                    <div id="floating-Modal-content">
+                        <h1>Title</h1>
+                        <p>Some Contents</p>
+                        <a href="javascript:void(0);" onClick={() => this.closeModal()}>Close</a>
+                    </div>
+                </Modal>
+            </div>
+        )
+
+        const floatingButton = (
+            <div id="floatingbutton">
+                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FkWvTk%2Fbtqvus0TPyq%2FxFFSx6jiVrRb4lmaRAd2Wk%2Fimg.png"
+                     onClick={() => this.openModal()} alt=""/>
+            </div>
+        )
+
+
 
         const side_bar = (
             <div className="sidebar">
@@ -160,6 +194,9 @@ class Header extends Component {
             </div>
         )
 
+
+
+
         const HEADER = (
             <div >
                 <div className="main-header">
@@ -197,6 +234,8 @@ class Header extends Component {
                         </div>
                     </nav>
                 </div>
+                {floatingButton}
+                {floatingModal}
                 {side_bar}
             </div>
         )

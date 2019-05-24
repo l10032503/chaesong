@@ -174,3 +174,28 @@ body {
     min-height: 100vh;
     min-width: 100%;
 }
+
+#floatingbutton{
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    z-index: 1;
+}
+
+#floatingbutton img{
+    width: 30%;
+    height: 30%;
+    float: right;
+}
+
+#floating-Modal-content{
+    margin: 5px;
+}
+
+#recipe-modal-content{
+    margin: 5px;
+}
+
+#recipe-modal-content p{
+    white-space:pre-line
+}
