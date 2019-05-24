@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Cookies from "js-cookie";
 import jQuery from "jquery";
 import Modal from 'react-awesome-modal';
+import FloatingButton from "./FloatingButton";
 window.$ = window.jQuery = jQuery;
 
 class Header extends Component {
@@ -19,6 +20,10 @@ class Header extends Component {
             egg: 0,
             visible : false
         }
+    }
+
+    handleIngredientSearch = (keyword) => {
+
     }
 
     openModal() {
@@ -129,26 +134,6 @@ class Header extends Component {
             </div>
         );
 
-        const floatingModal = (
-            <div>
-                <Modal visible={this.state.visible} width="400" height="300" effect="fadeInRight" onClickAway={() => this.closeModal()}>
-                    <div id="floating-Modal-content">
-                        <h1>Title</h1>
-                        <p>Some Contents</p>
-                        <a href="javascript:void(0);" onClick={() => this.closeModal()}>Close</a>
-                    </div>
-                </Modal>
-            </div>
-        )
-
-        const floatingButton = (
-            <div id="floatingbutton">
-                <img src="https://trello-attachments.s3.amazonaws.com/5ce636e5f2414e595f40bf7e/377x364/85c8414a92615ceaf07566442141e552/%E1%84%8E%E1%85%A2%E1%84%89%E1%85%A9%E1%86%BC%E1%84%85%E1%85%A9%E1%84%80%E1%85%A9_%E1%84%8C%E1%85%A2%E1%84%85%E1%85%AD%E1%84%8E%E1%85%AE%E1%84%80%E1%85%A1.png" onClick={() => this.openModal()} alt=""/>
-            </div>
-        )
-
-
-
         const side_bar = (
             <div className="sidebar">
                 <div className="scrollbar-inner sidebar-wrapper">
@@ -233,8 +218,7 @@ class Header extends Component {
                         </div>
                     </nav>
                 </div>
-                {floatingButton}
-                {floatingModal}
+                <FloatingButton/>
                 {side_bar}
             </div>
         )
@@ -259,7 +243,8 @@ Header.defaultProps = {
     isLoggedIn: false,
     searchWord: [],
     onSearch:(searchWord, seafood, milk, egg)=>{console.error("search function is not defined")},
-    onLogout: () => {console.error("logout function not defined")}
+    onLogout: () => {console.error("logout function not defined")},
+    history: {}
 };
 
 export default Header;

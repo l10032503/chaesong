@@ -199,3 +199,16 @@ body {
 #recipe-modal-content p{
     white-space:pre-line
 }
+
+#id{
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.modal-body{
+    overflow: scroll;
+}
+
+.modal-body p{
+    white-space:pre-line;
+}
