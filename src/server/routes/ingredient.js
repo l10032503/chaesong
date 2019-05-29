@@ -13,7 +13,6 @@ const sequelize = new Sequelize('chaesongdb', 'comhong', 'sook2019', {
         }
     }
 );
-const Op = Sequelize.Op;
 const ingredient = express.Router();
 
 ingredient.use(cors());
@@ -36,20 +35,11 @@ const Ingredient = sequelize.define(
     }
 );
 
-ingredient.get('/search/:ingredientname', (req,res) =>{
-    let ingredientname = req.params.ingredientname;
-    Ingredient.findAll({where:{
-            ingredient_name : req.body.ingredient_name
-        }
-    }).then(ingredients=> {
+ingredient.get('/search', (req,res) =>{
+    Ingredient.findAll().then(ingredients=> {
         return res.json(ingredients);
     }).catch(err=>{
         return res.send('error' + err);
     });
 });
-
-ingredient.get('/search',(req,res)=>{
-    res.json([]);
-});
-
 module.exports = ingredient;

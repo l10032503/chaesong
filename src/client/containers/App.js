@@ -3,7 +3,6 @@ import {Header} from '../components';
 import { connect } from 'react-redux';
 import { logoutRequest, getStatusRequest } from '../actions/authentication';
 import {recipeSearchRequest} from "../actions/recipe";
-import {ingredientSearchRequest} from "../actions/ingredient"
 
 class App extends Component {
 
@@ -97,7 +96,8 @@ const mapStateToProps = (state) => {
         errorCode : state.recipe.scrap.error,
         searchWord: state.search.searchWord,
         searchstatus: state.search.status,
-        searchData : state.search.data
+        searchData : state.search.data,
+        ingredientSearchResults : state.ingredient.ingredient_names
     };
 };
 
@@ -111,6 +111,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         logoutRequest: () => {
             return dispatch(logoutRequest());
+        },
+        ingredientSearchRequest:(keyword) =>{
+            return dispatch(ingredientSearchRequest(keyword));
         }
     };
 };

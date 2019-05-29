@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import Modal from 'react-awesome-modal';
 import Cookies from 'js-cookie';
 import * as Scroll from 'react-scroll';
-import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
-
-
 
 class RecipeBox extends Component{
 
@@ -45,18 +42,12 @@ class RecipeBox extends Component{
     }
 
     render() {
-        let Link       = Scroll.Link;
-        let Element    = Scroll.Element;
-        let Events     = Scroll.Events;
-        let scroll     = Scroll.animateScroll;
-        let scrollSpy  = Scroll.scrollSpy;
-
 
         const recipeModal = (
             <div>
                 <Modal visible={this.state.visible} width="400" height="600" effect="fadeInRight" onClickAway={() => this.closeModal()}>
                     <div className="modal-header bg-primary">
-                        <h6 id="modal-title"><i className="la la-smile-o">{this.props.data.recipe_name}</i> </h6>
+                        <h4 id="modal-title"><i className="la la-smile-o">{this.props.data.recipe_name}</i> </h4>
                         <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => this.closeModal()}>
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -64,10 +55,6 @@ class RecipeBox extends Component{
                     <div className="modal-body text-left element">
                         <img src={this.props.data.imgurl} alt="recipe"/>
                         <p>{this.props.data.content}</p>
-                    </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" onClick={this.handleEat}>스크랩</button>
-                        <button type="button" className="btn btn-secondary" onClick={this.handleScrap}>먹었음</button>
                     </div>
                 </Modal>
             </div>

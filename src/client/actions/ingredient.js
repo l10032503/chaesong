@@ -3,18 +3,22 @@ import {
     INGREDIENT_SEARCH_SUCCESS,
     INGREDIENT_SEARCH_FAILURE
 } from './ActionType';
-import axios from 'axios';
+import axios from 'axios'
 
-export function ingredientSearchRequest(keyword) {
+export function ingredientSearchRequest(isInitial, listType){
     return (dispatch) => {
-        dispatch(search());
-        return axios.get('/api/account/search/' + keyword)
-            .then((response) => {
-                dispatch(ingredientSearchSuccess(response.data));
+        dispatch(ingredientSearch());
+        let url = './api/ingredient/search';
+
+        return axios.get(url)
+            .then((response)=>{
+                console.log("ingredient dispatch success" );
+                dispatch(ingredientSearchSuccess(response.data, isInitial, listType));
             }).catch((error) => {
+                console.log("ingredient dispatch failure");
                 dispatch(ingredientSearchFailure());
-            });
-    };
+            })
+    }
 }
 
 export function ingredientSearch() {
@@ -23,10 +27,12 @@ export function ingredientSearch() {
     };
 }
 
-export function ingredientSearchSuccess(ingredient_names) {
+export function ingredientSearchSuccess(ingredient_names, isInitial, listType) {
     return {
         type: INGREDIENT_SEARCH_SUCCESS,
-        ingredient_names
+        ingredient_names,
+        isInitial,
+        listType
     };
 }
 

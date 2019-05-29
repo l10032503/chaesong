@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Cookies from "js-cookie";
 import jQuery from "jquery";
-import Modal from 'react-awesome-modal';
 import FloatingButton from "./FloatingButton";
+
 window.$ = window.jQuery = jQuery;
 
 class Header extends Component {
@@ -17,27 +17,9 @@ class Header extends Component {
             eggchecked:true,
             seafood : 0,
             milk: 0,
-            egg: 0,
-            visible : false
+            egg: 0
         }
     }
-
-    handleIngredientSearch = (keyword) => {
-
-    }
-
-    openModal() {
-        this.setState({
-            visible : true
-        });
-    }
-
-    closeModal() {
-        this.setState({
-            visible : false
-        });
-    }
-
 
     handleChange = (e) => {
         let nextState = {};
@@ -178,11 +160,8 @@ class Header extends Component {
             </div>
         )
 
-
-
-
         const HEADER = (
-            <div >
+            <div>
                 <div className="main-header">
                     <div className="logo-header">
                         <a href="/mainpage"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FbYhiUv%2FbtqvpAxTrJt%2Fnv4acApc3o0VWm7PMBBgKk%2Fimg.png" alt="logo"/> </a>
@@ -246,6 +225,8 @@ Header.defaultProps = {
     onLogout: () => {console.error("logout function not defined")},
     history: {}
 };
+
+
 
 export default Header;
 

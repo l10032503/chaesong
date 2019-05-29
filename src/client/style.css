@@ -200,7 +200,7 @@ body {
     white-space:pre-line
 }
 
-#id{
+#modal-title{
     color: #ffffff;
     font-weight: bold;
 }
@@ -222,4 +222,10 @@ body {
 #scrapButton{
     float: right;
     margin: 3px;
+}
+
+#auto-complete{
+    margin-top: 10px;
+    margin-left: 10px;
+    left: 0;
 }
