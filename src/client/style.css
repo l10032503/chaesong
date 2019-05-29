@@ -229,3 +229,29 @@ body {
     margin-left: 10px;
     left: 0;
 }
+
+#auto-complete input{
+    width: 380px;
+    height: 38px;
+}
+
+#auto-complete .validate{
+    width: 50px;
+    margin-top: 10px;
+    margin-right: 5px;
+    float: left;
+}
+
+#auto-complete select{
+    width: 260px;
+    height: 38px;
+    margin-top: 10px;
+    margin-right: 5px;
+    float: left;
+}
+
+#auto-complete button{
+    height: 38px;
+    margin-top: 10px;
+    float: left;
+}

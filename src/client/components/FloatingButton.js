@@ -13,9 +13,9 @@ class FloatingButton extends Component {
         this.state={
             values : '',
             visible : false,
-            keyword : ''
+            count : 1,
+            unit: '',
         }
-
     }
 
     openModal() {
@@ -36,19 +36,21 @@ class FloatingButton extends Component {
         this.setState(nextState);
     }
 
+    unitChange = (e) => {
+        let nextState = {};
+        nextState[e.target.name] = e.target.value;
+        this.setState(nextState);
+    }
+
     componentDidMount(){
         this.props.ingredientSearchRequest(true, undefined);
     }
-
-
-
-
 
     render(){
 
         const floatingModal = (
             <div>
-                <Modal visible={this.state.visible} width="400" height="400" effect="fadeInRight" onClickAway={() => this.closeModal()}>
+                <Modal visible={this.state.visible} width="400" height="186" effect="fadeInRight" onClickAway={() => this.closeModal()}>
                     <div className="modal-header bg-primary">
                         <h4 id="modal-title">먹은 재료 직접 입력 </h4>
                         <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => this.closeModal()}>
@@ -73,7 +75,55 @@ class FloatingButton extends Component {
                             onChange={e => this.setState({ value: e.target.value })}
                             onSelect={value => this.setState({ value })}
                         />
+                        <input
+                            name="count"
+                            type="text"
+                            className="validate"
+                            placeholder="1"
+                            onChange={this.handleChange}
+                            value={this.state.count}/>
+                        <select className="form-control" name="unit" id="unit"
+                                value={this.state.unit} onChange={this.unitChange}>
+                            <option selected>단위</option>
+                            <option name="unit"
+                                    className="validate"
+                                    value="0">직접 입력(기본 100g)</option>
+                            <option name="unit"
+                                    className="validate"
+                                    value="1">채소 한 줌(50g)</option>
+                            <option name="unit"
+                                    className="validate"
+                                    value="2">말린 재료 한 줌(5g)</option>
+                            <option name="unit"
+                                    className="validate"
+                                    value="3">말린 해산물 한 줌(15g)</option>
+                            <option name="unit"
+                                    className="validate"
+                                    value="4">면 1인분(60g)</option>
+                            <option name="unit"
+                                    className="validate"
+                                    value="5">밀가루 한 컵(100g)</option>
+                            <option name="unit"
+                                    className="validate"
+                                    value="6">고춧가루 한 컵(100g)</option>
+                            <option name="unit"
+                                    className="validate"
+                                    value="7">설탕 한 컵(180g)</option>
+                            <option name="unit"
+                                    className="validate"
+                                    value="8">소금 한 큰술(10g)</option>
+                            <option name="unit"
+                                    className="validate"
+                                    value="9">소금 한 컵(120g)</option>
+                            <option name="unit"
+                                    className="validate"
+                                    value="10">고추장 한 컵(250g)</option>
+                        </select>
+                        <button className="btn btn-default btn-sm" >
+                            먹었음
+                        </button>
                     </div>
+
                 </Modal>
             </div>
         )
@@ -97,7 +147,8 @@ const mapStateToProps = (state) => {
     return {
         ingredient_names : state.ingredient.ingredient_names,
         menuStyle : {
-            left:0,
+            left: '10px',
+            top: '110px',
             borderRadius: '3px',
             boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
             background: 'rgba(255, 255, 255, 0.9)',
