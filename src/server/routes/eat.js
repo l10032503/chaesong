@@ -41,6 +41,7 @@ const MemberEat = sequelize.define(
         timestamps: false
     }
 );
+
 const Recipe = sequelize.define(
     'Recipe',
     {
