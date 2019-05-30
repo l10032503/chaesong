@@ -129,11 +129,11 @@ class SettingUI extends Component{
                                         <div class="form-group">
                                             <label for="exampleFormControlSelect1">채식타입</label>
                                             <select value={this.state.vegantype} onChange={this.vegantypeChange} className="form-control" name="vegantype" id="exampleFormControlSelect1 ">
-                                                <option>페스코 베지테리언</option>
-                                                <option>락토오보 베지테리언</option>
-                                                <option>락토 베지테리언</option>
-                                                <option>오보 베지테리언</option>
-                                                <option>비건</option>
+                                                <option name="vegantype" value="1">페스코 베지테리언</option>
+                                                <option name="vegantype" value="2">락토오보 베지테리언</option>
+                                                <option name="vegantype" value="3">락토 베지테리언</option>
+                                                <option name="vegantype" value="4">오보 베지테리언</option>
+                                                <option name="vegantype" value="5">비건</option>
                                             </select>
                                         </div>
                                     </div>
