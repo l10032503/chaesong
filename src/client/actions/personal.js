@@ -8,7 +8,10 @@ import {
     SCRAP_LOAD_FAILURE,
     INFO_LOAD,
     INFO_LOAD_SUCCESS,
-    INFO_LOAD_FAILURE
+    INFO_LOAD_FAILURE,
+    SCRAP_DELETE,
+    SCRAP_DELETE_SUCCESS,
+    SCRAP_DELETE_FAILURE
 } from './ActionType';
 
 export function infoListRequest(isInitial){
@@ -112,5 +115,40 @@ export function scrapLoadFailure() {
 export function eatenLoadFailure() {
     return{
         type: EATEN_LIST_FAILURE
+    };
+}
+
+export function scrapDeleteRequest(user_id, recipe_code) {
+    return (dispatch) =>{
+        dispatch(scrapDelete());
+
+        return axios.post('/api/scrap/delete', {user_id,recipe_code})
+            .then((response)=>{
+                console.log("post action: ",user_id, recipe_code);
+                console.log("scrap dispatch success ");
+                dispatch(scrapDeleteSuccess());
+            }).catch((error)=>{
+                console.log("scrap dispatch failure");
+                dispatch(scrapDeleteFailure(error.response.data.code));
+            });
+    }
+}
+
+export function scrapDelete() {
+    return{
+        type : SCRAP_DELETE
+    };
+}
+
+export function scrapDeleteSuccess() {
+    return{
+        type: SCRAP_DELETE_SUCCESS
+    };
+}
+
+export function scrapDeleteFailure(error) {
+    return {
+        type: SCRAP_DELETE_FAILURE,
+        error
     };
 }

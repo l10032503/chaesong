@@ -14,12 +14,13 @@ class ScrapView extends Component{
                         index={i}
                         current={this.props.currentUser}
                         current_id={this.props.current_id}
+                        onScrapDelete = {this.props.onScrapDelete}
                     />
                 );
             })
         };
         return (
-            <div>
+            <div id="scrap-box">
                 {mapToComponents(this.props.data)}
             </div>
         );
@@ -27,10 +28,12 @@ class ScrapView extends Component{
 }
 
 ScrapView.propTypes={
-    data: PropTypes.array
+    data: PropTypes.array,
+    onScrapDelete : PropTypes.func,
 };
 ScrapView.defaultProps={
-    data: []
+    data: [],
+    onScrapDelete : (user_id,recipe_code) =>{console.error("scrap delete function is not defined");}
 };
 
 export default ScrapView;

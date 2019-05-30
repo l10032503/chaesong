@@ -9,6 +9,8 @@ class personalview extends Component{
         this.props.scrapListRequest(true, undefined);
     }
 
+
+
     render(){
               return (
             <div>

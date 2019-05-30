@@ -66,7 +66,7 @@ class RecipeBox extends Component{
                     <div className="card-header" onClick={() => this.openModal()}>
                         <h3 className="card-title" onClick={() => this.openModal()} >{this.props.data.recipe_name}</h3>
                     </div>
-                    <div className="card-body"onClick={() => this.openModal()}>
+                    <div className="card-body" onClick={() => this.openModal()}>
                         <img src={this.props.data.imgurl} onClick={() => this.openModal()} alt="recipe"/>
                         <br/>
                     </div>

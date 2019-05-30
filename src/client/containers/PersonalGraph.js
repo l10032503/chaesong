@@ -5,12 +5,13 @@ import {NutritionGraph} from '../components';
 
 class PersonalGraph extends Component {
 
-
     componentDidMount() {
         this.props.eatenListRequest(true, undefined);
     }
 
-    render() {
+
+
+render() {
         return (
             <div>
                 <NutritionGraph data={this.props.eatenData}/>
@@ -22,7 +23,8 @@ class PersonalGraph extends Component {
 const mapStateToProps = (state) => {
     return {
         eatenData : state.personalgraph.list.data,
-        listStatus : state.personalgraph.list.status
+        listStatus : state.personalgraph.list.status,
+
     };
 };
 
