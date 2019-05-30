@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import jQuery from "jquery";
 import Modal from 'react-awesome-modal';
-import {ingredientSearchRequest} from "../actions/ingredient";
+import {ingredientSearchRequest, ingredientEatRequest} from "../actions/ingredient";
 import {connect} from "react-redux";
 import ReactAutocomplete from 'react-autocomplete';
+import Cookies from "js-cookie";
 window.$ = window.jQuery = jQuery;
 
 class FloatingButton extends Component {
     constructor(props){
         super(props);
         this.state={
+            user_id : Cookies.get('member'),
             values : '',
             visible : false,
             count : 1,
@@ -45,6 +47,27 @@ class FloatingButton extends Component {
     componentDidMount(){
         this.props.ingredientSearchRequest(true, undefined);
     }
+
+    handleEat= () =>{
+        let user_id = this.state.user_id;
+        let value = this.state.value;
+        let count = this.state.count;
+        let unit = this.state.unit;
+
+        console.log("ingredient eat container " +  user_id + " / " + value + " / " + count  + " / " + unit);
+        return this.props.ingredientEatRequest(user_id, value, count, unit).then(
+            ()=>{
+                if(this.props.eatstatus === "SUCCESS"){
+                    console.log("ingredient eat container success");
+                    return true;
+                }else{
+                    console.log("ingredient eat container fail");
+                    return false;
+                }
+            }
+        );
+    }
+
 
     render(){
 
@@ -87,7 +110,7 @@ class FloatingButton extends Component {
                             <option selected>단위</option>
                             <option name="unit"
                                     className="validate"
-                                    value="0">직접 입력(기본 100g)</option>
+                                    value="0">직접 입력(기본 g)</option>
                             <option name="unit"
                                     className="validate"
                                     value="1">채소 한 줌(50g)</option>
@@ -119,7 +142,7 @@ class FloatingButton extends Component {
                                     className="validate"
                                     value="10">고추장 한 컵(250g)</option>
                         </select>
-                        <button className="btn btn-default btn-sm" >
+                        <button className="btn btn-default btn-sm" onClick={this.handleEat}>
                             먹었음
                         </button>
                     </div>
@@ -157,7 +180,10 @@ const mapStateToProps = (state) => {
             position: 'fixed',
             overflow: 'auto',
             height: '200px'
-            }
+            },
+        listStatus : state.ingredient.status,
+        isLast: state.ingredient.isLast,
+        eatstatus: state.ingredient.eat.eatstatus,
     };
 };
 
@@ -165,6 +191,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         ingredientSearchRequest:(isInitial, listType) =>{
             return dispatch(ingredientSearchRequest(isInitial, listType));
+        },
+        ingredientEatRequest:(user_id, value, count, unit) =>{
+            return dispatch(ingredientEatRequest(user_id, value, count, unit))
         }
     };
 };

@@ -4,7 +4,7 @@ import {
     INGREDIENT_SEARCH_FAILURE,
     INGREDIENT_EAT,
     INGREDIENT_EAT_SUCCESS,
-    INGREDIENT_EAT_FAILURE, RECIPE_EAT, RECIPE_EAT_SUCCESS, RECIPE_EAT_FAILURE
+    INGREDIENT_EAT_FAILURE
 } from './ActionType';
 import axios from 'axios'
 
@@ -45,13 +45,12 @@ export function ingredientSearchFailure() {
     };
 }
 
-export function ingredientRequest(user_id, ingredient_code, count, unit) {
+export function ingredientEatRequest(user_id, value, count, unit) {
     return (dispatch) =>{
         dispatch(ingredientEat());
-
-        return axios.post('/api/ingredient/eat', {user_id,ingredient_code, count, unit})
+        return axios.post('/api/ingredient/eat', {user_id, value, count, unit})
             .then((response)=>{
-                console.log("ingredient eat post action: " + user_id + ingredient_code + count + unit);
+                console.log("ingredient eat post action: " + user_id + ' / '  + value + ' / '  +  count + ' / '  +  unit);
                 console.log("ingredient eat dispatch success ");
                 dispatch(ingredientEatSuccess());
             }).catch((error)=>{
@@ -63,19 +62,19 @@ export function ingredientRequest(user_id, ingredient_code, count, unit) {
 
 export function ingredientEat() {
     return{
-        type : RECIPE_EAT
+        type : INGREDIENT_EAT
     };
 }
 
 export function ingredientEatSuccess() {
     return{
-        type: RECIPE_EAT_SUCCESS
+        type: INGREDIENT_EAT_SUCCESS
     };
 }
 
 export function ingredientEatFailure(error) {
     return {
-        type: RECIPE_EAT_FAILURE,
+        type: INGREDIENT_EAT_FAILURE,
         error
     };
 }

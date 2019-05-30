@@ -68,23 +68,27 @@ const MemberJoin = sequelize.define(
 
 eat.post('/', (req,res)=>{
     console.log("eat post route");
-    const loginUserData = {
-        user_id : req.body.user_id,
-    };
-    const recipeData = {
-        recipe_code : req.body.recipe_code
-    };
     const eatData = {
         user_id : req.body.user_id,
-        ingredient_code : req.body.ingredient_code,
-        EATEN_DATE : req.body.EATEN_DATE,
-        EATEN_TIME: req.body.EATEN_TIME
+        ingredient_code : req.body.ingredient_code
     };
-    console.log("eat post route2");
+    MemberEat.create(eatData)
+        .then(memberEat=>{
+            console.log("eat create");
+            return res.json({success: true})
+        })
+        .catch(err=>{
+            console.log("eat error");
+            return res.send('error' + err)
+        });
+
+    /*console.log("eat post route2");
     MemberEat.findOne({
-        where :{
+        where:{
             user_id : eatData.user_id,
-            ingredient_code : eatData.ingredient_code
+            ingredient_code : eatData.ingredient_code,
+            EATEN_DATE : eatData.EATEN_DATE,
+            EATEN_TIME : eatData.EATEN_TIME
         }
     }).then((memberEat)=>{
         if(!memberEat){
@@ -115,7 +119,7 @@ eat.post('/', (req,res)=>{
         }
     }).catch((err)=>{
         return res.send('error' + err);
-    })
+    })*/
 });
 
 module.exports = eat;

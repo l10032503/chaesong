@@ -73,84 +73,118 @@ ingredient.get('/search', (req,res) =>{
     });
 });
 
+
 ingredient.post('/eat',(req,res)=>{
     console.log("ingredint eat post route");
     const count = req.body.count;
-    const unit = req.body.unit;
+    let unit = req.body.unit;
+    Ingredient.findOne({
+        where:{
+            ingredient_name : req.body.value
+        },
+        raw: true
+    }).then((ingredient) =>{
+        const ingredientCode = ingredient.ingredient_code;
 
-    const ingredient = Ingredient.findOne({where:{
-        ingredient_name : req.body.value
-        }}).then((ingredient)=>{
-            return ingredient;
-    });
+        let Quantity  = 0;
 
-    const ingredientCode = ingredient.ingredient_code;
-
-    let Quantity  = 0;
-
-    switch(unit){
-        case 0:
-            Quantity = count;
-            break;
-        case 1:
-            Quantity = count * 0.5;
-            break;
-        case 2:
-            Quantity = count * 0.05;
-            break;
-        case 3:
-            Quantity = count * 0.5;
-            break;
-        case 4:
-            Quantity = count * 0.6;
-            break;
-        case 5:
-            Quantity = count;
-            break;
-        case 6:
-            Quantity = count;
-            break;
-        case 7:
-            Quantity = count * 1.8;
-            break;
-        case 8:
-            Quantity = count * 0.1;
-            break;
-        case 9:
-            Quantity = count * 1.2;
-            break;
-        case 10:
-            Quantity = count * 2.5;
-            break;
-        default:
-            Quantity = 1;
-    }
-
-    const eatData = {
-        user_id : req.body.user_id,
-        ingredient_code : ingredientCode,
-        quantity: Quantity
-    };
-    console.log(ingredientCode + "| " +  Quantity);
-    console.log(eatData.ingredient_code + " / " + eatData.quantity);
-
-    MemberEat.findOne().then((memberEat)=>{
-        if(!memberEat){
-            MemberEat.create(eatData)
-                .then(memberEat=>{
-                    console.log("eat create");
-                    return res.json({success: true})
-                })
-                .catch(err=>{
-                    console.log("eat error");
-                    return res.send('error' + err)
-                })
-        }else{
-            console.log('duplicate error?')
+        switch(unit){
+            case "0":
+                Quantity = count / 100;
+                break;
+            case "1":
+                Quantity = count * 0.5;
+                break;
+            case "2":
+                Quantity = count * 0.05;
+                break;
+            case "3":
+                Quantity = count * 0.5;
+                break;
+            case "4":
+                Quantity = count * 0.6;
+                break;
+            case "5":
+                Quantity = count;
+                break;
+            case "6":
+                Quantity = count;
+                break;
+            case "7":
+                Quantity = count * 1.8;
+                break;
+            case "8":
+                Quantity = count * 0.1;
+                break;
+            case "9":
+                Quantity = count * 1.2;
+                break;
+            case "10":
+                Quantity = count * 2.5;
+                break;
+            default:
+                console.log("default");
+                Quantity = 1;
+                break;
         }
-    }).catch((err)=>{
-        return res.send('error' + err);
-    })
+        const eatData = {
+            user_id : req.body.user_id,
+            ingredient_code : ingredientCode, quantity: Quantity
+        };
+        console.log(ingredientCode + " | " +  Quantity);
+        console.log(eatData.ingredient_code + " / " + eatData.quantity);
+        console.log(eatData);
+        MemberEat.create(eatData)
+            .then(memberEat=>{
+                console.log("eat create");
+                return res.json({success: true})
+            })
+            .catch(err=>{
+                console.log("eat create error");
+                return res.send('error' + err)
+            });
+
+        /*MemberEat.findOne({
+            where:{
+                user_id : eatData.user_id,
+                ingredient_code : eatData.ingredient_code,
+                EATEN_DATE : eatData.EATEN_DATE,
+                EATEN_TIME : eatData.EATEN_TIME
+            }
+        }).then((memberEat)=>{
+            if(!memberEat){
+                console.log(eatData);
+                MemberEat.create(eatData)
+                    .then(memberEat=>{
+                        console.log("eat create");
+                        return res.json({success: true})
+                    })
+                    .catch(err=>{
+                        console.log("eat create error");
+                        return res.send('error' + err)
+                    })
+            }else{
+                console.log('duplicate error');
+                MemberEat.destroy({
+                    where:{
+                        user_id : eatData.user_id,
+                        ingredient_code : eatData.ingredient_code
+                    }
+                })
+                    .then(memberEat=>{
+                        console.log("eat delete");
+                        return res.json({success: true})
+                    })
+                    .catch(err=>{
+                        console.log("eat error");
+                        return res.send('error' + err)
+                    })
+            }
+        }).catch((err)=>{
+            console.log(err);
+            return res.send('error' + err);
+        })*/
+    });
 });
 
 module.exports = ingredient;
