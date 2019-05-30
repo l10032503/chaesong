@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
 import {ScrapView} from "./index";
 import {scrapListRequest, scrapDeleteRequest} from "../actions/personal";
+
 import {connect} from "react-redux";
 
 class ScrapPage extends Component{

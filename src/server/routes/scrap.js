@@ -93,7 +93,11 @@ scrap.post('/', (req,res)=>{
                     return res.send('error' + err)
                 })
         }else{
-            MemberScrap.destroy({
+            return res.status(400).json({ // HTTP 요청에 대한 리스폰스 (json 형식으로)
+                error: "BAD USERNAME",
+                code: 1
+            });
+            /*MemberScrap.destroy({
                 where:{
                     user_id : scrapData.user_id,
                     recipe_code : scrapData.recipe_code
@@ -106,7 +110,7 @@ scrap.post('/', (req,res)=>{
                 .catch(err=>{
                     console.log("scrap error");
                     return res.send('error' + err)
-                })
+                })*/
         }
     }).catch((err)=>{
         return res.send('error' + err);
