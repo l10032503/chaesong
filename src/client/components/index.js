@@ -9,5 +9,6 @@ import Header from './Header';
 import RecommendPage from './RecommendPage';
 import ScrapPage from './ScrapPage';
 import NutritionGraph from './NutritionGraph';
+import SettingUI from './SettingUI';
 
-export {Header,Authentication, RecipeViewTest, RecipeBox, Main, Search, ScrapView, ScrapPage, ScrapBox, RecommendPage, NutritionGraph};
+export {Header,Authentication, RecipeViewTest, RecipeBox, Main, Search, ScrapView, ScrapPage, ScrapBox, RecommendPage, NutritionGraph, SettingUI};

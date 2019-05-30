@@ -60,6 +60,86 @@ const MemberJoin = sequelize.define(
 
 router.use(cors());
 
+router.get('/nowinfo', (req, res) => {
+    let session = req.session;
+    let new_query = 'SELECT * FROM memberJoins WHERE memberJoins.user_id = :now_user';
+    let values = {
+        now_user: session.loginInfo.user_id
+    };
+    sequelize.query(new_query, {replacements: values, model: MemberJoin})
+        .then(memberJoins => {return res.json(memberJoins);})
+})
+
+router.post('/refreshsignup', (req, res) => {
+
+    let new_calorieForDay = 0;
+
+    const grantStandWeight = (height) => {
+        let standWeight;
+        if(height < 150) { standWeight = height - 100; }
+        else if(height >= 150 && height < 160) { standWeight = (height - 150) / 2 + 50; }
+        else if(height >= 160) { standWeight = (height - 100) * 0.9; }
+        return standWeight;
+    }
+    const grantWeightRange = (weight, standWeight) => {
+        let overweightPercent = weight / standWeight * 100.0;
+        if (overweightPercent <= 90) { return 1; } //저체중
+        else if (overweightPercent >= 90 && overweightPercent < 110) { return 2;	} //정상
+        else if (overweightPercent >= 110 && overweightPercent < 120) { return 3; } //과체중
+        else if (overweightPercent >= 120 && overweightPercent < 140) { return 4; } //비만
+        else if (overweightPercent > 140) { return 5; } //심한 비만
+    }
+    //1kg당 필요한 칼로리(requiredCalPerKg)는 체중범위(weightRange)와 활동량(active)으로 측정한다
+    const grantRequiredCalPerKg = (weightRange, active) => {
+        let requiredCalPerKg;
+        if(weightRange >= 3) {
+            switch(active) {
+                case "1": requiredCalPerKg = 22.5; break;
+                case "2": requiredCalPerKg = 27.5; break;
+                case "3": requiredCalPerKg = 32.5; break;
+            }
+        }
+        else if(weightRange === 2) {
+            switch(active) {
+                case "1": requiredCalPerKg = 27.5; break;
+                case "2": requiredCalPerKg = 32.5; break;
+                case "3": requiredCalPerKg = 37.5; break;
+            }
+        }
+        else if(weightRange === 1) {
+            switch(active) {
+                case "1": requiredCalPerKg = 32.5; break;
+                case "2": requiredCalPerKg = 37.5; break;
+                case "3": requiredCalPerKg = 42.5; break;
+            }
+        }
+        return requiredCalPerKg;
+    }
+    const calorieForDay = (height, weight, active) => {
+        let standWeight = grantStandWeight(height);
+        let weightRange = grantWeightRange(weight, standWeight);
+        let totalCalRequired = weight * grantRequiredCalPerKg(weightRange, active);
+        return totalCalRequired;
+    }
+
+    new_calorieForDay = calorieForDay(req.body.height, req.body.weight, req.body.active);
+
+    let session = req.session;
+    let new_query = 'UPDATE memberJoins SET memberJoins.weight =: now_weight, memberJoins.calorieForDay =:now_calorieForDay, memberJoins.active =:now_active, memberJoins.vegantype =:now_vegantype, memberJoins.birthyear = :now_birth, memberJoins.height = :now_height WHERE memberJoins.user_id = :now_user';
+    let values = {
+        now_user: session.loginInfo.user_id,
+        now_height: req.body.height,
+        now_birth: req.body.birthyear,
+        now_weight: req.body.weight,
+        now_active : req.body.active,
+        now_vegantype : req.body.vegantype,
+        now_calorieForDay : new_calorieForDay
+    };
+    sequelize.query(new_query, {replacements: values})
+        .then(memberJoins => {return res.json(memberJoins);})
+
+});
+
 router.post('/signup', (req, res)=>{
    const today = new Date();
    const memberData = {
@@ -75,6 +155,7 @@ router.post('/signup', (req, res)=>{
        calorieForDay : 0
    };
    console.log(memberData.vegantype+" / " + memberData.sex);
+
     const grantStandWeight = (height) => {
         let standWeight;
         if(height < 150) { standWeight = height - 100; }

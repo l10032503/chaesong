@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from "prop-types";
 import CanvasJSReact from '../../canvasjs.react.js';
 import {connect} from "react-redux";
-import {eatenListRequest, scrapListRequest} from "../actions/personal";
-import {ScrapView} from "./index";
+import {eatenListRequest} from "../actions/personal";
 const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 

@@ -15,6 +15,16 @@ const initialState = {
 export default function personalpage (state = initialState, action){
     switch (action.type){
 
+        case types.INFO_LOAD:
+          console.log("infolist reducer waiting");
+          return{
+              ...state,
+              list: {
+                  ...state.list,
+                  status: 'waiting'
+              }
+          };
+
         case types.SCRAP_LOAD:
             console.log("scraplist reducer waiting");
             return{
@@ -23,6 +33,14 @@ export default function personalpage (state = initialState, action){
                     ...state.list,
                     status: 'waiting'
                 }
+            };
+
+        case types.INFO_LOAD_SUCCESS:
+            console.log("infolist reducer success");
+            return{
+                ...state,
+                status: "SUCCESS",
+                data: action.data
             };
 
         case types.SCRAP_LOAD_SUCCESS:
@@ -58,6 +76,16 @@ export default function personalpage (state = initialState, action){
                     }
                 }
             }
+
+        case types.INFO_LOAD_FAILURE:
+            return{
+                ...state,
+                list: {
+                    ...state.list,
+                    status: 'FAILURE'
+                }
+            };
+
         case types.SCRAP_LOAD_FAILURE:
             return{
                 ...state,
