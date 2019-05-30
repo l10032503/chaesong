@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import {Header, RecipeViewTest} from '../components';
+import {Header} from '../components';
 import { connect } from 'react-redux';
 import { logoutRequest, getStatusRequest } from '../actions/authentication';
 import {recipeSearchRequest} from "../actions/recipe";
-
 
 class App extends Component {
 
@@ -84,7 +83,8 @@ class App extends Component {
                                              currentUser = {this.props.currentUser}
                                              onSearch={this.handleSearch}
                                              searchWord={this.props.searchWord}
-                                             history={this.props.history}/> }
+                                             history={this.props.history}/>
+                }
             </div>
         );
     }
@@ -97,6 +97,7 @@ const mapStateToProps = (state) => {
         searchWord: state.search.searchWord,
         searchstatus: state.search.status,
         searchData : state.search.data,
+        ingredientSearchResults : state.ingredient.ingredient_names
     };
 };
 
@@ -110,6 +111,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         logoutRequest: () => {
             return dispatch(logoutRequest());
+        },
+        ingredientSearchRequest:(keyword) =>{
+            return dispatch(ingredientSearchRequest(keyword));
         }
     };
 };

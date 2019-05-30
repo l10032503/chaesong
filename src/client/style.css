@@ -175,3 +175,85 @@ body {
     min-width: 100%;
 }
 
+<<<<<<< HEAD
+=======
+#floatingbutton{
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    z-index: 1;
+}
+
+#floatingbutton img{
+    width: 20%;
+    height: 20%;
+    float: right;
+}
+
+#floating-Modal-content{
+    margin: 5px;
+}
+
+#recipe-modal-content{
+    margin: 5px;
+}
+
+#recipe-modal-content p{
+    white-space:pre-line
+}
+
+#modal-title{
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.modal-body{
+    overflow: scroll;
+    height: 541px;
+}
+
+.modal-body p{
+    white-space:pre-line;
+}
+
+#eatButton{
+    float: right;
+    margin: 3px;
+}
+
+#scrapButton{
+    float: right;
+    margin: 3px;
+}
+
+#auto-complete{
+    margin-top: 10px;
+    margin-left: 10px;
+    left: 0;
+}
+
+#auto-complete input{
+    width: 380px;
+    height: 38px;
+}
+
+#auto-complete .validate{
+    width: 50px;
+    margin-top: 10px;
+    margin-right: 5px;
+    float: left;
+}
+
+#auto-complete select{
+    width: 260px;
+    height: 38px;
+    margin-top: 10px;
+    margin-right: 5px;
+    float: left;
+}
+
+#auto-complete button{
+    height: 38px;
+    margin-top: 10px;
+    float: left;
+}

@@ -129,7 +129,7 @@ personalpage.get('/scrap', (req, res) => {
 
 personalpage.get('/eaten', (req,res) => {
     let session2 = req.session;
-    let new_query2 = 'SELECT * FROM MemberEats, Recipes, memberJoins WHERE MemberEats.recipe_code = Recipes.recipe_code AND MemberEats.user_id = :now_user AND memberJoins.user_id = :now_user';
+    let new_query2 = 'SELECT * FROM MemberEats, Ingredients, memberJoins WHERE MemberEats.ingredient_code = Ingredients.ingredient_code AND MemberEats.user_id = :now_user AND memberJoins.user_id = :now_user';
     let values2 = {
         now_user : session2.loginInfo.user_id
     };

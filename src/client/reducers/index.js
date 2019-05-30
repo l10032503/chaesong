@@ -5,12 +5,13 @@ import personalgraph from './personalgraph';
 import search from './search';
 import recommendpage from './recommendpage';
 import {combineReducers} from 'redux';
+import ingredient from './ingredient';
 
 export default combineReducers({
     authentication,
     recipe,
     personalpage,
     search,
-    recommendpage,
+    ingredient,
     personalgraph
 });
