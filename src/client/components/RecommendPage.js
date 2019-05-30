@@ -23,23 +23,6 @@ class RecommendPage extends Component{
             </div>
         );
 
-
-        const loginFail = (
-            <h1>
-                비로그인 상태
-            </h1>
-        );
-        const logoutButton =(
-            <button onClick={this.props.onLogout}>
-                로그아웃
-            </button>
-        );
-        return(
-            <div>
-                {this.props.isLoggedIn? loginSuccess : loginFail}
-                {logoutButton}
-            </div>
-        )
     }
 }
 

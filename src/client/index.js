@@ -9,6 +9,7 @@ import {recipeview} from '../client/containers';
 import {personalview} from '../client/containers';
 import {recommendview} from '../client/containers';
 import {App} from '../client/containers';
+import {UserSettings} from '../client/containers';
 import {Provider} from 'react-redux'
 import {createStore, applyMiddleware} from 'redux';
 import reducers from '../client/reducers';
@@ -31,6 +32,7 @@ ReactDOM.render(
                 <div id="member_body">
                 <Route path="/login" component={Login}/>
                 </div>
+                <Route path="/settings" component={UserSettings}/>
                 <Route path="/MainPage" component={MainPage}/>
                 <Route path="/recipeview" component={recipeview}/>
                 <Route path="/personalpage" component={personalview} />

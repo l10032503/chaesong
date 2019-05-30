@@ -133,6 +133,12 @@ class Header extends Component {
                     </div>
                     <ul className="nav">
                         <li className="nav-item">
+                            <a href="/settings">
+                                <i className="la la-hand-o-up"></i>
+                                <p>My Settings</p>
+                            </a>
+                        </li>
+                        <li className="nav-item">
                             <a href="/personalpage">
                                 <i className="la la-bookmark-o">
                                 </i>
