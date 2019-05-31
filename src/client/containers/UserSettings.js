@@ -12,8 +12,12 @@ class UserSettings extends  Component{
     handleRegister = (birthyear, sex, height, weight, active, vegantype) => {
         return this.props.changeRequest(birthyear, sex, height, weight, active, vegantype).then(
             () => {
-                this.props.history.push('/mainpage');
-                return true;
+                if(this.props.updateStatus === 'SUCCESS'){
+                    alert('개인정보가 수정되었습니다.');
+                    return true;
+                }else{
+                    alert('개인정보 수정에 실패했습니다.');
+                }
             }
         )
     };
@@ -34,7 +38,7 @@ class UserSettings extends  Component{
 const mapStateToProps = (state) =>{
     return{
         infoData : state.personalpage.list.data,
-        listStatus : state.personalpage.list.status,
+        updateStatus : state.authentication.register.status,
     };
 };
 
