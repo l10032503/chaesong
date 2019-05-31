@@ -31,7 +31,7 @@ class SettingUI extends Component{
                         height:this.props.settingData.height,
                         weight:this.props.settingData.weight,
                         active:String(this.props.settingData.active),
-                        vegantype: this.props.settingData.vegantype
+                        vegantype: String(this.props.settingData.vegantype)
                     });
                     return true;
                 }else{
