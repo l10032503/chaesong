@@ -160,7 +160,6 @@ body {
 #member_body{
     height : 100%;
     width : 100%;
-    margin-top:auto; margin-bottom:auto;
     background: #76b852;
     background: -webkit-linear-gradient(right, #76b852, #8DC26F);
     background: -moz-linear-gradient(right, #76b852, #8DC26F);
