@@ -154,7 +154,7 @@ class SettingUI extends Component{
                                                 <span className="form-radio-sign">남성</span>
                                             </label>
                                         </div>
-                                        <div class="form-group">
+                                        <div className="form-group">
                                             <label for="height">키 (cm)</label>
                                             <input type="number" className="form-control" id="height" name = "height" onChange={this.handleChange}
                                                    value={this.state.height}/>
