@@ -191,7 +191,7 @@ class Header extends Component {
                                            onChange={this.handleChange}
                                            value={this.state.searchWord}
                                            onKeyPress={this.handleKeyPress}/>
-                                    <div className="input-group-append">
+                                    <div className="input-group-append" onClick={() => this.handleSearch()}>
 								        <span className="input-group-text">
 									    <i className="la la-search search-icon">
                                         </i>

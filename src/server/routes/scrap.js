@@ -94,7 +94,7 @@ scrap.post('/', (req,res)=>{
                 })
         }else{
             return res.status(400).json({ // HTTP 요청에 대한 리스폰스 (json 형식으로)
-                error: "BAD USERNAME",
+                error: "duplicate scrap",
                 code: 1
             });
             /*MemberScrap.destroy({
