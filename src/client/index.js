@@ -28,8 +28,6 @@ ReactDOM.render(
                 <Route path="/" component={App}/>
                 <div id="member_body">
                 <Route path="/register" component={Register}/>
-                </div>
-                <div id="member_body">
                 <Route path="/login" component={Login}/>
                 </div>
                 <Route path="/settings" component={UserSettings}/>

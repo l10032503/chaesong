@@ -2,9 +2,12 @@ import {connect} from "react-redux";
 import React, {Component} from 'react';
 import {SettingUI} from '../components';
 import {infoListRequest} from "../actions/personal";
-import {changeRequest} from "../actions/authentication";
+import {changeRequest, getSettingRequest} from "../actions/authentication";
+import Cookies from "js-cookie";
 
 class UserSettings extends  Component{
+
+
 
     handleRegister = (birthyear, sex, height, weight, active, vegantype) => {
         return this.props.changeRequest(birthyear, sex, height, weight, active, vegantype).then(
@@ -15,17 +18,15 @@ class UserSettings extends  Component{
         )
     };
 
-    componentDidMount() {
-        this.props.infoListRequest(true, undefined);
-    }
 
     render(){
         return (
             <div>
-                <SettingUI data={this.props.infoData}
+                <SettingUI
                            onRegister={this.handleRegister}/>
             </div>
         );
+
     }
 
 }
@@ -33,7 +34,7 @@ class UserSettings extends  Component{
 const mapStateToProps = (state) =>{
     return{
         infoData : state.personalpage.list.data,
-        listStatus : state.personalpage.list.status
+        listStatus : state.personalpage.list.status,
     };
 };
 

@@ -6657,7 +6657,7 @@ body {
   }
 
   .main-panel {
-    width: 100%;
+    width: 100vh;
     transition: all .5s;
   }
   .main-panel .content {
