@@ -14,6 +14,7 @@ class UserSettings extends  Component{
             () => {
                 if(this.props.updateStatus === 'SUCCESS'){
                     alert('개인정보가 수정되었습니다.');
+                    document.location.href = '/mainpage';
                     return true;
                 }else{
                     alert('개인정보 수정에 실패했습니다.');
