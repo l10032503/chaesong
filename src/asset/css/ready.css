@@ -6705,7 +6705,7 @@ body {
   }
 
   .topbar_open .navbar-header {
-    transform: translate3d(0, 54px, 0) !important;
+    transform: translate3d(0, 0, 0) !important;
     border-bottom: 1px solid #eee;
   }
   .topbar_open .main-panel {

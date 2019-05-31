@@ -42,7 +42,7 @@ class Main extends Component{
                     console.log("scrap container success");
                     return true;
                 }else{
-                    let con = confirm("이미 스크랩한 레시피입니다.\n 삭제하시겠습니까?");
+                    let con = confirm("이미 스크랩한 레시피입니다.\n삭제하시겠습니까?");
                     if (con){
                         this.handleScrapDelete(user_id,recipe_code);
                     }

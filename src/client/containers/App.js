@@ -65,7 +65,7 @@ class App extends Component {
 
                     document.cookie='key=' + btoa(JSON.stringify(loginData));
 
-                    alert("비로그인 상태입니다.\n 로그인 화면으로 이동합니다.");
+                    alert("비로그인 상태입니다.\n로그인 화면으로 이동합니다.");
                     document.location.href = '/login';
                 }
             }
