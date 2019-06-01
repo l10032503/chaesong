@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {eatenListRequest} from "../actions/personal";
 import {connect} from "react-redux";
 import {NutritionGraph} from '../components';
+import EatView from "../components/NutritionGraph";
 
 class PersonalGraph extends Component {
 
@@ -13,7 +14,7 @@ class PersonalGraph extends Component {
 
 render() {
         return (
-            <div>
+            <div id="main-background" >
                 <NutritionGraph data={this.props.eatenData}/>
             </div>
         );

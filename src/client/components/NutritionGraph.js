@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import CanvasJSReact from '../../canvasjs.react.js';
 import {connect} from "react-redux";
 import {eatenListRequest} from "../actions/personal";
+import EatView from "./EatView";
 const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -10,6 +11,22 @@ class NutritionGraph extends Component{
 
     componentDidMount(){
         this.props.eatenListRequest(true, undefined);
+    }
+
+    handleEatDelete = (user_id, recipe_code) =>{
+        /*console.log("scrap delete container ", user_id, recipe_code);
+        return this.props.scrapDeleteRequest(user_id, recipe_code).then(
+            ()=>{
+                if(this.props.scrapstatus === "SUCCESS"){
+                    console.log("scrap delete container success");
+                    this.props.scrapListRequest(true, undefined);
+                    return true;
+                }else{
+                    console.log("scrap delete container fail");
+                    return false;
+                }
+            }
+        );*/
     }
 
     render(){
@@ -88,7 +105,7 @@ class NutritionGraph extends Component{
 
         return (
             <div className="main-panel" id="main-panel">
-                <div className="content">
+                <div className="content" id="graph-content">
                     <div className="container-fluid">
                         <h4 className="page-title">Nutritional Status </h4>
                         <div className="row row-card-no-pd">
@@ -96,6 +113,11 @@ class NutritionGraph extends Component{
                                 <CanvasJSChart options={options} />
                             </div>
                         </div>
+                        <h4> 오늘 먹은 음식 </h4>
+                        <EatView data={this.props.eatenData}
+                                 currentUser = {this.props.currentUser}
+                                 onEatDelete={this.handleEatDelete}
+                        />
                     </div>
                 </div>
             </div>
