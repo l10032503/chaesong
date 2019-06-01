@@ -7,9 +7,11 @@ class EatBox extends Component {
     handleEatDelete = () => {
         console.log("eat delete click");
         let user_id = Cookies.get('member');
-        let recipe_code = this.props.data.recipe_code;
-        this.props.onEatDelete(user_id,recipe_code);
-        console.log("eat box delete : ",user_id, recipe_code);
+        let ingredient_code = this.props.data.ingredient_code;
+        let EATEN_DATE = this.props.data.EATEN_DATE;
+        let EATEN_TIME = this.props.data.EATEN_TIME;
+        this.props.onEatDelete(user_id, ingredient_code, EATEN_DATE, EATEN_TIME, 0);
+        console.log("eat box delete : ",user_id, ingredient_code, EATEN_DATE, EATEN_TIME, 0);
     }
 
     render(){
@@ -39,7 +41,7 @@ EatBox.propTypes={
     data: PropTypes.object,
     currentUser: PropTypes.string,
     current_id : PropTypes.string,
-    onEatDelete : PropTypes.scrap
+    onEatDelete : PropTypes.eat
 };
 
 EatBox.defaultProps = {
@@ -51,8 +53,8 @@ EatBox.defaultProps = {
         EATEN_TIME:'12:12:12'
     },
     currentUser: '',
-    onScrapDelete: (user_id, recipe_code) =>{
-        console.error('scrap box delete function net defined');
+    onEatDelete: (user_id, ingredient_code, EATEN_DATE, EATEN_TIME, option) =>{
+        console.error('eat box delete function net defined');
     },
 };
 

@@ -13,6 +13,10 @@ const initialState = {
     scrap: {
         scrapstatus: 'INIT',
         error : -1
+    },
+    eat: {
+        eatstatus: 'INIT',
+        error : -1
     }
 };
 
@@ -124,6 +128,35 @@ export default function personalpage (state = initialState, action){
                 scrap:{
                     ...state.scrap,
                     scrapstatus: 'FAILURE',
+                    error: action.error
+                }
+            };
+
+        case types.EAT_DELETE:
+            console.log("eat delete reducer waiting");
+            return{
+                ...state,
+                eat:{
+                    eatstatus: 'WAITING',
+                    error : -1
+                }
+            };
+        case types.EAT_DELETE_SUCCESS:
+            console.log("eat delete reducer success");
+            return{
+                ...state,
+                eat:{
+                    ...state.eat,
+                    eatstatus: 'SUCCESS'
+                }
+            };
+        case types.EAT_DELETE_FAILURE:
+            console.log("eat delete reducer failure");
+            return{
+                ...state,
+                eat:{
+                    ...state.eat,
+                    eatstatus: 'FAILURE',
                     error: action.error
                 }
             };

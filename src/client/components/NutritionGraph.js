@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from "prop-types";
 import CanvasJSReact from '../../canvasjs.react.js';
 import {connect} from "react-redux";
-import {eatenListRequest} from "../actions/personal";
+import {eatenListRequest, eatDeleteRequest} from "../actions/personal";
 import EatView from "./EatView";
 const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -13,20 +13,20 @@ class NutritionGraph extends Component{
         this.props.eatenListRequest(true, undefined);
     }
 
-    handleEatDelete = (user_id, recipe_code) =>{
-        /*console.log("scrap delete container ", user_id, recipe_code);
-        return this.props.scrapDeleteRequest(user_id, recipe_code).then(
+    handleEatDelete = (user_id, ingredient_code, EATEN_DATE, EATEN_TIME, option) =>{
+        console.log("eat delete container ", user_id, ingredient_code, EATEN_DATE, EATEN_TIME, option);
+        return this.props.eatDeleteRequest(user_id, ingredient_code, EATEN_DATE, EATEN_TIME, option).then(
             ()=>{
-                if(this.props.scrapstatus === "SUCCESS"){
-                    console.log("scrap delete container success");
-                    this.props.scrapListRequest(true, undefined);
+                if(this.props.eatStatus === "SUCCESS"){
+                    console.log("eat delete container success");
+                    this.props.eatenListRequest(true, undefined);
                     return true;
                 }else{
-                    console.log("scrap delete container fail");
+                    console.log("eat delete container fail");
                     return false;
                 }
             }
-        );*/
+        );
     }
 
     render(){
@@ -139,7 +139,8 @@ NutritionGraph.defaultProps = {
 const mapStateToProps = (state) => {
     return{
         eatenData : state.personalgraph.list.data,
-        listStatus : state.personalgraph.list.status
+        listStatus : state.personalgraph.list.status,
+        eatStatus : state.personalpage.eat.eatstatus
     };
 };
 
@@ -147,6 +148,9 @@ const mapDispatchToProps = (dispatch) => {
     return{
         eatenListRequest: (isInitial, listType)=>{
             return dispatch(eatenListRequest(isInitial, listType));
+        },
+        eatDeleteRequest : (user_id, ingredient_code, EATEN_DATE, EATEN_TIME, option)=>{
+            return dispatch(eatDeleteRequest(user_id, ingredient_code, EATEN_DATE, EATEN_TIME, option))
         }
     };
 };

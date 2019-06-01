@@ -122,4 +122,55 @@ eat.post('/', (req,res)=>{
     })*/
 });
 
+eat.post('/delete', (req,res)=>{
+    console.log("eat delete post route");
+
+    const option = req.body.option;
+
+    const eatenData = {
+        user_id : req.body.user_id,
+        ingredient_code : req.body.ingredient_code,
+        EATEN_DATE : req.body.EATEN_DATE,
+        EATEN_TIME : req.body.EATEN_TIME
+    };
+
+    let date = new Date(eatenData.EATEN_DATE);
+    let date2 = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+    console.log(date2);
+
+    if(option === 0){
+        MemberEat.findOne({
+            where :{
+                user_id : eatenData.user_id,
+                ingredient_code : eatenData.ingredient_code,
+                EATEN_DATE : date,
+                EATEN_TIME : eatenData.EATEN_TIME
+            }
+        }).then((memberEat)=>{
+            if(memberEat){
+                MemberEat.destroy({
+                    where:{
+                        user_id : eatenData.user_id,
+                        ingredient_code : eatenData.ingredient_code,
+                        EATEN_DATE : date,
+                        EATEN_TIME : eatenData.EATEN_TIME
+                    }
+                })
+                    .then(memberEat=>{
+                        console.log("eat delete");
+                        return res.json({success: true})
+                    })
+                    .catch(err=>{
+                        console.log("eat error");
+                        return res.send('error' + err)
+                    })
+            }
+        }).catch((err)=>{
+            return res.send('error' + err);
+        })
+    }
+
+
+});
+
 module.exports = eat;

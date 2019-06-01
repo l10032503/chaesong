@@ -34,7 +34,7 @@ EatView.propTypes={
 };
 EatView.defaultProps={
     data: [],
-    onEatDelete : (user_id,recipe_code) =>{console.error("eat delete function is not defined");}
+    onEatDelete : (user_id, ingredient_code, EATEN_DATE, EATEN_TIME, option) =>{console.error("eat delete function is not defined");}
 };
 
 export default EatView;

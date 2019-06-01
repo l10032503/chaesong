@@ -119,12 +119,7 @@ scrap.post('/', (req,res)=>{
 
 scrap.post('/delete', (req,res)=>{
     console.log("scrap delete post route");
-    const loginUserData = {
-        user_id : req.body.user_id,
-    };
-    const recipeData = {
-        recipe_code : req.body.recipe_code
-    };
+
     const scrapData = {
         user_id : req.body.user_id,
         recipe_code : req.body.recipe_code,
