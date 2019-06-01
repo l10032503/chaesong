@@ -53,15 +53,19 @@ class Main extends Component{
         );
     }
 
-    handleEat= (user_id, recipe_code) =>{
-        console.log("eat container ", user_id, recipe_code);
-        return this.props.eatRequest(user_id, recipe_code).then(
+    handleEat= (user_id, recipe_code, option) =>{
+        console.log("eat container ", user_id, recipe_code, option);
+        return this.props.eatRequest(user_id, recipe_code, option).then(
             ()=>{
                 if(this.props.eatstatus === "SUCCESS"){
                     console.log("eat container success");
                     return true;
                 }else{
                     console.log("eat container fail");
+                    let con = confirm("이미 오늘 먹은 음식입니다.\n더 추가하시겠습니까?");
+                    if(con){
+                        this.props.eatRequest(user_id,recipe_code, 1);
+                    }
                     return false;
                 }
             }
@@ -182,8 +186,8 @@ const mapDispatchToProps = (dispatch) => {
         scrapRequest: (user_id, recipe_code) =>{
             return dispatch(scrapRequest(user_id, recipe_code));
         },
-        eatRequest: (user_id, recipe_code) =>{
-            return dispatch(eatRequest(user_id, recipe_code));
+        eatRequest: (user_id, recipe_code, option) =>{
+            return dispatch(eatRequest(user_id, recipe_code,  option));
         },
         recipeSearchRequest:(searchWord, seafood, milk, egg) =>{
             return dispatch(recipeSearchRequest(searchWord, seafood, milk, egg));

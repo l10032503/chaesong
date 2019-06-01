@@ -68,19 +68,61 @@ const MemberJoin = sequelize.define(
 
 eat.post('/', (req,res)=>{
     console.log("eat post route");
+
+    const option = req.body.option;
+
+    const date1 = new Date();
+    const date2 = new Date();
+    date2.setDate(date1.getDate() + 1 );
+    console.log(date2);
+
     const eatData = {
         user_id : req.body.user_id,
         ingredient_code : req.body.ingredient_code
     };
-    MemberEat.create(eatData)
-        .then(memberEat=>{
-            console.log("eat create");
-            return res.json({success: true})
+
+    if(option === 0){
+        console.log("eat post route2");
+        MemberEat.findOne({
+            where:{
+                user_id : eatData.user_id,
+                ingredient_code : eatData.ingredient_code,
+                EATEN_DATE : date2.toISOString().slice(0,10)
+            }
+        }).then((memberEat)=>{
+            if(!memberEat){
+                MemberEat.create(eatData)
+                    .then(memberEat=>{
+                        console.log("eat create");
+                        return res.json({success: true})
+                    })
+                    .catch(err=>{
+                        console.log("eat error");
+                        return res.send('error' + err)
+                    })
+            }else{
+                console.log("eat duplicate error");
+                return res.status(400).json({ // HTTP 요청에 대한 리스폰스 (json 형식으로)
+                    error: "duplicate eat",
+                    code: 1
+                });
+            }
+        }).catch((err)=>{
+            return res.send('error' + err);
         })
-        .catch(err=>{
-            console.log("eat error");
-            return res.send('error' + err)
-        });
+
+    } else if (option === 1){
+        MemberEat.create(eatData)
+            .then(memberEat=>{
+                console.log("eat create");
+                return res.json({success: true})
+            })
+            .catch(err=>{
+                console.log("eat error");
+                return res.send('error' + err)
+            });
+    }
+
 
     /*console.log("eat post route2");
     MemberEat.findOne({
@@ -134,8 +176,8 @@ eat.post('/delete', (req,res)=>{
         EATEN_TIME : req.body.EATEN_TIME
     };
 
-    let date = new Date(eatenData.EATEN_DATE);
-    let date2 = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+    const date = new Date(eatenData.EATEN_DATE);
+    const date2 = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
     console.log(date2);
 
     if(option === 0){
@@ -169,7 +211,6 @@ eat.post('/delete', (req,res)=>{
             return res.send('error' + err);
         })
     }
-
 
 });
 
