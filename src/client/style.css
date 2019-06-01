@@ -9,6 +9,11 @@
     -webkit-appearance:radio;
 }
 
+#main-background{
+    height: 100vh;
+    background: #f2f3f8;
+}
+
 #active, #vegantype, #sex {
     font-family: 'Noto Sans KR', "Roboto", sans-serif;
     font-size: 13px;

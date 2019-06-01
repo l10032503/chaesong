@@ -6617,6 +6617,7 @@ body {
 }
 
 @media screen and (max-width: 991px) {
+
   .sidebar {
     position: fixed;
     left: 0 !important;

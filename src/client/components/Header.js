@@ -209,7 +209,7 @@ class Header extends Component {
         )
 
         return (
-            <div>
+            <div >
                 {HEADER}
             </div>
         );
