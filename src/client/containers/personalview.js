@@ -13,7 +13,7 @@ class personalview extends Component{
 
     render(){
               return (
-            <div>
+            <div id="main-background">
                 <ScrapPage data={this.props.scrapData}
                            currentUser = {this.props.currentUser}
                               />
