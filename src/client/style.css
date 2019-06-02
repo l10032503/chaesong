@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300');
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
+html{
+    height: 100vh;
+}
+
 .form input[type=radio]
 {
     position: relative;
@@ -10,7 +14,7 @@
 }
 
 #main-background{
-    height: 100vh;
+    height: 92vh;
     background: #f2f3f8;
 }
 

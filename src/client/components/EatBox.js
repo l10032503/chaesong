@@ -15,8 +15,7 @@ class EatBox extends Component {
     }
 
     render(){
-        //let date = this.props.data.EATEN_DATE.toDateString();
-        let current_id = Cookies.get('member');
+       let current_id = Cookies.get('member');
         console.log(current_id);
 
         return (
@@ -30,7 +29,7 @@ class EatBox extends Component {
                         </button>
                     </div>
                     <div className="card-body">
-                        {this.props.data.EATEN_DATE} {this.props.data.EATEN_TIME}
+                        {this.props.data.EATEN_TIME}
                     </div>
                 </div>
             </div>

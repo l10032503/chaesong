@@ -74,13 +74,13 @@ class NutritionGraph extends Component{
                 indexLabel: "{y}",
                 indexLabelFontColor: "white",
                 dataPoints: [
-                    {label: "ENERGY", y: totalAmount0},
-                    {label: "PROCNP", y: totalAmount1},
-                    {label: "FAT(지방)", y: totalAmount2},
-                    {label: "CHOTDF", y: totalAmount3},
-                    {label: "CA", y: totalAmount4},
-                    {label: "NA", y: totalAmount5},
-                    {label: "FE", y: totalAmount6}
+                    {label: "칼로리", y: totalAmount0},
+                    {label: "단백질", y: totalAmount1},
+                    {label: "지방", y: totalAmount2},
+                    {label: "탄수화물", y: totalAmount3},
+                    {label: "칼슘", y: totalAmount4},
+                    {label: "나트륨", y: totalAmount5/10000},
+                    {label: "철분", y: totalAmount6}
                 ]
             },
                 {
@@ -91,13 +91,13 @@ class NutritionGraph extends Component{
                     indexLabel: "{y}",
                     indexLabelFontColor: "white",
                     dataPoints: [
-                        {label: "ENERGY", y: (100-totalAmount0 > 0) ? 100-totalAmount0 : 0},
-                        {label: "PROCNP", y: 100-totalAmount1},
-                        {label: "FAT(지방)", y: 100-totalAmount2},
-                        {label: "CHOTDF", y: 100-totalAmount3},
-                        {label: "CA", y: 100-totalAmount4},
-                        {label: "NA", y: 100-totalAmount5},
-                        {label: "FE", y: 100-totalAmount6}
+                        {label: "칼로리", y: (2100-totalAmount0 > 0) ? 2100-totalAmount0 : 0},
+                        {label: "단백질", y: 100-totalAmount1},
+                        {label: "지방", y: 100-totalAmount2},
+                        {label: "탄수화물", y: 100-totalAmount3},
+                        {label: "칼슘", y: 650-totalAmount4},
+                        {label: "나트륨", y: 1.5-(totalAmount5/10000)},
+                        {label: "철분", y: 14-totalAmount6}
                     ]
                 }]
         };

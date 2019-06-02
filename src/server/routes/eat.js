@@ -72,9 +72,7 @@ eat.post('/', (req,res)=>{
 
     const option = req.body.option;
 
-    const date1 = new Date();
     const date2 = new Date();
-    //date2.setDate(date1.getDate() + 1);
     const date3 = date2.toISOString().slice(0,10);
     console.log(date3);
 
