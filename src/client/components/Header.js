@@ -204,12 +204,14 @@ class Header extends Component {
                     </nav>
                 </div>
                 <FloatingButton/>
-                {side_bar}
+                <div >
+                    {side_bar}
+                </div>
             </div>
         )
 
         return (
-            <div >
+            <div>
                 {HEADER}
             </div>
         );
