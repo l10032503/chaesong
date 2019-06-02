@@ -13,6 +13,7 @@ const sequelize = new Sequelize('chaesongdb', 'comhong', 'sook2019', {
         }
     }
 );
+const Op = Sequelize.Op;
 const eat = express.Router();
 eat.use(cors());
 
@@ -73,8 +74,9 @@ eat.post('/', (req,res)=>{
 
     const date1 = new Date();
     const date2 = new Date();
-    date2.setDate(date1.getDate() + 1 );
-    console.log(date2);
+    //date2.setDate(date1.getDate() + 1);
+    const date3 = date2.toISOString().slice(0,10);
+    console.log(date3);
 
     const eatData = {
         user_id : req.body.user_id,
@@ -87,7 +89,7 @@ eat.post('/', (req,res)=>{
             where:{
                 user_id : eatData.user_id,
                 ingredient_code : eatData.ingredient_code,
-                EATEN_DATE : date2.toISOString().slice(0,10)
+                EATEN_DATE : {[Op.gte]: Date.parse(date3)}
             }
         }).then((memberEat)=>{
             if(!memberEat){

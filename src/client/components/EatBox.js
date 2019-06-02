@@ -15,6 +15,7 @@ class EatBox extends Component {
     }
 
     render(){
+        //let date = this.props.data.EATEN_DATE.toDateString();
         let current_id = Cookies.get('member');
         console.log(current_id);
 
