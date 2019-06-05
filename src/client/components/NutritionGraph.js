@@ -49,6 +49,8 @@ class NutritionGraph extends Component{
         let totalAmount5 = parseInt(sumProperty(this.props.eatenData, input[5]));
         let totalAmount6 = parseInt(sumProperty(this.props.eatenData, input[6]));
 
+        let calorieForDay = this.props.settingData.calorieForDay;
+
         let greenBar = [
             {label: "칼로리", y: totalAmount0},
             {label: "단백질", y: totalAmount1},
@@ -60,7 +62,7 @@ class NutritionGraph extends Component{
         ];
 
         let grayBar = [
-            {label: "칼로리", y: (2100-totalAmount0 > 0) ? 2100-totalAmount0 : 0},
+            {label: "칼로리", y: (calorieForDay-totalAmount0 > 0) ? calorieForDay-totalAmount0 : 0},
             {label: "단백질", y: 100-totalAmount1},
             {label: "지방", y: 100-totalAmount2},
             {label: "탄수화물", y: 100-totalAmount3},
@@ -131,12 +133,16 @@ class NutritionGraph extends Component{
 
 NutritionGraph.propTypes = {
     isLoggedIn : PropTypes.bool,
-    onLogout: PropTypes.func
+    onLogout: PropTypes.func,
+    settingData : PropTypes.object
 };
 
 NutritionGraph.defaultProps = {
     isLoggedIn : true,
-    onLogout: () => {console.error("logout function not defined")}
+    onLogout: () => {console.error("logout function not defined")},
+    settingData:{
+        calorieForDay : 2000
+    },
 };
 
 const mapStateToProps = (state) => {
