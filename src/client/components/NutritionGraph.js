@@ -49,6 +49,25 @@ class NutritionGraph extends Component{
         let totalAmount5 = parseInt(sumProperty(this.props.eatenData, input[5]));
         let totalAmount6 = parseInt(sumProperty(this.props.eatenData, input[6]));
 
+        let greenBar = [
+            {label: "칼로리", y: totalAmount0},
+            {label: "단백질", y: totalAmount1},
+            {label: "지방", y: totalAmount2},
+            {label: "탄수화물", y: totalAmount3},
+            {label: "칼슘", y: totalAmount4},
+            {label: "나트륨", y: totalAmount5/10000},
+            {label: "철분", y: totalAmount6}
+        ];
+
+        let grayBar = [
+            {label: "칼로리", y: (2100-totalAmount0 > 0) ? 2100-totalAmount0 : 0},
+            {label: "단백질", y: 100-totalAmount1},
+            {label: "지방", y: 100-totalAmount2},
+            {label: "탄수화물", y: 100-totalAmount3},
+            {label: "칼슘", y: 650-totalAmount4},
+            {label: "나트륨", y: 1.5-(totalAmount5/10000)},
+            {label: "철분", y: 14-totalAmount6}
+        ];
 
         let options = {
             title: {
@@ -73,15 +92,7 @@ class NutritionGraph extends Component{
                 showInLegend: true,
                 indexLabel: "{y}",
                 indexLabelFontColor: "white",
-                dataPoints: [
-                    {label: "칼로리", y: totalAmount0},
-                    {label: "단백질", y: totalAmount1},
-                    {label: "지방", y: totalAmount2},
-                    {label: "탄수화물", y: totalAmount3},
-                    {label: "칼슘", y: totalAmount4},
-                    {label: "나트륨", y: totalAmount5/10000},
-                    {label: "철분", y: totalAmount6}
-                ]
+                dataPoints: greenBar
             },
                 {
                     type: "stackedBar100",
@@ -90,15 +101,7 @@ class NutritionGraph extends Component{
                     showInLegend: true,
                     indexLabel: "{y}",
                     indexLabelFontColor: "white",
-                    dataPoints: [
-                        {label: "칼로리", y: (2100-totalAmount0 > 0) ? 2100-totalAmount0 : 0},
-                        {label: "단백질", y: 100-totalAmount1},
-                        {label: "지방", y: 100-totalAmount2},
-                        {label: "탄수화물", y: 100-totalAmount3},
-                        {label: "칼슘", y: 650-totalAmount4},
-                        {label: "나트륨", y: 1.5-(totalAmount5/10000)},
-                        {label: "철분", y: 14-totalAmount6}
-                    ]
+                    dataPoints: grayBar
                 }]
         };
 
