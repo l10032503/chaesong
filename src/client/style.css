@@ -313,8 +313,20 @@ body {
     float:right
 }
 
+li.nav-item{
+    margin-right: 10px;
+    text-decoration-color: #1c7430;
+}
+
 
 /*StartPage*/
+@font-face {
+    font-family: 'YiSunShinDotumM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YiSunShinDotumM.woff')format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 header.masthead {
     width: auto;
     height: 100vh;
@@ -326,6 +338,15 @@ header.masthead {
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-size: cover;
+}
+
+#yisunshin{
+    font-family: YiSunShinDotumM;
+}
+
+#notosans{
+    font-family: Noto Sans KR;
+    font-size: 15pt;
 }
 
 hr.divider {
@@ -399,4 +420,24 @@ hr.divider {
     opacity: 1;
 }
 
-
+#startbutton {
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}

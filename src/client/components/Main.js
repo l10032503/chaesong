@@ -97,7 +97,7 @@ class Main extends Component{
         console.log(location.search);
         const query = queryString.parse(location.search);
         console.log(query);
-        const searchWord = query.searchWord
+        const searchWord = query.searchWord;
         let egg = 1;
         let milk = 1;
         let seafood = 1;
