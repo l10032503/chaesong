@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {eatenListRequest} from "../actions/personal";
 import {connect} from "react-redux";
-import {NutritionGraph} from '../components';
+import {NutritionGraph, NutritionGraphDetail} from '../components';
 import {getSettingRequest} from "../actions/authentication";
 import Cookies from "js-cookie";
 
@@ -19,6 +19,8 @@ render() {
         return (
             <div id="main-background" >
                 <NutritionGraph eatenData={this.props.eatenData}
+                                settingData = {this.props.settingData}/>
+                <NutritionGraphDetail eatenData={this.props.eatenData}
                                 settingData = {this.props.settingData}/>
             </div>
         );
