@@ -472,14 +472,23 @@ class NutritionGraphDetail extends Component{
 
         let options = {
             title: {
-                text: " 오늘 섭취한 영양소"
+                text: "오늘 섭취한 영양소",
+                fontSize: 30,
             },
+            subtitles:[
+                {
+                    fontSize: 30
+                }
+            ],
             toolTip: {
                 shared: true
             },
             legend: {
                 verticalAlign: "top"
             },
+            axisX: {
+                interval:1,
+             },
             axisY: {
                 labelFormatter : "",
                 valueFormatString: "",

@@ -247,7 +247,8 @@ class NutritionGraph extends Component{
 
         let options = {
             title: {
-                text: " 오늘 섭취한 영양소"
+                text: " 오늘 섭취한 영양소",
+                fontSize: 30,
             },
             toolTip: {
                 shared: true
