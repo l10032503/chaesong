@@ -39,6 +39,7 @@ class Main extends Component{
         return this.props.scrapRequest(user_id, recipe_code).then(
             ()=>{
                 if(this.props.scrapstatus === "SUCCESS"){
+                    alert("레시피를 스크랩했습니다.");
                     console.log("scrap container success");
                     return true;
                 }else{
@@ -55,9 +56,11 @@ class Main extends Component{
 
     handleEat= (user_id, recipe_code, option) =>{
         console.log("eat container ", user_id, recipe_code, option);
+
         return this.props.eatRequest(user_id, recipe_code, option).then(
             ()=>{
                 if(this.props.eatstatus === "SUCCESS"){
+                    alert("먹은 음식을 등록했습니다.");
                     console.log("eat container success");
                     return true;
                 }else{

@@ -344,6 +344,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return{
+        eatenListRequest: (isInitial, listType) => {
+            return dispatch(eatenListRequest(isInitial, listType));
+        },
         eatDeleteRequest : (user_id, ingredient_code, EATEN_DATE, EATEN_TIME, option)=>{
             return dispatch(eatDeleteRequest(user_id, ingredient_code, EATEN_DATE, EATEN_TIME, option))
         }
