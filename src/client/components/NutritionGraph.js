@@ -301,10 +301,7 @@ class NutritionGraph extends Component{
 
 
         return (
-            <div className="main-panel" id="main-panel">
-                <div className="content" id="graph-content">
-                    <div className="container-fluid">
-                        <h4 className="page-title">Nutritional Status </h4>
+            <div className="col-12">
                         <div className="row row-card-no-pd">
                             <div className = "col-md-12">
                                 <CanvasJSChart options={options} />
@@ -315,8 +312,6 @@ class NutritionGraph extends Component{
                                  currentUser = {this.props.currentUser}
                                  onEatDelete={this.handleEatDelete}
                         />
-                    </div>
-                </div>
             </div>
         );
 
