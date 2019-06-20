@@ -12,6 +12,18 @@ class ScrapBox extends Component{
         }
     }
 
+    openModal() {
+        this.setState({
+            visible : true
+        });
+    }
+
+    closeModal() {
+        this.setState({
+            visible : false
+        });
+    }
+
     handleScrapDelete = () => {
         console.log("scrap delete click");
         let user_id = Cookies.get('member');
@@ -24,8 +36,12 @@ class ScrapBox extends Component{
         let current_id = Cookies.get('member');
         console.log(current_id);
 
+        const recipeModal = (
+
+        )
+
         return (
-            <div className = "col-md-4 scrap-box">
+            <div className = "col-md-4 scrap-box" onClick={() => this.openModal()}>
                 <div className = "card">
                     <div className="card-header" >
                         <h3 className="card-title" >{this.props.data.recipe_name}</h3>

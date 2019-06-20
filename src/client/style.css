@@ -425,7 +425,8 @@ hr.divider {
     opacity: 1;
 }
 
-button .btn-success {
+.masthead .container .row .col-lg-8 a .btn{
+    font-family: YiSunShinDotumM;
     display: inline-block;
     font-weight: 400;
     color: #212529;
