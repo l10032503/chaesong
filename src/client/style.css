@@ -318,6 +318,11 @@ li.nav-item{
     text-decoration-color: #1c7430;
 }
 
+.nav-item a{
+    color: green;
+    font-family: YiSunShinDotumM;
+    font-weight: bold;
+}
 
 /*StartPage*/
 @font-face {
@@ -420,7 +425,7 @@ hr.divider {
     opacity: 1;
 }
 
-#startbutton {
+button .btn-success {
     display: inline-block;
     font-weight: 400;
     color: #212529;
