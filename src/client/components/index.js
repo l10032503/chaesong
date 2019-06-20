@@ -14,6 +14,11 @@ import SettingUI from './SettingUI';
 import EatBox from './EatBox';
 import EatView from './EatView';
 import NutritionGraphDetail from'./NutritionGraphDetail';
+import RecommendBox from './RecommendBox';
+import RecommendViewTest from './RecommendViewTest';
+import RecommendUserBox from './RecommendUserBox';
 
 export {Header,Authentication, RecipeViewTest, RecipeBox, Main, Search, ScrapView, ScrapPage, ScrapBox, RecommendPage,
-    NutritionGraph, FloatingButton, SettingUI, EatBox, EatView, NutritionGraphDetail};
+    NutritionGraph, FloatingButton, SettingUI, EatBox, EatView, NutritionGraphDetail, RecommendBox, RecommendViewTest, RecommendUserBox};
+
+

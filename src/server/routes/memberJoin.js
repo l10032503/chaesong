@@ -236,6 +236,17 @@ router.post('/signup', (req, res)=>{
                MemberJoin.create(memberData)
                    .then(memberJoin=>{
                        console.log("회원가입 성공");
+                       let session = req.session;
+                       session.loginInfo ={
+                           _id : memberJoin.user_id,
+                           user_id: memberJoin.user_id
+                       };
+                       res.cookie("member", req.body.user_id,{
+                           expires: new Date(Date.now() + 900000)
+                       }); // 지워도 괜찮은 코드
+                       res.cookie("vegantype", vegantype,{
+                           expires: new Date(Date.now() + 900000)
+                       });
                        return res.json({success: true})
                    })
                    .catch(err=>{

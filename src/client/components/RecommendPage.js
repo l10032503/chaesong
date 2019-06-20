@@ -1,39 +1,42 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import {RecommendBox} from '../components';
 
 class RecommendPage extends Component{
-    constructor(props){
-        super(props);
-        this.state={
-            user_Id : Cookies.get('member'),
-        }
-    } // cookie
-    render(){
-        const userID = Cookies.get('member');
-        const loginSuccess = (
-            <div>
-                <h1>
-                    This is RecommendPage. Here are the 5 randomly chosen recipes for { userID },,,
-                </h1>
-                <h2>
 
-                </h2>
+    render(){
+        const mapToComponents = data => {
+            return data.map((recipe, i)=>{
+                return (
+                    <RecommendBox
+                        data={recipe}
+                        key={recipe.recipe_code}
+                        index={i}
+                        current={this.props.currentUser}
+                        onRecommend={this.props.onRecommend}
+                    />
+
+                );
+            })
+        };
+
+        return(
+            <div>
+                {mapToComponents(this.props.data)}
             </div>
         );
-
     }
 }
 
 RecommendPage.propTypes = {
-    isLoggedIn : PropTypes.bool,
-    onLogout: PropTypes.func
+    mode: PropTypes.bool,
+    data: PropTypes.array,
+    onRecommend: PropTypes.func,
 };
 
 RecommendPage.defaultProps = {
-    isLoggedIn : false,
-    onLogout: () => {console.error("logout function not defined")}
+    data: [],
+    onRecommend: (user_id,recipe_code) =>{console.error("recommend function is not defined");}
 };
 
 export default RecommendPage;

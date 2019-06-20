@@ -15,5 +15,6 @@ export default combineReducers({
     search,
     ingredient,
     personalgraph,
-    vegekeyword
+    vegekeyword,
+    recommendpage
 });

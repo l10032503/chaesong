@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
-import {RecipeViewTest} from "./index";
+import {RecipeViewTest, RecommendViewTest} from "./index";
 import {eatRequest, recipeListRequest, recipeSearchRequest, scrapRequest} from "../actions/recipe";
+import {recommendListRequest} from "../actions/recommend";
 import {scrapDeleteRequest} from "../actions/personal";
 import {connect} from "react-redux";
 import Modal from "./Header";
@@ -39,7 +40,6 @@ class Main extends Component{
         return this.props.scrapRequest(user_id, recipe_code).then(
             ()=>{
                 if(this.props.scrapstatus === "SUCCESS"){
-                    alert("레시피를 스크랩했습니다.");
                     console.log("scrap container success");
                     return true;
                 }else{
@@ -56,11 +56,9 @@ class Main extends Component{
 
     handleEat= (user_id, recipe_code, option) =>{
         console.log("eat container ", user_id, recipe_code, option);
-
         return this.props.eatRequest(user_id, recipe_code, option).then(
             ()=>{
                 if(this.props.eatstatus === "SUCCESS"){
-                    alert("먹은 음식을 등록했습니다.");
                     console.log("eat container success");
                     return true;
                 }else{
@@ -97,7 +95,7 @@ class Main extends Component{
         console.log(location.search);
         const query = queryString.parse(location.search);
         console.log(query);
-        const searchWord = query.searchWord;
+        const searchWord = query.searchWord
         let egg = 1;
         let milk = 1;
         let seafood = 1;
@@ -124,6 +122,7 @@ class Main extends Component{
 
         if(!searchWord){
             this.props.recipeSearchRequest(" ",seafood,milk,egg);
+            this.props.recommendListRequest(" ", seafood, milk, egg);
         } else{
             this.props.recipeSearchRequest(query.searchWord,seafood,milk,egg);
             console.log("searchData->");
@@ -137,22 +136,47 @@ class Main extends Component{
         const query = queryString.parse(location.search);
         console.log(query);
         const searchWord = query.searchWord;
-
-        return(
-            <div className="main-panel" id="main-panel">
-                <div className="content">
-                    <div className="container-fluid">
-                        <h4 className="page-title">조회된 레시피</h4>
-                        <RecipeViewTest data={this.props.searchData}
-                                        currentUser = {this.props.currentUser}
-                                        onScrap={this.handleScrap}
-                                        onEat={this.handleEat}
-                                        onSearch={this.handleSearch}
-                                        history={this.props.history}/>
+        if(searchWord){
+            return(
+                <div className="main-panel" id="main-panel">
+                    <div className="content">
+                        <div className="container-fluid">
+                            <h4 className="page-title">조회된 레시피</h4>
+                            <RecipeViewTest data={this.props.searchData}
+                                            currentUser = {this.props.currentUser}
+                                            onScrap={this.handleScrap}
+                                            onEat={this.handleEat}
+                                            onSearch={this.handleSearch}
+                                            history={this.props.history}/>
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        }else{
+            return(
+                <div className="main-panel" id="main-panel">
+                    <div className="content">
+                        <div className="container-fluid">
+                            <h4 className="page-title"> 추천 레시피 </h4>
+                            <RecommendViewTest data={this.props.recommendData}
+                                               currentUser = {this.props.currentUser}
+                                               onScrap={this.handleScrap}
+                                               onEat={this.handleEat}
+                                               onSearch={this.handleSearch}
+                                               history={this.props.history}/>
+                            <h4 className="page-title">전체 레시피</h4>
+                            <RecipeViewTest data={this.props.searchData}
+                                            currentUser = {this.props.currentUser}
+                                            onScrap={this.handleScrap}
+                                            onEat={this.handleEat}
+                                            onSearch={this.handleSearch}
+                                            history={this.props.history}/>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
 
     }
 }
@@ -177,6 +201,7 @@ const mapStateToProps = (state) => {
         errorCode : state.recipe.scrap.error,
         searchstatus: state.search.status,
         searchData : state.search.data,
+        recommendData : state.recommendpage.data,
         scrapdeletestatus: state.personalpage.scrap.scrapstatus
     };
 };
@@ -197,6 +222,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         scrapDeleteRequest: (user_id, recipe_code) =>{
             return dispatch(scrapDeleteRequest(user_id, recipe_code));
+        },
+        recommendListRequest: (searchWord, seafood, milk, egg) => {
+            return dispatch(recommendListRequest(searchWord, seafood, milk, egg));
         }
     };
 };

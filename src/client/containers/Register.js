@@ -10,13 +10,18 @@ class Register extends Component{
             ()=> {
                 if(this.props.status === "SUCCESS"){
                     console.log('container success');
-                    this.props.history.push('/login');
+                    let loginData = {
+                        isLoggedIn: true,
+                        user_id: user_id
+                    };
+                    document.cookie = 'key=' + btoa(JSON.stringify(loginData));
+                    this.props.history.push('/recommendview');
                     return true;
                 } else {
                     let errorMessage = [
-                      'Invalid ID',
-                      'Password is too short',
-                      'ID already exists'
+                        'Invalid ID',
+                        'Password is too short',
+                        'ID already exists'
                     ];
                     alert('회원가입실패');
                     return false;
@@ -42,11 +47,11 @@ const mapStateToProps = (state) =>{
 };
 
 const mapDispatchToProps = (dispatch) =>{
-  return{
-     registerRequest: (user_id, pw, birthyear, sex, height, weight, active, vegantype) =>{
-         return dispatch(registerRequest(user_id, pw, birthyear, sex, height, weight, active, vegantype));
-     }
-  } ;
+    return{
+        registerRequest: (user_id, pw, birthyear, sex, height, weight, active, vegantype) =>{
+            return dispatch(registerRequest(user_id, pw, birthyear, sex, height, weight, active, vegantype));
+        }
+    } ;
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
