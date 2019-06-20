@@ -17,12 +17,37 @@ html{
     right: 0;
     height: 100%;
     width: 100%;
-    opacity: 0;
+    opacity: 0.4;
     transition: .5s ease;
     background: rgba(0,0,0,0.7);
 }
-.card-body:hover .overlay{
-    opacity: 1
+
+.overlay h3 {
+    position: absolute;
+    text-align: center;
+    margin: auto;
+    padding: auto;
+    opacity: 1;
+    font-weight : 700;
+    font-size : 20px;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    color : white;
+    z-index : 2;
+}
+
+.overlay_no {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background: rgba(0,0,0,0.7);
 }
 
 #overlay_id{

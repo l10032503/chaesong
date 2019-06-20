@@ -31,7 +31,7 @@ class RecommendPage extends Component{
 RecommendPage.propTypes = {
     mode: PropTypes.bool,
     data: PropTypes.array,
-    onRecommend: PropTypes.func,
+    onRecommend: PropTypes.func
 };
 
 RecommendPage.defaultProps = {
