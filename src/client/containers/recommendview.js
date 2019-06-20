@@ -32,10 +32,9 @@ class recommendview extends Component {
     render() {
         return (
             <div id="select_page">
-                <button type="button" class="btn btn-outline-default btn-rounded waves-effect" onClick={this.handlesubmit}>
+                <button id="yisunshin" type="button" class="btn btn-outline-default btn-rounded waves-effect text-white" onClick={this.handlesubmit}>
                     <p>제출</p>
                 </button>
-
                 <RecommendPage data={this.props.recipeData}
                                onRecommend={this.handleRecommend}/>
             </div>
