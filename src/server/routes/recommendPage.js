@@ -52,6 +52,9 @@ const Recipe = sequelize.define(
         },
         egg: {
             type: Sequelize.TEXT
+        },
+        sort1:{
+            type: Sequelize.STRING
         }
     },{
         timestamps: false
@@ -101,45 +104,52 @@ recommendPage.get('/:searchWord/:seafood/:milk/:egg', (req,res)=>{
 
     let session = req.session;
     //let new_query = 'SELECT * FROM MemberEats, Recipes WHERE Recipes.recipe_code = MemberEats.recipe_code AND MemberEats.user_id = :now_user';
-    let new_query = 'SELECT DISTINCT sort1, count(sort1) as CountOf from memberRecommends where memberRecommends.user_id = :now_user group by sort1 ';
+    let new_query = 'SELECT DISTINCT sort1, count(sort1) as CountOf from memberRecommends where memberRecommends.user_id = :now_user group by sort1 ORDER BY sort1 ASC ';
     let values = {
         now_user: session.loginInfo.user_id
     };
-    sequelize.query(new_query, {replacements: values})
-        .then(MemberScraps => {console.log(MemberScraps)})
 
-    Recipe.findAll({
-        limit: 4,
-        where:{
-            [Op.or]: [
-                {
-                    recipe_name: {
-                        [Op.like]: "%" + searchWord + "%"
-                    }
+    let scrapArray = [];
+    memberRecommend.findAll({
+        attributes: ['sort1', [sequelize.fn('count', '*'), 'count']],
+        group : 'sort1'
+    }).then((result)=>{
+        Recipe.findAll({
+            limit: 4,
+            where:{
+                [Op.or]: [
+                    {
+                        recipe_name: {
+                            [Op.like]: "%" + result[0].sort1 + "%"
+                        }
+                    },
+                    {
+                        content:{
+                            [Op.like]: "%" + result[0].sort1 + "%"
+                        }
+                    },
+                ],
+                seafood : {
+                    [Op.lte] : req.params.seafood
                 },
-                {
-                    content:{
-                        [Op.like]: "%" + searchWord + "%"
-                    }
+                milk : {
+                    [Op.lte] : req.params.milk
                 },
-            ],
-            seafood : {
-                [Op.lte] : req.params.seafood
-            },
-            milk : {
-                [Op.lte] : req.params.milk
-            },
-            egg : {
-                [Op.lte] : req.params.egg
+                egg : {
+                    [Op.lte] : req.params.egg
+                }
             }
-        }
-    }).then(recipes=>{
-        //console.log(recipes);
-        return res.json(recipes)
-    })
-        .catch(err=>{
-            return res.send('error' + err)
+        }).then(recipes=>{
+            //console.log(recipes);
+            return res.json(recipes)
         })
+            .catch(err=>{
+                return res.send('error' + err)
+            })
+    });
+
+
+
 });
 
 recommendPage.post('/insert', (req, res) => {
@@ -147,21 +157,22 @@ recommendPage.post('/insert', (req, res) => {
     const recommendData = {
         user_id: req.body.user_id,
         recipe_code: req.body.recipe_code,
-        sort1: tmp
+        sort1: ""
     };
 
     console.log("recommendpage router");
 
-    Ingredient.findOne({
+    Recipe.findOne({
         where:{
-            ingredient_code: req.body.recipe_code
+            recipe_code: req.body.recipe_code
         }
     }).then(function(result){
-            recommendData.sort1 = result.sort1;
+        console.log(result.sort1);
+        recommendData.sort1 = result.sort1;
         }
     )
 
-
+    console.log(recommendData.sort1);
 
     memberRecommend.findOne({
         where:{
