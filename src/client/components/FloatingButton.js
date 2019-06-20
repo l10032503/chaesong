@@ -75,7 +75,7 @@ class FloatingButton extends Component {
             <div>
                 <Modal visible={this.state.visible} width="400" height="186" effect="fadeInRight" onClickAway={() => this.closeModal()}>
                     <div className="modal-header bg-success">
-                        <h4 id="modal-title">먹은 재료 직접 입력 </h4>
+                        <h5 id="modal-title">먹은 재료 직접 입력 </h5>
                         <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => this.closeModal()}>
                             <span aria-hidden="true">&times;</span>
                         </button>

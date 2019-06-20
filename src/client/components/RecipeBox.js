@@ -47,7 +47,7 @@ class RecipeBox extends Component{
             <div>
                 <Modal visible={this.state.visible} width="400" height="600" effect="fadeInRight" onClickAway={() => this.closeModal()}>
                     <div className="modal-header bg-success">
-                        <h4 id="modal-title"><i className="la la-smile-o">{this.props.data.recipe_name}</i> </h4>
+                        <h5 id="modal-title">{this.props.data.recipe_name}</h5>
                         <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={() => this.closeModal()}>
                             <span aria-hidden="true">&times;</span>
                         </button>
