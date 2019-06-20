@@ -21,8 +21,7 @@ class Start extends Component {
                                     내가 피하는 재료 손쉽게 거르고 싶을 때, <br/>
                                     채송으로 스마트하게 식단관리 시작하세요!
                                 </p>
-                                <a id="yisunshin" className="btn btn-success btn-xl text-white" href="login" >회원가입 및 로그인</a>
-
+                                <button id="yisunshin" className="btn btn-success btn-xl text-white" href="login" >회원가입 및 로그인</button>
                             </div>
                         </div>
                     </div>

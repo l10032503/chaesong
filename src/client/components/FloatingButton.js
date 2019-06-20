@@ -128,7 +128,7 @@ class FloatingButton extends Component {
                                     value="5">밀가루 한 컵(100g)</option>
                             <option name="unit"
                                     className="validate"
-                                    value="6">고춧가루 한 컵(100g)</option>
+                                    value="6">밥 한 공기(210g)</option>
                             <option name="unit"
                                     className="validate"
                                     value="7">설탕 한 컵(180g)</option>
@@ -141,6 +141,9 @@ class FloatingButton extends Component {
                             <option name="unit"
                                     className="validate"
                                     value="10">고추장 한 컵(250g)</option>
+                            <option name="unit"
+                                    className="validate"
+                                    value="11">고춧가루 한 컵(100g)</option>
                         </select>
                         <button className="btn btn-default btn-sm" onClick={this.handleEat}>
                             먹었음

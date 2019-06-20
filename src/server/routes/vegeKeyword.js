@@ -37,7 +37,7 @@ const VegeKeyword = sequelize.define(
 
 vegeKeyword.get('/', (req,res)=>{
     console.log("vegekeyword routes");
-    let query = "select * from VegeKeywords where VegeKeywords.date > CURRENT_DATE()";
+    let query = "select * from VegeKeywords ";
 
     sequelize.query(query, {})
         .then(vegeKeywords=>{

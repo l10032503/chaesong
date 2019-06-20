@@ -139,7 +139,7 @@ class Header extends Component {
                         const url = "MainPage?searchWord=" + vegeKey.keyword;
                         return(
                             <li className="nav-item dropdown hidden-caret" key={idx}>
-                                <a href={url}>#{vegeKey.keyword}</a>
+                                <a href={url} color="green">#{vegeKey.keyword}</a>
                             </li>
                         );
                     })}
@@ -280,6 +280,7 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
 
